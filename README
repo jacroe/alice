@@ -1,0 +1,1 @@
+ALICE monitors email, the weather, turns lights on and off, add torents placed in a dropbox folder (or any folder really) and can even tell you what clothes you should wear outside. All is done in pure PHP with a few PHP classes/libraries to help along the way. 
