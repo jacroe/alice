@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Email
+ABOUT:        Checks for, sends, and organizes email
+DEPENDENCIES: Swift library;
+*/
 function alice_email_openserver()
 {
 	return imap_open(IMAP_SERVER, IMAP_USER, IMAP_PASS);

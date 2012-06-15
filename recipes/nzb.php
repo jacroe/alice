@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Newzbin
+ABOUT:        Adds .nzb to SABnzbd
+DEPENDENCIES: Email module;
+*/
 foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.nzb')) as $file)
 {
 	$result = file_get_contents(SABNZBD_SERVER."api?mode=addlocalfile&name=".$file."&apikey=".SABNZBD_API);

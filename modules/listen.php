@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Listening
+ABOUT:        Main logic of Alice. Each command is routed through here and then ran
+DEPENDENCIES: All modules and their requried libraries.
+*/
 function alice_check_command($string)
 {
 	if (preg_match("/\bxbmc\b/i", $string))
@@ -40,14 +45,16 @@ function alice_check_command($string)
 	{
 		if (!alice_loc_check($string)) $string = "here";
 		$loc = alice_loc_get($string);
-		return "In ".$loc['city'].", ".$loc['state'].", the sun will rise at ".alice_sunrise($loc['lat'], $loc['long'], $loc['tz'])." ".$loc['tz_short'];
+		//return "In ".$loc['city'].", ".$loc['state'].", the sun will rise at ".alice_sunrise($loc['lat'], $loc['long'], $loc['tz'])." ".$loc['tz_short'];
+		return alice_sunrise($loc['lat'], $loc['long'], $loc['tz']);
 	}
 	elseif (preg_match("/\bsunset\b/i", $string))
 	{
 		
 		if (!alice_loc_check($string)) $string = "here";
 		$loc = alice_loc_get($string);
-		return "In ".$loc['city'].", ".$loc['state'].", the sun will set at ".alice_sunset($loc['lat'], $loc['long'], $loc['tz'])." ".$loc['tz_short'];
+		//return "In ".$loc['city'].", ".$loc['state'].", the sun will set at ".alice_sunset($loc['lat'], $loc['long'], $loc['tz'])." ".$loc['tz_short'];
+		return alice_sunset($loc['lat'], $loc['long'], $loc['tz']);
 	}
 	elseif (preg_match("/\bwhere am i\b/i", $string))
 	{

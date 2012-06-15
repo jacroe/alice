@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Transmission
+ABOUT:        Interacts with the Transmission program via its API
+DEPENDENCIES: Transmission library;
+*/
 function alice_transmission_add($url)
 {
 	require_once PATH.'lib/transmission/transmission.php';

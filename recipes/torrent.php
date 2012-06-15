@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Torrent
+ABOUT:        Adds all .torrent files to Transmission
+DEPENDENCIES: Transmission module; Email module;
+*/
 foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.torrent')) as $file)
 {
 	$torrent = alice_transmission_add($file);

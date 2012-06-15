@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Error messages
+ABOUT:        Location for all error messages. 
+DEPENDENCIES: None
+*/
 function alice_error_nodate()
 {
 	return "I didn't catch that date.".alice_tryagain();

@@ -1,49 +1,28 @@
 <?php
 require "alice.php";
 include "data.php";
-$w = $dWeather;
-
-/* Masthead */
-if ($dEmailCount)
-	if ($dEmailCount == 1) $masthead = "$dEmailCount new message";
-	else $masthead = "$dEmailCount new messages";
-elseif (alice_xbmc_check('playing'))
+/* Movie */
+//
+if ($_GET['movie'])
 {
-	$nowPlaying = alice_xbmc_check('playing');
-	$masthead = "{$nowPlaying[0]} - &ldquo;{$nowPlaying[1]}&rdquo;";
+	$jsonFilm = json_decode(alice_xbmc_talk(array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetMovieDetails", "params" => array("movieid" => intval($_GET['movie']), "properties" => array("tagline", "plot", "year", "mpaa", "runtime", "thumbnail", "genre")), "id" => 1)));
+	$film = $jsonFilm->result->moviedetails;
+	$masthead = $film->label;
+	$subhead = $film->tagline;
+	$poster = "http://$dIP:8090/vfs/{$film->thumbnail}";
+	$summary = $film->plot;
+	$genre = $film->genre;
+	$year = $film->year;
+	$rating = $film->mpaa;
+	$runtime = $film->runtime;
+	$finishtime = date("g:i a", time()+$runtime*60);
 }
 else
 {
-	$w = $dWeather;
-	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']}";
-}
-
-/* Subhead */
-if (date('H') == 23)
-{
-	$now = new DateTime();
-	$ref = new DateTime("tomorrow 6:30am");
-	$diff = $now->diff($ref);
-	if ($diff->h) $time = "{$diff->h} hours and {$diff->i} minutes";
-	else $time = "{$diff->i} minutes"; 
-	$subhead = "You will be waking up in $time.";
-}
-else
-{
-$subhead = "It is ".date('g:i a');
-}
-
-/* Weather */
-$weather = "Right now it's {$w['currTemp']} and {$w['currCond']}. The forecast for today calls for {$w['fcastTod']}. The high is {$w['hiTemp']}F and the low is {$w['loTemp']}F.";
-
-/* XBMC */
-/* Get three most recent films */
-$jsonThreeFilms = json_decode(alice_xbmc_talk(array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetRecentlyAddedMovies", "params" => array("limits" => array("end" => 3), "properties" => array("mpaa", "runtime")), "id" => 1)));
-$arrayThreeFilms = $jsonThreeFilms->result->movies;
-$films = "";
-foreach ($arrayThreeFilms as $movie)
-{
-	$films .= "<a href=xbmc.php?movie={$movie->movieid}><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
+	$arrayAllFilms = alice_xbmc_movies();
+	$arrayAllTVShows = alice_xbmc_tvshows();
+	$masthead = "XBMC";
+	$subhead = "Great media center, or greatest media center?";
 }
 
 ?>
@@ -52,7 +31,7 @@ foreach ($arrayThreeFilms as $movie)
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Alice</title>
+<title><?php echo $masthead; ?> | Alice</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -87,9 +66,9 @@ padding-bottom: 40px;
 <a class="brand" href="index.php">Alice</a>
 <div class="nav-collapse">
 <ul class="nav">
-<li class="active"><a href="#">Main</a></li>
+<li><a href="index.php">Main</a></li>
 <li><a href="#weather">Weather</a></li>
-<li><a href="xbmc.php">XBMC</a></li>
+<li class="active"><a href=#>XBMC</a></li>
 <li><a href="#home">Home</a></li>
 </ul>
 </div><!--/.nav-collapse -->
@@ -102,33 +81,93 @@ padding-bottom: 40px;
 <div class="hero-unit">
 <h1><?php echo $masthead; ?></h1>
 <p><?php echo $subhead; ?></p>
+<?php
+if ($_GET['movie'])
+//Display information about one specific film
+{
+
+?>
+<p><a class="btn btn-primary btn-large" onclick='$.post("api.php", { movieid: <?php echo $_GET['movie'];?> } );'>Play &raquo;</a></p>
 </div>
+
 
 <div class="row">
 
-<div class="span4">
-<h2>Weather</h2>
-<p><?php echo $weather; ?>
-<p><a class="btn" href="#">View details &raquo;</a></p>
+<div class="span5">
+<h2>Poster</h2>
+<p><img src="<?php echo $poster; ?>" width=300 /></p>
 </div>
 
-<div class="span4">
-<h2>Recently Added Films</h2>
-<p><?php echo $films; ?></p>
-<p><a class="btn" href="xbmc.php">Watch more &raquo;</a></p>
+<div class="span7">
+<h2>Information</h2>
+<table class="table table-bordered table-condensed">
+<tbody>
+<tr><td><strong>Summary</strong></td><td><?php echo $summary; ?></td></tr>
+<tr><td><strong>Genre</strong></td><td><?php echo $genre; ?></td></tr>
+<tr><td><strong>Year</strong></td><td><?php echo $year; ?></td></tr>
+<tr><td><strong>Rating</strong></td><td><?php echo $rating; ?></td></tr>
+<tr><td><strong>Runtime</strong></td><td><?php echo $runtime; ?> minutes</td></tr>
+<tr><td><strong>Finish Time</strong></td><td><?php echo $finishtime; ?></td></tr>
+</tbody>
+</table>
 </div>
 
-<div class="span4">
-<h2>Home</h2>
-<p><a class="btn btn-success" onclick='$.post("api.php",{event:"lOn"});'>Lights On</a> <a class="btn btn-danger" onclick=$.post("api.php",{event:"lOff"});>Lights Off</a></p>
-<p><a class="btn" onclick=$.post("api.php",{event:"movie"});>Movie</a> <a class="btn" onclick=$.post("api.php",{event:"sleep"});>Sleep</a> <a class="btn" onclick=$.post("api.php",{event:"reading"});>Reading</a></p>
 </div>
 
+<?php
+}
+?>
+
+<?php
+// Display posters of all films
+if (!$_GET)
+{
+?>
 </div>
+
+
+<div class=row>
+<div class=span12>
+<div class="page-header">
+<h1>TV Shows</h1>
+</div>
+<ul class="thumbnails">
+<?php
+foreach ($arrayAllTVShows as $show) 
+	echo "<li class=span3>
+  <div class=thumbnail>
+  <a href=xbmc.php?show={$show->tvshowid} class=thumbnail><img src=http://$dIP:8090/vfs/{$show->thumbnail} /></a>
+  </div>
+</li>\n";
+?>
+</ul>
+</div>
+
+<div class=span12>
+<div class="page-header">
+<h1>Films</h1>
+</div>
+<ul class="thumbnails">
+<?php
+foreach ($arrayAllFilms as $movie) 
+	echo "<li class=span3>
+  <div class=thumbnail>
+  <a href=xbmc.php?movie={$movie->movieid} class=thumbnail><img src=http://$dIP:8090/vfs/{$movie->thumbnail} /></a>
+  </div>
+</li>\n";
+?>
+</ul>
+</div>
+</div>
+
+<?php
+}
+?>
+
 <hr>
 
 <footer>
-<p>Last updated at <?php echo $dUpdated; ?> in <?php echo $dLocation['city'].', '.$dLocation['state']; ?>. <a href=cron.php?purge=yes>Purge</a></p>
+<p></p>
 </footer>
 
 </div> <!-- /container -->

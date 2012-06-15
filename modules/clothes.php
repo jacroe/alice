@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Clothes
+ABOUT:        Returns data about what type of clothes to wear for the day
+DEPENDENCIES: Location module; Weather module;
+*/
 function alice_clothes($string = "here") {
 	if (alice_loc_check($string)) $loc = alice_loc_get($string);
 	else $loc = alice_loc_get("here");

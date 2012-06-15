@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         X10
+ABOUT:        Turns off and on X10 devices. Must be preset as shown
+DEPENDENCIES: None
+*/
 function alice_x10_check($string)
 { 
 	if(preg_match("/\blivingroom\b/i", $string))

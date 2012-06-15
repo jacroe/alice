@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Purging mail
+ABOUT:        Does certain actions to an inbox based on rules
+DEPENDENCIES: Email module;
+*/
 /*if (!(date('i') % 2))
 {
 	alice_email_purge(NULL, "Your Order with Amazon.com", "\\Seen", "INBOX.Receipts");

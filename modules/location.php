@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Location
+ABOUT:        Returns data about certain locations. Can look up where a person is based on Google Latitude
+DEPENDENCIES: None;
+*/
 function alice_loc_check($string)
 { 
 	if(preg_match('/\(? (\d\d\d\d\d)/x', $string, $matches)) return true;

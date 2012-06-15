@@ -1,4 +1,9 @@
 <?php
+/*
+NAME:         Weather
+ABOUT:        Gets the current weather, forecast and returns sunrise/sunset times
+DEPENDENCIES: Location module;
+*/
 function alice_weather_get($loc)
 {
 	if ($loc == "Preston, MS") $loc = "39339";
