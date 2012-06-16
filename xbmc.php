@@ -17,6 +17,26 @@ if ($_GET['movie'])
 	$runtime = $film->runtime;
 	$finishtime = date("g:i a", time()+$runtime*60);
 }
+elseif ($_GET['show'])
+{
+	$arrayShow = alice_xbmc_show($_GET['show']);
+	$arrayEpisodes = alice_xbmc_episodes($_GET['show']);
+	$masthead = $arrayShow->label;
+	$subhead = $arrayShow->plot;
+	$intFirstSeason = $arrayEpisodes[0]->season;
+	$shows = "";
+	foreach ($arrayEpisodes as $episode)
+	{
+		
+		if ($episode->season != $intCurSeason)
+		{	
+			$intCurSeason = $episode->season;
+			$shows .= "<strong>$intCurSeason</strong><br />\n";
+		}
+		$shows .= "<a class=\"btn btn-mini\" onclick='$.post(\"api.php\", { episodeid: {$episode->episodeid} } );'><i class=icon-play></i></a>{$episode->episode}. {$episode->title}<br />\n";
+	}
+	
+}
 else
 {
 	$arrayAllFilms = alice_xbmc_movies();
@@ -68,7 +88,7 @@ padding-bottom: 40px;
 <ul class="nav">
 <li><a href="index.php">Main</a></li>
 <li><a href="#weather">Weather</a></li>
-<li class="active"><a href=#>XBMC</a></li>
+<li class="active"><a href=xbmc.php>XBMC</a></li>
 <li><a href="#home">Home</a></li>
 </ul>
 </div><!--/.nav-collapse -->
@@ -114,6 +134,22 @@ if ($_GET['movie'])
 
 </div>
 
+<?php
+}
+elseif($_GET['show'])
+{
+?>
+</div>
+
+
+<div class="row">
+
+<div class="span12">
+<h2>Shows</h2>
+<p><?php echo $shows; ?></p>
+</div>
+
+</div>
 <?php
 }
 ?>

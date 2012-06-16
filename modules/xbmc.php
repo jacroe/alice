@@ -98,7 +98,15 @@ function alice_xbmc_check($string)
 		$id = intval($match[0]);
 		$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("movieid" => $id)), "id" => 1);
 		alice_xbmc_talk($data);
-		alice_events("movie");
+		alice_events("watch");
+	}
+	elseif (preg_match("/\bepisode\b/i", $string))
+	{
+		preg_match('/\d{1,3}/', $string, $match);
+		$id = intval($match[0]);
+		$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("episodeid" => $id)), "id" => 1);
+		alice_xbmc_talk($data);
+		alice_events("watch");
 	}
 	elseif (preg_match("/\bquit\b/i", $string))
 	{
@@ -121,4 +129,18 @@ function alice_xbmc_tvshows()
 	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetTVShows", "params" => array("sort" => array("order" => "ascending", "method" => "label", "ignorearticle" => true), "properties" => array("plot", "year", "mpaa", "thumbnail", "genre")), "id" => 1);
 	$xbmc = json_decode(alice_xbmc_talk($data));
 	return $xbmc->result->tvshows;
+}
+
+function alice_xbmc_show($show)
+{
+	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetTVShowDetails", "params" => array("tvshowid" => intval($show), "properties" => array("plot", "year", "mpaa", "thumbnail", "genre")), "id" => 1);
+	$xbmc = json_decode(alice_xbmc_talk($data));
+	return $xbmc->result->tvshowdetails;
+}
+
+function alice_xbmc_episodes($show)
+{
+	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetEpisodes", "params" => array("sort" => array("order" => "ascending", "method" => "label", "ignorearticle" => true),"tvshowid" => intval($show), "properties" => array("title", "episode", "season")), "id" => 1);
+	$xbmc = json_decode(alice_xbmc_talk($data));
+	return $xbmc->result->episodes;
 }

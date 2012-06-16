@@ -30,13 +30,12 @@ function alice_events($string)
 		alice_x10_check("bedroom brighten");
 		return "Welcome Back";
 	}
-	elseif (preg_match("/\bmovie\b/i", $string))
+	elseif (preg_match("/\bwatch\b/i", $string) || preg_match("/\bmovie\b/i", $string))
 	{
-		alice_xbmc_check("notify Heck yeah! Movie time!");
+		alice_xbmc_check("notify Killing the lights");
 		alice_x10_check("livingroom off");
 		sleep(1);
 		alice_x10_check("bedroom off");
-		return "Enjoy your film";
 	}
 	elseif (preg_match("/\breading\b/i", $string))
 	{
