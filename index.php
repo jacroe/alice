@@ -19,7 +19,13 @@ else
 }
 
 /* Subhead */
-if (date('H') == 23)
+if (alice_xbmc_check('playing'))
+{
+	$subhead = <<<SHEAD
+<a class="btn" onclick='$.post("api.php", { control: "rewind" } );'><i class=icon-backward></i></a> <a class="btn btn-primary" onclick='$.post("api.php", { control: "pause" } );'><i class=icon-play></i><i class=icon-pause></i></a> <a class="btn" onclick='$.post("api.php", { control: "forward" } );'><i class=icon-forward></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume up" } );'><i class=icon-volume-up></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume down" } );'><i class=icon-volume-down></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume mute" } );'><i class=icon-volume-off></i></a>
+SHEAD;
+}
+elseif (date('H') == 23)
 {
 	$now = new DateTime();
 	$ref = new DateTime("tomorrow 6:30am");

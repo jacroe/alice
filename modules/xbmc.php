@@ -133,7 +133,7 @@ function alice_xbmc_tvshows()
 
 function alice_xbmc_show($show)
 {
-	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetTVShowDetails", "params" => array("tvshowid" => intval($show), "properties" => array("plot", "year", "mpaa", "thumbnail", "genre")), "id" => 1);
+	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetTVShowDetails", "params" => array("tvshowid" => intval($show), "properties" => array("plot", "year", "mpaa", "thumbnail", "fanart", "genre")), "id" => 1);
 	$xbmc = json_decode(alice_xbmc_talk($data));
 	return $xbmc->result->tvshowdetails;
 }

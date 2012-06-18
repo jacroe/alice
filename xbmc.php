@@ -23,6 +23,7 @@ elseif ($_GET['show'])
 	$arrayEpisodes = alice_xbmc_episodes($_GET['show']);
 	$masthead = $arrayShow->label;
 	$subhead = $arrayShow->plot;
+	$fanart = "http://$dIP:8090/vfs/{$arrayShow->fanart}";
 	$intFirstSeason = $arrayEpisodes[0]->season;
 	$shows = "";
 	foreach ($arrayEpisodes as $episode)
@@ -31,9 +32,9 @@ elseif ($_GET['show'])
 		if ($episode->season != $intCurSeason)
 		{	
 			$intCurSeason = $episode->season;
-			$shows .= "<strong>$intCurSeason</strong><br />\n";
+			$shows .= "<strong>Season $intCurSeason</strong><br />\n";
 		}
-		$shows .= "<a class=\"btn btn-mini\" onclick='$.post(\"api.php\", { episodeid: {$episode->episodeid} } );'><i class=icon-play></i></a>{$episode->episode}. {$episode->title}<br />\n";
+		$shows .= "<a class=\"btn btn-mini\" onclick='$.post(\"api.php\", { episodeid: {$episode->episodeid} } );'><i class=icon-play></i></a> {$episode->episode}. {$episode->title}<br />\n";
 	}
 	
 }
@@ -144,7 +145,12 @@ elseif($_GET['show'])
 
 <div class="row">
 
-<div class="span12">
+<div class="span5">
+<h2>Fanart</h2>
+<p><img src="<?php echo $fanart; ?>" width=400 /></p>
+</div>
+
+<div class="span7">
 <h2>Shows</h2>
 <p><?php echo $shows; ?></p>
 </div>
