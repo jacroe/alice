@@ -28,15 +28,13 @@ elseif ($_GET['show'])
 	$shows = "";
 	foreach ($arrayEpisodes as $episode)
 	{
-		
 		if ($episode->season != $intCurSeason)
-		{	
+		{
 			$intCurSeason = $episode->season;
 			$shows .= "<strong>Season $intCurSeason</strong><br />\n";
 		}
 		$shows .= "<a class=\"btn btn-mini\" onclick='$.post(\"api.php\", { episodeid: {$episode->episodeid} } );'><i class=icon-play></i></a> {$episode->episode}. {$episode->title}<br />\n";
 	}
-	
 }
 else
 {
@@ -98,7 +96,15 @@ padding-bottom: 40px;
 </div>
 
 <div class="container">
-
+<?php if(!alice_xbmc_on())
+{
+?>
+<div class="alert alert-error">
+<strong>Warning!</strong> XBMC is offline.
+</div>
+<?php
+}
+?>
 <div class="hero-unit">
 <h1><?php echo $masthead; ?></h1>
 <p><?php echo $subhead; ?></p>

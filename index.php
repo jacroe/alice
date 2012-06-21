@@ -10,7 +10,9 @@ if ($dEmailCount)
 elseif (alice_xbmc_check('playing'))
 {
 	$nowPlaying = alice_xbmc_check('playing');
+	if ($nowPlaying[0])
 	$masthead = "{$nowPlaying[0]} - &ldquo;{$nowPlaying[1]}&rdquo;";
+	else $masthead = $nowPlaying[1];
 }
 else
 {
@@ -22,7 +24,7 @@ else
 if (alice_xbmc_check('playing'))
 {
 	$subhead = <<<SHEAD
-<a class="btn" onclick='$.post("api.php", { control: "rewind" } );'><i class=icon-backward></i></a> <a class="btn btn-primary" onclick='$.post("api.php", { control: "pause" } );'><i class=icon-play></i><i class=icon-pause></i></a> <a class="btn" onclick='$.post("api.php", { control: "forward" } );'><i class=icon-forward></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume up" } );'><i class=icon-volume-up></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume down" } );'><i class=icon-volume-down></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume mute" } );'><i class=icon-volume-off></i></a>
+<a class="btn" onclick='$.post("api.php", { control: "rewind" } );'><i class=icon-backward></i></a> <a class="btn btn-primary" onclick='$.post("api.php", { control: "pause" } );'><i class="icon-play icon-white"></i><i class="icon-pause icon-white"></i></a> <a class="btn" onclick='$.post("api.php", { control: "forward" } );'><i class=icon-forward></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume up" } );'><i class=icon-volume-up></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume down" } );'><i class=icon-volume-down></i></a> <a class="btn" onclick='$.post("api.php", { control: "volume mute" } );'><i class=icon-volume-off></i></a>
 SHEAD;
 }
 elseif (date('H') == 23)
@@ -44,12 +46,15 @@ $weather = "Right now it's {$w['currTemp']} and {$w['currCond']}. The forecast f
 
 /* XBMC */
 /* Get three most recent films */
-$jsonThreeFilms = json_decode(alice_xbmc_talk(array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetRecentlyAddedMovies", "params" => array("limits" => array("end" => 3), "properties" => array("mpaa", "runtime")), "id" => 1)));
-$arrayThreeFilms = $jsonThreeFilms->result->movies;
-$films = "";
-foreach ($arrayThreeFilms as $movie)
+if (alice_xbmc_on())
 {
-	$films .= "<a href=xbmc.php?movie={$movie->movieid}><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
+	$jsonThreeFilms = json_decode(alice_xbmc_talk(array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetRecentlyAddedMovies", "params" => array("limits" => array("end" => 3), "properties" => array("mpaa", "runtime")), "id" => 1)));
+	$arrayThreeFilms = $jsonThreeFilms->result->movies;
+	$films = "";
+	foreach ($arrayThreeFilms as $movie)
+	{
+		$films .= "<a href=xbmc.php?movie={$movie->movieid}><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
+	}
 }
 
 ?>
@@ -119,9 +124,25 @@ padding-bottom: 40px;
 </div>
 
 <div class="span4">
+<?php
+if (alice_xbmc_on())
+{
+?>
 <h2>Recently Added Films</h2>
 <p><?php echo $films; ?></p>
 <p><a class="btn" href="xbmc.php">Watch more &raquo;</a></p>
+<?php
+}
+else
+{
+?>
+<h2>XBMC Offline</h2>
+<div class="alert">
+<strong>Warning!</strong> XBMC is offline.
+</div>
+<?php
+}
+?>
 </div>
 
 <div class="span4">

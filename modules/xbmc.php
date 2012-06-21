@@ -5,7 +5,7 @@ ABOUT:        Plays films, tv shows, and controls the playback of XBMC
 DEPENDENCIES: None;
 */
 function alice_xbmc_talk($data)
-{	
+{
 	$data = json_encode($data);
 	$ch = curl_init(XBMC_SERVER."jsonrpc");
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -14,6 +14,12 @@ function alice_xbmc_talk($data)
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($data)));
 	$result = curl_exec($ch);
 	return $result;
+}
+function alice_xbmc_on()
+{
+	if(file_get_contents(XBMC_SERVER."jsonrpc"))
+	return true;
+	else return false;
 }
 function alice_xbmc_check($string)
 {
@@ -38,6 +44,12 @@ function alice_xbmc_check($string)
 		$data = array("jsonrpc" => "2.0", "method" => "Player.Seek", "params" => array("playerid" => $player, "value" => "smallforward"), "id" => 1);
 		$xbmc = json_decode(alice_xbmc_talk($data));
 		return "XBMC Skipped Forward";
+	}
+	elseif (preg_match("/\bstop\b/i", $string))
+	{
+		$data = array("jsonrpc" => "2.0", "method" => "Player.Stop", "params" => array("playerid" => $player), "id" => 1);
+		$xbmc = json_decode(alice_xbmc_talk($data));
+		return "XBMC Stopped";
 	}
 	elseif (preg_match("/\bvolume\b/i", $string))
 	{
