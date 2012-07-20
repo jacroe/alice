@@ -3,7 +3,7 @@
 NAME:         Daily mail
 ABOUT:        Sends an email each morning with general information about the day
 DEPENDENCIES: Location module; Weather module; Email module; Clothes module;
-*/
+
 if (date('Hi') == '0700')
 {
 	$date = date('l, F j, Y ');
@@ -44,4 +44,5 @@ EOF;
 	alice_email_send("Jacob", "jacob@jacroe.com", $subject, $body);
 	sleep(30);
 }
-
+*/
+?>

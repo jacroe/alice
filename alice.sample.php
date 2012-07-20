@@ -37,3 +37,4 @@ define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. 
 /* ALICE SETTINGS */
 define("PATH", "/var/www/alice/");	// Root directory of install
 foreach (glob(PATH.'modules/*.php') as $includes) require_once($includes);
+require_once(PATH."lib/smarty/Smarty.class.php");

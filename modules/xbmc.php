@@ -98,7 +98,7 @@ function alice_xbmc_check($string)
 	}
 	elseif (preg_match("/\bnotify\b/i", $string))
 	{
-		// There isn't a JSON call in v4 of the API. Using the HTTP server instead.
+		// There isn't a JSON call in v4 of the API. Using the HTTP server API instead.
 		$string = str_replace("xbmc", "", $string);
 		$string = trim(str_replace("notify", "", $string));
 		file_get_contents(XBMC_SERVER."xbmcCmds/xbmcHttp/?command=ExecBuiltin&parameter=Notification(Alice:,".urlencode($string).")");
@@ -152,7 +152,7 @@ function alice_xbmc_show($show)
 
 function alice_xbmc_episodes($show)
 {
-	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetEpisodes", "params" => array("sort" => array("order" => "ascending", "method" => "label", "ignorearticle" => true),"tvshowid" => intval($show), "properties" => array("title", "episode", "season")), "id" => 1);
+	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetEpisodes", "params" => array("sort" => array("order" => "ascending", "method" => "label", "ignorearticle" => true),"tvshowid" => intval($show), "properties" => array("title", "episode", "season", "playcount")), "id" => 1);
 	$xbmc = json_decode(alice_xbmc_talk($data));
 	return $xbmc->result->episodes;
 }
