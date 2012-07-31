@@ -1,6 +1,6 @@
 <?php
 require "alice.php";
-include "data.php";
+require "data.php";
 $smarty = new Smarty;
 $smarty->left_delimiter = '{{';
 $smarty->right_delimiter = '}}';
@@ -16,7 +16,7 @@ if ($_GET['movie'])
 	$smarty->assign("masthead", $film->label);
 	$smarty->assign("subhead", $film->tagline);
 	$smarty->assign("movieid", $_GET['movie']);
-	$smarty->assign("poster", "http://$dIP:8090/vfs/{$film->thumbnail}");
+	$smarty->assign("poster", XBMC_SERVER."vfs/{$film->thumbnail}");
 	$smarty->assign("summary", $film->plot);
 	$smarty->assign("genre", $film->genre);
 	$smarty->assign("year", $film->year);
@@ -31,7 +31,7 @@ elseif ($_GET['show'])
 	$smarty->assign("title", $arrayShow->label);
 	$smarty->assign("masthead", $arrayShow->label);
 	$smarty->assign("subhead", $arrayShow->plot);
-	$smarty->assign("fanart", "http://$dIP:8090/vfs/{$arrayShow->fanart}");
+	$smarty->assign("fanart", XBMC_SERVER."vfs/{$arrayShow->fanart}");
 	$smarty->assign("arrayEpisodes", alice_xbmc_episodes($_GET['show']));
 	$smarty->display("xbmcShow.tpl");
 }
@@ -40,6 +40,7 @@ else
 	$smarty->assign("title", "XBMC");
 	$smarty->assign("masthead", "XBMC");
 	$smarty->assign("subhead", "Great media center, or greatest media center?");
+	$smarty->assign("xbmcserver", XBMC_SERVER);
 	$smarty->assign("arrayShows", alice_xbmc_tvshows());
 	$smarty->assign("arrayFilms", alice_xbmc_movies());
 	$smarty->display("xbmc.tpl");

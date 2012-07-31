@@ -16,7 +16,7 @@ function alice_x10_check($string)
 	}
 	elseif(preg_match("/\bbedroom\b/i", $string))
 	{
-		if(preg_match("/\bon\b/i", $string)) {exec("nohup flipit flip j2 on on > /dev/null 2>&1 & echo $!"); return true;}
+		if(preg_match("/\bon\b/i", $string)) {exec("nohup flipit flip j2 on > /dev/null 2>&1 & echo $!"); return true;}
 		elseif(preg_match("/\boff\b/i", $string)) {exec("nohup flipit flip j2 off > /dev/null 2>&1 & echo $!"); return true;}
 		elseif(preg_match("/\bbrighten\b/i", $string)) {exec("nohup flipit brighten j2 2 > /dev/null 2>&1 & echo $!"); return true;}
 		elseif(preg_match("/\bdim\b/i", $string)) {exec("nohup flipit dim j2 2 > /dev/null 2>&1 & echo $!"); return true;}

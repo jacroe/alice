@@ -6,5 +6,5 @@ function resize_image($file, $x=600) {
     return $img;
 }
 header('Content-Type: image/jpg');
-echo resize_image("http://".$_GET['i'], $_GET['x']);
+echo resize_image($_GET['i'], $_GET['x']);
 ?>

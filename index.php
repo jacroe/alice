@@ -1,6 +1,6 @@
 <?php
 require "alice.php";
-include "data.php";
+require "data.php";
 $smarty = new Smarty;
 $smarty->left_delimiter = '{{';
 $smarty->right_delimiter = '}}';

@@ -26,7 +26,7 @@ define("SMTP_PASS", "bobandalice");						// SMTP
 define("SMTP_FROM", "alice@bob.com");						// Where should it look like its come from
 
 /* MODULE: Location */
-define("LATITUDE_API", 12345);		// Can grab your user ID @ https://www.google.com/latitude/b/0/apps (Must enable Google Public Location Badge)
+define("LATITUDE_API", "1234567890123467890");		// Can grab your user ID @ https://www.google.com/latitude/b/0/apps (Must enable Google Public Location Badge)
 
 /* MODULE: Weather */
 define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wunderground.com/api/
@@ -36,5 +36,5 @@ define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. 
 
 /* ALICE SETTINGS */
 define("PATH", "/var/www/alice/");	// Root directory of install
-foreach (glob(PATH.'modules/*.php') as $includes) require_once($includes);
+foreach (glob(PATH."modules/*.php") as $includes) require_once($includes);
 require_once(PATH."lib/smarty/Smarty.class.php");
