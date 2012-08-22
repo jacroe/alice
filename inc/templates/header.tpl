@@ -31,7 +31,7 @@ padding-bottom: 40px;
 
 <body>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top navbar-inverse">
 <div class="navbar-inner">
 <div class="container">
 <a class="brand" href="index.php">Alice</a>
@@ -46,3 +46,8 @@ padding-bottom: 40px;
 </div>
 </div>
 </div>
+{{if $error}}
+<div class="container">
+<div class="alert alert-error"><strong>Warning!</strong> {{$error}}</div>
+</div>
+{{/if}}

@@ -7,11 +7,12 @@ $smarty->right_delimiter = '}}';
 $smarty->template_dir = PATH."inc/templates/";
 $smarty->compile_dir  = PATH."inc/templates_c/";
 
+if (!alice_xbmc_isOn()) $smarty->assign("error", "XBMC is offline.");
+
 if ($_GET['movie'])
 {
-	$jsonFilm = json_decode(alice_xbmc_talk(array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetMovieDetails", "params" => array("movieid" => intval($_GET['movie']), "properties" => array("tagline", "plot", "year", "mpaa", "runtime", "thumbnail", "genre")), "id" => 1)));
-	$film = $jsonFilm->result->moviedetails;
-	
+	$film = alice_xbmc_getSingleFilm($_GET['movie']);
+
 	$smarty->assign("title", $film->label);
 	$smarty->assign("masthead", $film->label);
 	$smarty->assign("subhead", $film->tagline);
@@ -27,12 +28,12 @@ if ($_GET['movie'])
 }
 elseif ($_GET['show'])
 {
-	$arrayShow = alice_xbmc_show($_GET['show']);
+	$arrayShow = alice_xbmc_getSingleShow($_GET['show']);
 	$smarty->assign("title", $arrayShow->label);
 	$smarty->assign("masthead", $arrayShow->label);
 	$smarty->assign("subhead", $arrayShow->plot);
 	$smarty->assign("fanart", XBMC_SERVER."vfs/{$arrayShow->fanart}");
-	$smarty->assign("arrayEpisodes", alice_xbmc_episodes($_GET['show']));
+	$smarty->assign("arrayEpisodes", alice_xbmc_getAllEpisodesOfShow($_GET['show']));
 	$smarty->display("xbmcShow.tpl");
 }
 else
@@ -41,8 +42,8 @@ else
 	$smarty->assign("masthead", "XBMC");
 	$smarty->assign("subhead", "Great media center, or greatest media center?");
 	$smarty->assign("xbmcserver", XBMC_SERVER);
-	$smarty->assign("arrayShows", alice_xbmc_tvshows());
-	$smarty->assign("arrayFilms", alice_xbmc_movies());
+	$smarty->assign("arrayShows", alice_xbmc_getAllShows());
+	$smarty->assign("arrayFilms", alice_xbmc_getAllFilms());
 	$smarty->display("xbmc.tpl");
 }
 ?>

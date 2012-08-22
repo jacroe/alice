@@ -7,6 +7,8 @@ $smarty->right_delimiter = '}}';
 $smarty->template_dir = PATH."inc/templates/";
 $smarty->compile_dir  = PATH."inc/templates_c/";
 
+if (!alice_xbmc_isOn()) $smarty->assign("error", "XBMC is offline.");
+
 $w = $dWeather;
 
 /* Masthead */
@@ -39,7 +41,7 @@ elseif (date('H') == 23)
 	$ref = new DateTime("tomorrow 6:30am");
 	$diff = $now->diff($ref);
 	if ($diff->h) $time = "{$diff->h} hours and {$diff->i} minutes";
-	else $time = "{$diff->i} minutes"; 
+	else $time = "{$diff->i} minutes";
 	$subhead = "You will be waking up in $time.";
 }
 else
@@ -49,7 +51,7 @@ $subhead = "It is ".date('g:i a');
 
 /* XBMC */
 /* Get three most recent films */
-if (alice_xbmc_on())
+if (alice_xbmc_isOn())
 {
 	$jsonThreeFilms = json_decode(alice_xbmc_talk(array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetRecentlyAddedMovies", "params" => array("limits" => array("end" => 3), "properties" => array("mpaa", "runtime")), "id" => 1)));
 	$arrayThreeFilms = $jsonThreeFilms->result->movies;
@@ -62,7 +64,7 @@ if (alice_xbmc_on())
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w);
-if (alice_xbmc_on()) $smarty->assign("xbmcBody", $films);
+if (alice_xbmc_isOn()) $smarty->assign("xbmcBody", $films);
 $smarty->assign("updateTime", $dUpdated);
 $smarty->assign("updateCity", $dLocation['city'].', '.$dLocation['state']);
 $smarty->display("index.tpl");

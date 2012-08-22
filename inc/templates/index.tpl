@@ -17,7 +17,8 @@
 <div class="span4">
 <h2>{{if $xbmcBody}}Recently Added Films{{else}}XBMC Offline{{/if}}</h2>
 {{if $xbmcBody}}<p>{{$xbmcBody}}</p>
-<p><a class="btn" href="xbmc.php">Watch more &raquo;</a></p>{{else}}<div class="alert"><strong>Warning!</strong> XBMC is offline.</div>{{/if}}
+<p><a class="btn" href="xbmc.php">Watch more &raquo;</a></p>
+{{/if}}
 </div>
 
 <div class="span4">
