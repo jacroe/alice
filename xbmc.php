@@ -12,6 +12,8 @@ if (!alice_xbmc_isOn()) $smarty->assign("error", "XBMC is offline.");
 if ($_GET['movie'])
 {
 	$film = alice_xbmc_getSingleFilm($_GET['movie']);
+	$imdb = str_replace("tt", "", $film->imdbnumber);
+	$arrayRT = json_decode(file_get_contents("http://api.rottentomatoes.com/api/public/v1.0/movie_alias.json?apikey=4zexarfb847qe7rjpn8cfq45&type=imdb&id=".$imdb));
 
 	$smarty->assign("title", $film->label);
 	$smarty->assign("masthead", $film->label);
@@ -24,6 +26,9 @@ if ($_GET['movie'])
 	$smarty->assign("mpaa", $film->mpaa);
 	$smarty->assign("runtime", $film->runtime);
 	$smarty->assign("finishtime", date("g:i a", time()+$film->runtime*60));
+	$smarty->assign("rtScore", $arrayRT->ratings->critics_score);
+	$smarty->assign("rtFreshness", $arrayRT->ratings->critics_rating);
+	$smarty->assign("rtConsensus", $arrayRT->critics_consensus);
 	$smarty->display("xbmcFilm.tpl");
 }
 elseif ($_GET['show'])

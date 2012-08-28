@@ -63,7 +63,7 @@ if (alice_xbmc_isOn())
 }
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
-$smarty->assign("weather", $w);
+$smarty->assign("weather", $w['fcastFull']);
 if (alice_xbmc_isOn()) $smarty->assign("xbmcBody", $films);
 $smarty->assign("updateTime", $dUpdated);
 $smarty->assign("updateCity", $dLocation['city'].', '.$dLocation['state']);

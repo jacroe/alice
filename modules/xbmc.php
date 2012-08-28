@@ -137,7 +137,7 @@ function alice_xbmc_getAllFilms()
 }
 function alice_xbmc_getSingleFilm($film)
 {
-	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetMovieDetails", "params" => array("movieid" => intval($_GET['movie']), "properties" => array("tagline", "plot", "year", "mpaa", "runtime", "thumbnail", "genre")), "id" => 1);
+	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetMovieDetails", "params" => array("movieid" => intval($film), "properties" => array("tagline", "plot", "year", "mpaa", "runtime", "thumbnail", "genre", "imdbnumber")), "id" => 1);
 	$xbmc = json_decode(alice_xbmc_talk($data));
 	return $xbmc->result->moviedetails;
 }

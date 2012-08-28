@@ -7,11 +7,14 @@ DEPENDENCIES: Location module;
 function alice_weather_get($loc)
 {
 	if ($loc == "Preston, MS") $loc = "39339";
-	$xml = simplexml_load_file("http://www.google.com/ig/api?weather=$loc");
-	$current = $xml->xpath("/xml_api_reply/weather/current_conditions");
-	$forecast = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
-
-	return array("currTemp"=>$current[0]->temp_f['data'], "currCond"=>$current[0]->condition['data'], "hiTemp"=>$forecast[0]->high['data'], "loTemp"=>$forecast[0]->low['data'], "fcastTod"=>$forecast[0]->condition['data'], "fcastTom"=>$forecast[1]->condition['data']);
+	$jsonWeather = json_decode(file_get_contents("http://api.wunderground.com/api/".WUNDERGROUND_API."/conditions/forecast/q/$loc.json"));
+	return array("currTemp"=>"{$jsonWeather->current_observation->temp_f}",
+	"currCond"=>"{$jsonWeather->current_observation->weather}",
+	"hiTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->high->fahrenheit}", 
+	"loTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->low->fahrenheit}",
+	"fcastTod"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->conditions}",
+	"fcastTom"=>"{$jsonWeather->forecast->simpleforecast->forecastday[1]->conditions}",
+	"fcastFull"=>"{$jsonWeather->forecast->txt_forecast->forecastday[0]->fcttext}");
 }
 
 function alice_rain_check($loc = "here")

@@ -22,6 +22,7 @@
 <tr><td><strong>Genre</strong></td><td>{{$genre}}</td></tr>
 <tr><td><strong>Year</strong></td><td>{{$year}}</td></tr>
 <tr><td><strong>Rating</strong></td><td>{{$mpaa}}</td></tr>
+<tr><td><strong>Rotten Tomatoes</strong></td><td>{{$rtFreshness}}. {{$rtConsensus}}</td></tr>
 <tr><td><strong>Runtime</strong></td><td>{{$runtime}} minutes</td></tr>
 <tr><td><strong>Finish Time</strong></td><td>{{$finishtime}}</td></tr>
 </tbody>

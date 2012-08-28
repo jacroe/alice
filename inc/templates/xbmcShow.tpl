@@ -19,7 +19,11 @@
 {{foreach $arrayEpisodes as $episode}}
 {{if $season != $episode->season}}
 {{assign var='season' value=$episode->season}}
+{{if $season == 0}}
+<strong>Specials</strong><br />
+{{else}}
 <strong>Season {{$season}}</strong><br />
+{{/if}}
 {{/if}}
 <a class="btn btn-mini" onclick='$.post("api.php", { episodeid: {{$episode->episodeid}} } );'><i class=icon-play></i></a>
 {{if $episode->playcount}}<i class=icon-ok></i> {{/if}}

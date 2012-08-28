@@ -3,13 +3,13 @@ require('alice.php');
 if (!(date('i') % 10) || ($_GET['purge']))
 {
 	$t = date('g:i a');
-	$l = alice_loc_get('here');
+	$l = alice_loc_get("here");
 	$w = alice_weather_get($l['zip']);
 	$e = alice_email_check('num');
 	$ip = file_get_contents('http://jacroe.com/projects/ip.php');
 	$f = <<<FILE
 <?php
-\$dWeather = array("currTemp"=>{$w['currTemp']}, "currCond"=>"{$w['currCond']}", "hiTemp"=>{$w['hiTemp']}, "loTemp"=>{$w['loTemp']}, "fcastTod"=>"{$w['fcastTod']}", "fcastTom"=>"{$w['fcastTom']}");
+\$dWeather = array("currTemp"=>round({$w['currTemp']}), "currCond"=>"{$w['currCond']}", "hiTemp"=>round({$w['hiTemp']}), "loTemp"=>round({$w['loTemp']}), "fcastTod"=>"{$w['fcastTod']}", "fcastTom"=>"{$w['fcastTom']}", "fcastFull"=>"{$w['fcastFull']}");
 \$dEmailCount = $e;
 \$dLocation = array("city"=>"{$l['city']}","state"=>"{$l['state']}","zip"=>{$l['zip']},"lat"=>{$l['lat']}, "long"=>{$l['long']}, "tz"=>"{$l['tz']}","tz_short"=>"{$l['tz_short']}");
 \$dIP = "$ip";
