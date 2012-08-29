@@ -8,8 +8,6 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/OutputByteStream.php';
-
 /**
  * An OutputByteStream which specifically reads from a file.
  * @package Swift
@@ -18,11 +16,9 @@
  */
 interface Swift_FileStream extends Swift_OutputByteStream
 {
-  
-  /**
-   * Get the complete path to the file.
-   * @return string
-   */
-  public function getPath();
-  
+    /**
+     * Get the complete path to the file.
+     * @return string
+     */
+    public function getPath();
 }

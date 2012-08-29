@@ -4,8 +4,8 @@ require "data.php";
 $smarty = new Smarty;
 $smarty->left_delimiter = '{{';
 $smarty->right_delimiter = '}}';
-$smarty->template_dir = PATH."inc/templates/";
-$smarty->compile_dir  = PATH."inc/templates_c/";
+$smarty->setTemplateDir(PATH."inc/templates/");
+$smarty->setCompileDir(PATH."inc/templates_c/");
 
 if (!alice_xbmc_isOn()) $smarty->assign("error", "XBMC is offline.");
 
