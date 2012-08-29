@@ -33,6 +33,7 @@ define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wun
 
 /* MODULE: XBMC */
 define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. This is used for both HTTP and jsonRPC (default is shown)
+define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb
 
 /* ALICE SETTINGS */
 define("PATH", "/var/www/alice/");	// Root directory of install

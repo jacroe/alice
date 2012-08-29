@@ -13,7 +13,7 @@ if ($_GET['movie'])
 {
 	$film = alice_xbmc_getSingleFilm($_GET['movie']);
 	$imdb = str_replace("tt", "", $film->imdbnumber);
-	$arrayRT = json_decode(file_get_contents("http://api.rottentomatoes.com/api/public/v1.0/movie_alias.json?apikey=4zexarfb847qe7rjpn8cfq45&type=imdb&id=".$imdb));
+	$arrayRT = json_decode(file_get_contents("http://api.rottentomatoes.com/api/public/v1.0/movie_alias.json?apikey=".RTOMATOES_API."&type=imdb&id=$imdb"));
 
 	$smarty->assign("title", $film->label);
 	$smarty->assign("masthead", $film->label);
