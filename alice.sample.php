@@ -26,16 +26,24 @@ define("SMTP_PASS", "bobandalice");						// SMTP
 define("SMTP_FROM", "alice@bob.com");						// Where should it look like its come from
 
 /* MODULE: Location */
-define("LATITUDE_API", "1234567890123467890");		// Can grab your user ID @ https://www.google.com/latitude/b/0/apps (Must enable Google Public Location Badge)
+define("LOCATION_LOOKUP", "here");		// Set your physical location using a zipcode. Can also be set to "here" which will cause your location to be determined by Google Latitude
+define("LATITUDE_API", "1234567890123467890");	// Can grab your user ID @ https://www.google.com/latitude/b/0/apps (Must enable Google Public Location Badge)
 
 /* MODULE: Weather */
 define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wunderground.com/api/
 
 /* MODULE: XBMC */
-define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. This is used for both HTTP and jsonRPC (default is shown)
+define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. Used for both HTTP and jsonRPC (default is shown)
 define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb
 
 /* ALICE SETTINGS */
 define("PATH", "/var/www/alice/");	// Root directory of install
+
+/* THAT'S IT! Don't edit anything below this line */
 foreach (glob(PATH."modules/*.php") as $includes) require_once($includes);
 require_once(PATH."lib/smarty/Smarty.class.php");
+$smarty = new Smarty;
+$smarty->left_delimiter = '{{';
+$smarty->right_delimiter = '}}';
+$smarty->setTemplateDir(PATH."inc/templates/");
+$smarty->setCompileDir(PATH."inc/templates_c/");
