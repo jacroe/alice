@@ -23,7 +23,7 @@ define("SMTP_SERVER", "mail.bob.com");						// SMTP Server
 define("SMTP_PORT", 465);							// SSL port of server
 define("SMTP_USER", "bob");							// SMTP Username
 define("SMTP_PASS", "bobandalice");						// SMTP 
-define("SMTP_FROM", "alice@bob.com");						// Where should it look like its come from
+define("SMTP_FROM", "alice@bob.com");						// Where should it look like it's come from
 
 /* MODULE: Location */
 define("LOCATION_LOOKUP", "here");		// Set your physical location using a zipcode. Can also be set to "here" which will cause your location to be determined by Google Latitude
@@ -37,7 +37,7 @@ define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. 
 define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb
 
 /* ALICE SETTINGS */
-define("PATH", "/var/www/alice/");	// Root directory of install
+define("PATH", "/var/www/alice/");						// Root directory of install
 
 /* THAT'S IT! Don't edit anything below this line */
 foreach (glob(PATH."modules/*.php") as $includes) require_once($includes);
