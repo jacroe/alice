@@ -2,7 +2,11 @@
 <div class="container">
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
-<p>{{$subhead}}</p>
+{{if $nextEpisode}}
+<p><a class="btn btn-large btn-primary" onclick='$.post("api.php", { episodeid: {{$nextEpisode}} } );'><i class="icon-play icon-white"></i> Play next episode</a></p>
+{{else}}
+<p>All episodes watched</p>
+{{/if}}
 </div>
 
 

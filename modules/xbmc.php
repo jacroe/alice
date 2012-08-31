@@ -161,3 +161,13 @@ function alice_xbmc_getAllEpisodesOfShow($show)
 	$xbmc = json_decode(alice_xbmc_talk($data));
 	return $xbmc->result->episodes;
 }
+function alice_xbmc_getFirstUnwatchedEpisode($show)
+{
+	$arrayEpisodes = alice_xbmc_getAllEpisodesOfShow($show);
+	foreach($arrayEpisodes as $episode)
+	{
+		if(($episode->playcount < 1) && (!$nextShow))
+		$nextShow = $episode->episodeid;
+	}
+	return $nextShow;
+}

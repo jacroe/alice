@@ -31,7 +31,7 @@ elseif ($_GET['show'])
 	$arrayShow = alice_xbmc_getSingleShow($_GET['show']);
 	$smarty->assign("title", $arrayShow->label);
 	$smarty->assign("masthead", $arrayShow->label);
-	$smarty->assign("subhead", $arrayShow->plot);
+	$smarty->assign("nextEpisode", alice_xbmc_getFirstUnwatchedEpisode($_GET['show']));
 	$smarty->assign("fanart", XBMC_SERVER."vfs/{$arrayShow->fanart}");
 	$smarty->assign("arrayEpisodes", alice_xbmc_getAllEpisodesOfShow($_GET['show']));
 	$smarty->display("xbmcShow.tpl");
