@@ -14,7 +14,7 @@ if ($_GET['movie'])
 	$smarty->assign("masthead", $film->label);
 	$smarty->assign("subhead", $film->tagline);
 	$smarty->assign("movieid", $_GET['movie']);
-	$smarty->assign("poster", XBMC_SERVER."vfs/{$film->thumbnail}");
+	$smarty->assign("poster", "inc/thumb.php?i=".XBMC_SERVER."vfs/{$film->thumbnail}");
 	$smarty->assign("summary", $film->plot);
 	$smarty->assign("genre", $film->genre);
 	$smarty->assign("year", $film->year);
@@ -32,7 +32,7 @@ elseif ($_GET['show'])
 	$smarty->assign("title", $arrayShow->label);
 	$smarty->assign("masthead", $arrayShow->label);
 	$smarty->assign("nextEpisode", alice_xbmc_getFirstUnwatchedEpisode($_GET['show']));
-	$smarty->assign("fanart", XBMC_SERVER."vfs/{$arrayShow->fanart}");
+	$smarty->assign("fanart", "inc/thumb.php?i=".XBMC_SERVER."vfs/{$arrayShow->fanart}");
 	$smarty->assign("arrayEpisodes", alice_xbmc_getAllEpisodesOfShow($_GET['show']));
 	$smarty->display("xbmcShow.tpl");
 }
