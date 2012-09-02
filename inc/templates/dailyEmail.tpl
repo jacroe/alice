@@ -3,4 +3,4 @@ Daily email for {{$date}}
 <h2>Weather</h2>
 {{$weather}}
 <h2>What you should wear</h2>
-{{$clothes}}
+For {{$city}}, you should wear {{$clothes.top}} and {{$clothes.bottom}} as the high for today will be {{$clothes.hi}}F. {{if $clothes.extra}}You may also want to have {{$clothes.extra}}.{{/if}}

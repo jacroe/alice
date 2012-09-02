@@ -10,7 +10,7 @@ if (date('Hi') == '0700')
 	$smarty->assign("city", $dLocation['city']);
 	$smarty->assign("state", $dLocation['state']);
 	$smarty->assign("weather", $dWeather['fcastFull']);
-	$smarty->assign("clothes", "I don't even know what to tell you.");
+	$smarty->assign("clothes", alice_clothes($dWeather));
 
 	$body = $smarty->fetch('dailyEmail.tpl');
 	$lines = explode("\n", $body);

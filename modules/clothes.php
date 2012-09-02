@@ -2,13 +2,12 @@
 /*
 NAME:         Clothes
 ABOUT:        Returns data about what type of clothes to wear for the day
-DEPENDENCIES: Location module; Weather module;
+DEPENDENCIES: None directly. The weather array stored in data.php must be passed to it. 
 */
-function alice_clothes($string = "here") {
-	if (alice_loc_check($string)) $loc = alice_loc_get($string);
-	else $loc = alice_loc_get("here");
-	$weather = alice_weather_get($loc['zip']);
+function alice_clothes($weather) {
+	
 	$hi = $weather['hiTemp'];
+	$forecast = $weather['fcastTod'];
 
 	// top
 	if ($hi >= 60) $top = "just a tshirt";
@@ -20,8 +19,8 @@ function alice_clothes($string = "here") {
 	else $bottom = "blue jeans";
 	
 	// other items?
-	if (alice_rain_check($loc['zip'])) $extra = "an umbrella or rain jacket because it may rain";
+	if ((preg_match("/\brain\b/i", $forecast)) || (preg_match("/\bthunder\b/i", $forecast)) || (preg_match("/\bThunderstorm\b/i", $forecast)) || (preg_match("/\bshower\b/i", $forecast)) || (preg_match("/\bstorm\b/i", $forecast)) || (preg_match("/\bdrizzle\b/i", $forecast))) $extra = "an umbrella or rain jacket because it may rain";
 	
-	return array("city"=>$loc['city'], "top"=>$top, "bottom"=>$bottom, "hi"=>$hi, "extra"=>$extra);
+	return array("top"=>$top, "bottom"=>$bottom, "hi"=>$hi, "extra"=>$extra);
 }
 ?>
