@@ -2,8 +2,6 @@
 require "alice.php";
 require "data.php";
 
-if (!alice_xbmc_isOn()) $smarty->assign("error", "XBMC is offline.");
-
 $w = $dWeather;
 
 /* Masthead */
@@ -49,12 +47,14 @@ if (alice_xbmc_isOn())
 	{
 		$films .= "<a href=xbmc.php?movie={$movie->movieid}><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
 	}
+	$smarty->assign("xbmcBody", $films);
 }
+else $errors[] = array("error", "XBMC is offline.");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w['fcastFull']);
-if (alice_xbmc_isOn()) $smarty->assign("xbmcBody", $films);
 $smarty->assign("updateTime", $dUpdated);
 $smarty->assign("updateCity", $dLocation['city'].', '.$dLocation['state']);
+$smarty->assign("error", $errors);
 $smarty->display("index.tpl");
 ?>

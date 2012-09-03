@@ -2,8 +2,7 @@
 require "alice.php";
 require "data.php";
 
-if (!alice_xbmc_isOn()) $smarty->assign("error", "XBMC is offline.");
-
+if (!alice_xbmc_isOn()) $errors[] = array("error", "XBMC is offline.");
 if ($_GET['movie'])
 {
 	$film = alice_xbmc_getSingleFilm($_GET['movie']);
@@ -24,6 +23,7 @@ if ($_GET['movie'])
 	$smarty->assign("rtScore", $arrayRT->ratings->critics_score);
 	$smarty->assign("rtFreshness", $arrayRT->ratings->critics_rating);
 	$smarty->assign("rtConsensus", $arrayRT->critics_consensus);
+	$smarty->assign("error", $errors);
 	$smarty->display("xbmcFilm.tpl");
 }
 elseif ($_GET['show'])
@@ -34,6 +34,7 @@ elseif ($_GET['show'])
 	$smarty->assign("nextEpisode", alice_xbmc_getFirstUnwatchedEpisode($_GET['show']));
 	$smarty->assign("fanart", "inc/thumb.php?i=".XBMC_SERVER."vfs/{$arrayShow->fanart}");
 	$smarty->assign("arrayEpisodes", alice_xbmc_getAllEpisodesOfShow($_GET['show']));
+	$smarty->assign("error", $errors);
 	$smarty->display("xbmcShow.tpl");
 }
 else
@@ -44,6 +45,7 @@ else
 	$smarty->assign("xbmcserver", XBMC_SERVER);
 	$smarty->assign("arrayShows", alice_xbmc_getAllShows());
 	$smarty->assign("arrayFilms", alice_xbmc_getAllFilms());
+	$smarty->assign("error", $errors);
 	$smarty->display("xbmc.tpl");
 }
 ?>

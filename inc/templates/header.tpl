@@ -48,6 +48,8 @@ padding-bottom: 40px;
 </div>
 {{if $error}}
 <div class="container">
-<div class="alert alert-error"><strong>Warning!</strong> {{$error}}</div>
+{{foreach $error as $issue}}
+<div class="alert alert-{{$issue[0]}}"><strong>Warning!</strong> {{$issue[1]}}</div>
+{{/foreach}}
 </div>
 {{/if}}
