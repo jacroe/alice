@@ -2,8 +2,8 @@
 <div class="container">
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
-{{if $nextEpisode}}
-<p><a class="btn btn-large btn-primary" onclick='$.post("api.php", { episodeid: {{$nextEpisode}} } );'><i class="icon-play icon-white"></i> Play next episode</a></p>
+{{if $nextEpisodeID}}
+<p><a class="btn btn-large btn-primary" onclick='$.post("api.php", { episodeid: {{$nextEpisodeID}} } );'><i class="icon-play icon-white"></i> Play next episode</a></p>
 {{else}}
 <p>All episodes watched</p>
 {{/if}}
@@ -18,7 +18,7 @@
 </div>
 
 <div class="span7">
-<h2>Shows</h2>
+<h2>Episodes</h2>
 <p>
 {{foreach $arrayEpisodes as $episode}}
 {{if $season != $episode->season}}

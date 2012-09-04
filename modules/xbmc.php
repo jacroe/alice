@@ -166,8 +166,11 @@ function alice_xbmc_getFirstUnwatchedEpisode($show)
 	$arrayEpisodes = alice_xbmc_getAllEpisodesOfShow($show);
 	foreach($arrayEpisodes as $episode)
 	{
-		if(($episode->playcount < 1) && (!$nextShow))
-		$nextShow = $episode->episodeid;
+		if(($episode->playcount < 1) && (!$nextShowID))
+		{
+			$nextShowID = $episode->episodeid;
+			$nextShowTitle = $episode->title;
+		}
 	}
-	return $nextShow;
+	return array("title" => $nextShowTitle, "id" => $nextShowID);
 }

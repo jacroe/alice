@@ -4,6 +4,7 @@ error_reporting(0);
 /* GENERAL SETTINGS */
 define("NAME", "Bob");		// The name you wish to be referenced by in correspondence (emails, tweets, etc.)
 define("EMAIL", "bob@bob.com");	// Where we should be sending you emails
+define("DISPLAYNOTICES", TRUE); // Whether or not API information notices should be displayed. Your keys could be revoked if off
 
 /* RECIPE: NZB */
 define("SABNZBD_SERVER", "http://localhost:8080/sabnzbd/");	// Location of your SABnzbd setup (default is shown)
@@ -47,3 +48,4 @@ $smarty->left_delimiter = '{{';
 $smarty->right_delimiter = '}}';
 $smarty->setTemplateDir(PATH."inc/templates/");
 $smarty->setCompileDir(PATH."inc/templates_c/");
+$smarty->assign("dispLicense", DISPLAYNOTICES); 
