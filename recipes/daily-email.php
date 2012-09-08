@@ -26,7 +26,7 @@ if (date('Hi') == '2300')
 	$date = date('l, F j, Y ');
 	$loc = alice_loc_get('here');
 	$weather = alice_weather_get($loc['zip']);
-	
+
 	$subject = "Nightly email for ".$date;
 	$body = <<<EOF
 <h1>$date - {$loc['city']}, {$loc['state']}</h1>

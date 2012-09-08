@@ -1,5 +1,5 @@
 <?php
-error_reporting(0); 
+error_reporting(0);
 
 /* GENERAL SETTINGS */
 define("NAME", "Bob");		// The name you wish to be referenced by in correspondence (emails, tweets, etc.)
@@ -23,7 +23,7 @@ define("IMAP_PASS", "bobandalice");						// IMAP Password
 define("SMTP_SERVER", "mail.bob.com");						// SMTP Server
 define("SMTP_PORT", 465);							// SSL port of server
 define("SMTP_USER", "bob");							// SMTP Username
-define("SMTP_PASS", "bobandalice");						// SMTP 
+define("SMTP_PASS", "bobandalice");						// SMTP
 define("SMTP_FROM", "alice@bob.com");						// Where should it look like it's come from
 
 /* MODULE: Location */
@@ -37,6 +37,10 @@ define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wun
 define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. Used for both HTTP and jsonRPC (default is shown)
 define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb
 
+/* MODULE: Pushover */
+define("PUSHOVER_APP", "123abc");	// Your local Alice Pushover application. Make one at https://pushover.net/apps/build
+define("PUSHOVER_USER", "456def");	// Your Pushover user key. https://pushover.net/
+
 /* ALICE SETTINGS */
 define("PATH", "/var/www/alice/");						// Root directory of install
 
@@ -48,4 +52,4 @@ $smarty->left_delimiter = '{{';
 $smarty->right_delimiter = '}}';
 $smarty->setTemplateDir(PATH."inc/templates/");
 $smarty->setCompileDir(PATH."inc/templates_c/");
-$smarty->assign("dispLicense", DISPLAYNOTICES); 
+$smarty->assign("dispLicense", DISPLAYNOTICES);

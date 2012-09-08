@@ -2,19 +2,19 @@
 /*
 NAME:         Newzbin
 ABOUT:        Adds .nzb to SABnzbd
-DEPENDENCIES: Email module;
+DEPENDENCIES: Email module; Pushover module;
 */
 foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.nzb')) as $file)
 {
 	$result = file_get_contents(SABNZBD_SERVER."api?mode=addlocalfile&name=".$file."&apikey=".SABNZBD_API);
-	if ($result == "ok\n") 
+	if ($result == "ok\n")
 	{
-		alice_email_send(NAME, EMAIL, "NZB added", "<code>".$file."</code> has been queued.");
+		alice_pushover("NZB added", "$file has been queued.");
 		unlink($file);
 	}
 	else
 	{
-		alice_email_send(NAME, EMAIL, "NZB not added", "The NZB at <code>".$file."</code> could not be queued. The following error was given:<br /> <code>".$result."</code>");
+		alice_pushover("NZB not added", "The NZB at $file could not be queued.");
 		rename($file, $file."s");
 	}
 }
