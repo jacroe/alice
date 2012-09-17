@@ -5,7 +5,7 @@ ABOUT:        Returns data about certain locations. Can look up where a person i
 DEPENDENCIES: None;
 */
 function alice_loc_check($string)
-{ 
+{
 	if(preg_match('/\(? (\d\d\d\d\d)/x', $string, $matches)) return true;
 	elseif (preg_match("/\bhere\b/i", $string)) return true;
 	else return false;
@@ -34,10 +34,10 @@ function alice_loc_get($string)
 	"tz_short"=>$jsonWund->location->tz_short);
 }
 
-function alice_loc_travel($from, $to, $mode = "driving") 
+function alice_loc_travel($from, $to, $mode = "driving")
 {
-	$jsonTravel = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/distancematrix/json?origins=32.966585,-88.895643&destinations=39406&mode=driving&language=en-US&sensor=false&units=imperial"));
-	return array("time"=>$json->rows[0]->elements[0]->duration->text,
-	"dist"=>$json->rows[0]->elements[0]->distance->text);
+	$jsonTravel = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/distancematrix/json?origins=$from&destinations=$to&mode=$mode&language=en-US&sensor=false&units=imperial"));
+	return array("time"=>$jsonTravel->rows[0]->elements[0]->duration->text,
+	"dist"=>$jsonTravel->rows[0]->elements[0]->distance->text);
 }
 ?>

@@ -2,7 +2,7 @@
 /*
 NAME:         Newzbin
 ABOUT:        Adds .nzb to SABnzbd
-DEPENDENCIES: Email module; Pushover module;
+DEPENDENCIES: Pushover module;
 */
 foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.nzb')) as $file)
 {
