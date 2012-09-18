@@ -1,4 +1,4 @@
-{{include file="header.tpl"}}
+{{include file="header.tpl" page="index"}}
 <div class="container">
 
 <div class="hero-unit">

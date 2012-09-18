@@ -34,13 +34,18 @@ padding-bottom: 40px;
 <div class="navbar navbar-fixed-top navbar-inverse">
 <div class="navbar-inner">
 <div class="container">
+<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
 <a class="brand" href="index.php">Alice</a>
-<div class="nav-collapse">
+<div class="nav-collapse collapse">
 <ul class="nav">
-<li><a href="index.php">Main</a></li>
-<li><a href="#weather">Weather</a></li>
-<li><a href="xbmc.php">XBMC</a></li>
-<li><a href="#home">Home</a></li>
+<li class="{{if $page=='index'}}active{{/if}}"><a href="index.php">Main</a></li>
+<li class="{{if $page=='weather'}}active{{/if}}"><a href="#weather">Weather</a></li>
+<li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
+<li class="{{if $page=='home'}}active{{/if}}"><a href="#home">Home</a></li>
 </ul>
 </div><!--/.nav-collapse -->
 </div>
