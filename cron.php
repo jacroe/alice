@@ -6,17 +6,18 @@ if (!(date('i') % 10) || ($_GET['purge']))
 	$l = alice_loc_get(LOCATION_LOOKUP);
 	$w = alice_weather_get($l['zip']);
 	$e = alice_email_check('num');
-	$f = <<<FILE
-<?php
-\$dWeather = array("currTemp"=>round({$w['currTemp']}), "currCond"=>"{$w['currCond']}", "hiTemp"=>round({$w['hiTemp']}), "loTemp"=>round({$w['loTemp']}), "fcastTod"=>"{$w['fcastTod']}", "fcastTom"=>"{$w['fcastTom']}", "fcastFull"=>"{$w['fcastFull']}", "icon"=>"{$w['icon']}");
-\$dEmailCount = $e;
-\$dLocation = array("city"=>"{$l['city']}","state"=>"{$l['state']}","zip"=>{$l['zip']},"lat"=>{$l['lat']}, "long"=>{$l['long']}, "tz"=>"{$l['tz']}","tz_short"=>"{$l['tz_short']}");
-\$dUpdated = "$t";
-?>
-FILE;
-	file_put_contents(PATH.'data.php', $f);
-	if ($_GET['purge']) header("Location: index.php");
+	alice_mysql_put("modules", "weather", $w);
+	alice_mysql_put("modules", "location", $l);
+	alice_mysql_put("modules", "email", array("count"=>$e));
+	alice_mysql_put("modules", "update", array("time"=>$t));
 }
-require('data.php');
+else
+{
+	$w = alice_mysql_get("modules", "weather");
+	$l = alice_mysql_get("modules", "location");
+	$u = alice_mysql_get("modules", "update");
+	$e = alice_mysql_get("modules", "email");
+}
+//require('data.php');
 foreach (glob(PATH.'recipes/*.php') as $recipes) require_once($recipes);
 ?>

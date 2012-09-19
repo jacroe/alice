@@ -1,13 +1,10 @@
 <?php
 require "alice.php";
-require "data.php";
-
-$w = $dWeather;
 
 /* Masthead */
-if ($dEmailCount)
-	if ($dEmailCount == 1) $masthead = "$dEmailCount new message";
-	else $masthead = "$dEmailCount new messages";
+if ($e['count'])
+	if ($e['count'] == 1) $masthead = "{$e['count']} new message";
+	else $masthead = "{$e['count']} new messages";
 elseif (alice_xbmc_check('playing'))
 {
 	$nowPlaying = alice_xbmc_check('playing');
@@ -17,7 +14,6 @@ elseif (alice_xbmc_check('playing'))
 }
 else
 {
-	$w = $dWeather;
 	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.svg width=100 />";
 }
 
@@ -54,8 +50,8 @@ $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w['fcastFull']);
 $smarty->assign("weatherIcon", alice_weather_getIcon($w['icon']));
-$smarty->assign("updateTime", $dUpdated);
-$smarty->assign("updateCity", $dLocation['city'].', '.$dLocation['state']);
+$smarty->assign("updateTime", $u['time']);
+$smarty->assign("updateCity", $l['city'].', '.$l['state']);
 $smarty->assign("error", $errors);
 $smarty->display("index.tpl");
 ?>

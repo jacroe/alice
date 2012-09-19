@@ -2,19 +2,16 @@
 error_reporting(0);
 
 /* GENERAL SETTINGS */
-define("NAME", "Bob");		// The name you wish to be referenced by in correspondence (emails, tweets, etc.)
-define("EMAIL", "bob@bob.com");	// Where we should be sending you emails
-define("DISPLAYNOTICES", TRUE); // Whether or not API information notices should be displayed. Your keys could be revoked if off
+define("NAME", "Bob");			// The name you wish to be referenced by in correspondence (emails, tweets, etc.)
+define("EMAIL", "bob@bob.com");		// Where we should be sending you emails
+define("DISPLAYNOTICES", TRUE); 	// Whether or not API information notices should be displayed. Your keys could be revoked if off
+define("PATH", "/var/www/alice/");	// Root directory of install
 
-/* RECIPE: NZB */
-define("SABNZBD_SERVER", "http://localhost:8080/sabnzbd/");	// Location of your SABnzbd setup (default is shown)
-define("SABNZBD_API", ""); 					// Found in Config > General > SABnzbd Web Server > API Key
-
-/* MODULE: Transmission */
-define("TRANSMISSION_SERVER", "http://localhost:9091/transmission/rpc");	// Location of Transmission (default is shown)
-define("TRANSMISSION_USER", NULL);						// Username. Use NULL if you haven't set one
-define("TRANSMISSION_PASS", NULL);						// Password. Use NULL if you haven't set one
-define("TRANSMISSION_DOWNLOAD", "/home/bob/Downloads");				// Where the files should be downloaded to
+/* MODULE: MySQL */
+define("MYSQL_SERVER", "localhost");						// MySQL server
+define("MYSQL_USER", "root");							// MySQL username
+define("MYSQL_PASS", "password");						// MySQL password
+define("MYSQL_DB", "alice");							// MySQL Database
 
 /* MODULE: Email */
 define("IMAP_SERVER", "{mail.bob.com:993/imap/ssl/novalidate-cert}INBOX");	// In a PHP readable format
@@ -37,12 +34,19 @@ define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wun
 define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. Used for both HTTP and jsonRPC (default is shown)
 define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb
 
+/* MODULE: Transmission */
+define("TRANSMISSION_SERVER", "http://localhost:9091/transmission/rpc");	// Location of Transmission (default is shown)
+define("TRANSMISSION_USER", NULL);						// Username. Use NULL if you haven't set one
+define("TRANSMISSION_PASS", NULL);						// Password. Use NULL if you haven't set one
+define("TRANSMISSION_DOWNLOAD", "/home/bob/Downloads");				// Where the files should be downloaded to
+
 /* MODULE: Pushover */
 define("PUSHOVER_APP", "123abc");	// Your local Alice Pushover application. Make one at https://pushover.net/apps/build
 define("PUSHOVER_USER", "456def");	// Your Pushover user key. https://pushover.net/
 
-/* ALICE SETTINGS */
-define("PATH", "/var/www/alice/");						// Root directory of install
+/* RECIPE: NZB */
+define("SABNZBD_SERVER", "http://localhost:8080/sabnzbd/");	// Location of your SABnzbd setup (default is shown)
+define("SABNZBD_API", ""); 					// Found in Config > General > SABnzbd Web Server > API Key
 
 /* THAT'S IT! Don't edit anything below this line */
 foreach (glob(PATH."modules/*.php") as $includes) require_once($includes);
@@ -53,3 +57,7 @@ $smarty->right_delimiter = '}}';
 $smarty->setTemplateDir(PATH."inc/templates/");
 $smarty->setCompileDir(PATH."inc/templates_c/");
 $smarty->assign("dispLicense", DISPLAYNOTICES);
+$w = alice_mysql_get("modules", "weather");
+$l = alice_mysql_get("modules", "location");
+$u = alice_mysql_get("modules", "update");
+$e = alice_mysql_get("modules", "email");

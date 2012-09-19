@@ -1,6 +1,5 @@
 <?php
 require "alice.php";
-require "data.php";
 
 if (!alice_xbmc_isOn()) $errors[] = array("error", "XBMC is offline.");
 if ($_GET['movie'])
