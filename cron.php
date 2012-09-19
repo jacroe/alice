@@ -10,6 +10,7 @@ if (!(date('i') % 10) || ($_GET['purge']))
 	alice_mysql_put("modules", "location", $l);
 	alice_mysql_put("modules", "email", array("count"=>$e));
 	alice_mysql_put("modules", "update", array("time"=>$t));
+	if ($_GET['purge']) header("Location: index.php");
 }
 else
 {
