@@ -53,7 +53,8 @@ INSERT INTO `a_modules` (`name`, `value`, `lastchanged`) VALUES
 ('weather_icon', 'sunny', '2012-01-01 06:00:00'),
 ('email_count', '0', '2012-01-01 06:00:00'),
 ('location_city', 'Hattiesburg', '2012-01-01 06:00:00'),
-('weather_currTemp', '60', '2012-01-01 06:00:00');
+('weather_currTemp', '60', '2012-01-01 06:00:00'),
+('weather_currWind', 'Calm', '2012-01-01 06:00:00');
 
 -- --------------------------------------------------------
 
