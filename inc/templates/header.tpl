@@ -43,7 +43,7 @@ padding-bottom: 40px;
 <div class="nav-collapse collapse">
 <ul class="nav">
 <li class="{{if $page=='index'}}active{{/if}}"><a href="index.php">Main</a></li>
-<li class="{{if $page=='weather'}}active{{/if}}"><a href="#weather">Weather</a></li>
+<li class="{{if $page=='weather'}}active{{/if}}"><a href="weather.php">Weather</a></li>
 <li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
 <li class="{{if $page=='home'}}active{{/if}}"><a href="#home">Home</a></li>
 </ul>

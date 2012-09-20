@@ -12,7 +12,7 @@
 <h2>Weather</h2>
 <p>{{$weather}}</p>
 {{*<p>Right now it's {{$weather.currTemp}} and {{$weather.currCond}}. The forecast for today calls for {{$weather.fcastTod}}. The high is {{$weather.hiTemp}}F and the low is {{$weather.loTemp}}F.</p>*}}
-<p><a class="btn" href="#">View details &raquo;</a></p>
+<p><a class="btn" href="weather.php">View details &raquo;</a></p>
 </div>
 
 <div class="span4">

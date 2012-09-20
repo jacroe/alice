@@ -2,7 +2,7 @@
 /*
 NAME:         Update Sickbeard
 ABOUT:        Checks if Sickbeard is up to date.
-DEPENDENCIES: None;
+DEPENDENCIES: Pushover module
 */
 if ($sb = file_get_contents("http://localhost:8082/home/"))
 	if (preg_match("/\/home\/update\/\?pid=[0-9]{4}/i", $sb, $matches))

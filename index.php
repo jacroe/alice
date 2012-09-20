@@ -49,7 +49,6 @@ else $errors[] = array("error", "XBMC is offline.");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w['fcastFull']);
-$smarty->assign("weatherIcon", alice_weather_getIcon($w['icon']));
 $smarty->assign("updateTime", $u['time']);
 $smarty->assign("updateCity", $l['city'].', '.$l['state']);
 $smarty->assign("error", $errors);

@@ -4,7 +4,7 @@ if (!(date('i') % 10) || ($_GET['purge']))
 {
 	$t = date('g:i a');
 	$l = alice_loc_get(LOCATION_LOOKUP);
-	$w = alice_weather_get($l['zip']);
+	$w = alice_weather_get($l);
 	$e = alice_email_check('num');
 	alice_mysql_put("modules", "weather", $w);
 	alice_mysql_put("modules", "location", $l);
