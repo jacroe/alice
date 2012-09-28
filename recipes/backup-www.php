@@ -1,8 +1,10 @@
 <?php
 /*
-NAME:         Backup /var/www/ folder
+NAME:         Backup Apache folder
 ABOUT:        Backups the www folder to Dropbox
-DEPENDENCIES: None;
+DEPENDENCIES: The rsync package must be installed on your system.
+INSTALL:      None;
+CONFIG:       Change the directories to match your own. 
 */
 
 if (date('Hi') == "0400")

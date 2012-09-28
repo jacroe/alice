@@ -19,6 +19,5 @@ else
 	$u = alice_mysql_get("modules", "update");
 	$e = alice_mysql_get("modules", "email");
 }
-//require('data.php');
 foreach (glob(PATH.'recipes/*.php') as $recipes) require_once($recipes);
 ?>

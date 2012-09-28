@@ -3,6 +3,8 @@
 NAME:         Notify of Connection
 ABOUT:        Notices when computer is offline and sends a notification when we reconnnect. 
 DEPENDENCIES: Pushover module
+INSTALL:      Execute the SQL code below. 
+CONFIG:       Works out of the box though you may want to edit the phrasing to your liking;
 SQL:          INSERT INTO `a_recipes` (`name`, `value`, `lastchanged`) VALUES
 ('notifyConnection_time', '-1', '2012-01-01 06:00:00')
 */
@@ -18,12 +20,11 @@ if (($arrayDB['time'] != -1) && alice_onlineCheck())
 	else $time = "{$diff->i} minutes";
 	
 	alice_pushover("Connection Down", "The internet connection was down for $time. It is now back up.");
-	$arrayDB['time'] = -1;
-	alice_mysql_put("recipes", "notifyConnection", $arrayDB);
+	alice_mysql_put("recipes", "notifyConnection", array("time"=>-1));
 }
 elseif (($arrayDB['time'] == -1) && !alice_onlineCheck())
 {
-	$arrayDB['time'] = date('Y-m-d g:i a');
-	alice_mysql_put("recipes", "notifyConnection", $arrayDB);
+	$arrayDB['time'] = ;
+	alice_mysql_put("recipes", "notifyConnection", array("time"=>date('Y-m-d g:i a')));
 }
 ?>

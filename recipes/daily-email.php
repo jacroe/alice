@@ -3,6 +3,8 @@
 NAME:         Daily mail
 ABOUT:        Sends an email each morning with general information about the day
 DEPENDENCIES: Location module; Weather module; Email module; Clothes module;
+INSTALL:      None;
+CONFIG:       Edit the dailyEmail.tpl file in inc/templates_C folder to your liking.
 */
 if (date('Hi') == '0700')
 {

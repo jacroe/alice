@@ -3,6 +3,8 @@
 NAME:         Newzbin
 ABOUT:        Adds .nzb to SABnzbd
 DEPENDENCIES: Pushover module;
+INSTALL:      Edit the SABnzbd+ settings in alice.php.
+CONFIG:       Change the directory to one of your own. 
 */
 foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.nzb')) as $file)
 {

@@ -3,6 +3,8 @@
 NAME:         Torrent
 ABOUT:        Adds all .torrent files to Transmission
 DEPENDENCIES: Transmission module; Pushover module;
+INSTALL:      Edit the Transmission settings in alice.php.
+CONFIG:       Change the directory to your own.
 */
 foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.torrent')) as $file)
 {
