@@ -45,7 +45,7 @@ if (alice_xbmc_isOn())
 	}
 	$smarty->assign("xbmcBody", $films);
 }
-else $errors[] = array("error", "XBMC is offline.");
+else $errors[] = array("alert", "XBMC is offline.");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w['fcastFull']);
