@@ -72,4 +72,10 @@ function alice_cleanup($string)
 	$string = trim($string);
 	return $string;
 }
+
+function alice_onlineCheck()
+{
+	if (file_get_contents("http://google.com")) return true;
+	else return false;
+}
 ?>
