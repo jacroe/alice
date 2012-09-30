@@ -24,7 +24,6 @@ if (($arrayDB['time'] != -1) && alice_onlineCheck())
 }
 elseif (($arrayDB['time'] == -1) && !alice_onlineCheck())
 {
-	$arrayDB['time'] = ;
 	alice_mysql_put("recipes", "notifyConnection", array("time"=>date('Y-m-d g:i a')));
 }
 ?>
