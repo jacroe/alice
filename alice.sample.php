@@ -40,6 +40,10 @@ define("TRANSMISSION_USER", NULL);						// Username. Use NULL if you haven't set
 define("TRANSMISSION_PASS", NULL);						// Password. Use NULL if you haven't set one
 define("TRANSMISSION_DOWNLOAD", "/home/bob/Downloads");				// Where the files should be downloaded to
 
+/* MODULE: Deluge */
+define("DELUGE_SERVER", "http://localhost:8112/json");				// Location of Deluge's Web json server (default shown)
+define("DELUGE_PASS", "#3n.7B");						// Password set to access web client
+
 /* MODULE: Pushover */
 define("PUSHOVER_APP", "123abc");	// Your local Alice Pushover application. Make one at https://pushover.net/apps/build
 define("PUSHOVER_USER", "456def");	// Your Pushover user key. https://pushover.net/
