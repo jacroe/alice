@@ -11,11 +11,12 @@ function alice_weather_get($loc)
 	return array("currTemp"=>"{$jsonWeather->current_observation->temp_f}",
 	"currCond"=>"{$jsonWeather->current_observation->weather}",
 	"currWind" => "{$jsonWeather->current_observation->wind_string}",
+	"currHumidity" => "{$jsonWeather->current_observation->relative_humidity}",
 	"hiTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->high->fahrenheit}", 
 	"loTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->low->fahrenheit}",
-	"fcastTod"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->conditions}",
-	"fcastTom"=>"{$jsonWeather->forecast->simpleforecast->forecastday[1]->conditions}",
-	"fcastFull"=>"{$jsonWeather->forecast->txt_forecast->forecastday[0]->fcttext}",
+	"fcastToday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[0]->fcttext}",
+	"fcastTomorrow"=>"{$jsonWeather->forecast->txt_forecast->forecastday[1]->fcttext}",
+	"fcastNextday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[1]->fcttext}",
 	"icon"=>$icon);
 }
 function alice_weather_getRadar($loc)
@@ -23,6 +24,13 @@ function alice_weather_getRadar($loc)
 	
 	#TODO: Find a way to store this image
 	return "http://api.wunderground.com/api/".WUNDERGROUND_API."/animatedradar/q/{$loc['state']}/{$loc['city']}.gif?newmaps=1&timelabel=1&timelabel.y=10&num=8&delay=50";
+
+}
+function alice_weather_getSatellite($loc)
+{
+	
+	#TODO: Find a way to store this image
+	return "http://api.wunderground.com/api/".WUNDERGROUND_API."/animatedsatellite/q/{$loc['state']}/{$loc['city']}.gif?borders=1&basemap=1&timelabel=1&timelabel.y=10&num=8&delay=50";
 
 }
 function alice_weather_getIcon($icon)

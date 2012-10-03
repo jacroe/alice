@@ -5,12 +5,13 @@ require "alice.php";
 
 $masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 />";
 
-$subhead = $w['fcastFull'];
+$subhead = $w['fcastToday'];
 
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w);
 $smarty->assign("radarimg", alice_weather_getRadar($l));
+$smarty->assign("satimg", alice_weather_getSatellite($l));
 $smarty->assign("updateTime", $u['time']);
 $smarty->assign("updateCity", $l['city'].', '.$l['state']);
 $smarty->assign("error", $errors);

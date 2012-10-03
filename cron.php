@@ -10,7 +10,6 @@ if ((!(date('i') % 10) || ($_GET['purge'])) && alice_onlineCheck())
 	alice_mysql_put("modules", "location", $l);
 	alice_mysql_put("modules", "email", array("count"=>$e));
 	alice_mysql_put("modules", "update", array("time"=>$t));
-	if ($_GET['purge']) header("Location: index.php");
 }
 else
 {
@@ -19,5 +18,6 @@ else
 	$u = alice_mysql_get("modules", "update");
 	$e = alice_mysql_get("modules", "email");
 }
+if ($_GET['purge']) header("Location: index.php");
 foreach (glob(PATH.'recipes/*.php') as $recipes) require_once($recipes);
 ?>

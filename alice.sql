@@ -45,16 +45,17 @@ INSERT INTO `a_modules` (`name`, `value`, `lastchanged`) VALUES
 ('location_zip', '39406', '2012-01-01 06:00:00'),
 ('location_state', 'MS', '2012-01-01 06:00:00'),
 ('weather_currCond', 'Clear', '2012-01-01 06:00:00'),
+('weather_currTemp', '60', '2012-01-01 06:00:00'),
+('weather_currHumidity', '60', '2012-01-01 06:00:00'),
+('weather_currWind', 'Calm', '2012-01-01 06:00:00'),
 ('weather_hiTemp', '100', '2012-01-01 06:00:00'),
 ('weather_loTemp', '0', '2012-01-01 06:00:00'),
-('weather_fcastTod', 'Clear', '2012-01-01 06:00:00'),
-('weather_fcastTom', 'Clear', '2012-01-01 06:00:00'),
-('weather_fcastFull', 'Clear then clearer', '2012-01-01 06:00:00'),
+('weather_fcastToday', 'Clear', '2012-01-01 06:00:00'),
+('weather_fcastTomorrow', 'Clear', '2012-01-01 06:00:00'),
+('weather_fcastNextday', 'Clear', '2012-01-01 06:00:00'),
 ('weather_icon', 'sunny', '2012-01-01 06:00:00'),
 ('email_count', '0', '2012-01-01 06:00:00'),
-('location_city', 'Hattiesburg', '2012-01-01 06:00:00'),
-('weather_currTemp', '60', '2012-01-01 06:00:00'),
-('weather_currWind', 'Calm', '2012-01-01 06:00:00');
+('location_city', 'Hattiesburg', '2012-01-01 06:00:00');
 
 -- --------------------------------------------------------
 
