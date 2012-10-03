@@ -16,7 +16,7 @@ function alice_weather_get($loc)
 	"loTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->low->fahrenheit}",
 	"fcastToday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[0]->fcttext}",
 	"fcastTomorrow"=>"{$jsonWeather->forecast->txt_forecast->forecastday[1]->fcttext}",
-	"fcastNextday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[1]->fcttext}",
+	"fcastNextday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[2]->fcttext}",
 	"icon"=>$icon);
 }
 function alice_weather_getRadar($loc)

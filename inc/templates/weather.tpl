@@ -23,6 +23,7 @@
 <tbody>
 <tr><td><strong>Today</strong></td><td>{{$weather.fcastToday}}</td></tr>
 <tr><td><strong>Tomorrow</strong></td><td>{{$weather.fcastTomorrow}}</td></tr>
+<tr><td><strong>{{$nextDay}}</strong></td><td>{{$weather.fcastNextday}}</td></tr>
 </tbody>
 </table>
 </div>
@@ -38,4 +39,4 @@
 </div>
 
 </div>
-{{include file="footer.tpl"}}
+{{include file="footer.tpl" page="weather"}}

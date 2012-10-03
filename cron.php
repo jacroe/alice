@@ -18,6 +18,6 @@ else
 	$u = alice_mysql_get("modules", "update");
 	$e = alice_mysql_get("modules", "email");
 }
-if ($_GET['purge']) header("Location: index.php");
+if ($_GET['purge']) header("Location: {$_GET['purge']}.php");
 foreach (glob(PATH.'recipes/*.php') as $recipes) require_once($recipes);
 ?>

@@ -37,4 +37,4 @@
 </ul>
 </div>
 </div>
-{{include file="footer.tpl"}}
+{{include file="footer.tpl" page="xbmc"}}
