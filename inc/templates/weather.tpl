@@ -21,9 +21,16 @@
 <h2>Forecast</h2>
 <table class="table table-bordered table-condensed">
 <tbody>
+{{if $smarty.now|date_format:"%H" < 18}}
 <tr><td><strong>Today</strong></td><td>{{$weather.fcastToday}}</td></tr>
+{{/if}}
+<tr><td><strong>Tonight</strong></td><td>{{$weather.fcastTonight}}</td></tr>
 <tr><td><strong>Tomorrow</strong></td><td>{{$weather.fcastTomorrow}}</td></tr>
+<tr><td><strong>Tomorrow night</strong></td><td>{{$weather.fcastTomorrowNight}}</td></tr>
+{{if $smarty.now|date_format:"%H" >= 18}}
 <tr><td><strong>{{$nextDay}}</strong></td><td>{{$weather.fcastNextday}}</td></tr>
+{{/if}}
+{{* <tr><td><strong>{{$nextDay}} night</strong></td><td>{{$weather.fcastNextdayNight}}</td></tr> *}}
 </tbody>
 </table>
 </div>

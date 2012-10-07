@@ -11,7 +11,7 @@ if (date('Hi') == '0700')
 	$smarty->assign("date", date('l, F j, Y '));
 	$smarty->assign("city", $l['city']);
 	$smarty->assign("state", $l['state']);
-	$smarty->assign("weather", $w['fcastFull']);
+	$smarty->assign("weather", $w['fcastToday']);
 	$smarty->assign("clothes", alice_clothes($w));
 
 	$body = $smarty->fetch('dailyEmail.tpl');

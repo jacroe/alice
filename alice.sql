@@ -51,8 +51,11 @@ INSERT INTO `a_modules` (`name`, `value`, `lastchanged`) VALUES
 ('weather_hiTemp', '100', '2012-01-01 06:00:00'),
 ('weather_loTemp', '0', '2012-01-01 06:00:00'),
 ('weather_fcastToday', 'Clear', '2012-01-01 06:00:00'),
+('weather_fcastTonight', 'Clear', '2012-01-01 06:00:00'),
 ('weather_fcastTomorrow', 'Clear', '2012-01-01 06:00:00'),
+('weather_fcastTomorrowNight', 'Clear', '2012-01-01 06:00:00'),
 ('weather_fcastNextday', 'Clear', '2012-01-01 06:00:00'),
+('weather_fcastNextdayNight', 'Clear', '2012-01-01 06:00:00'),
 ('weather_icon', 'sunny', '2012-01-01 06:00:00'),
 ('email_count', '0', '2012-01-01 06:00:00'),
 ('location_city', 'Hattiesburg', '2012-01-01 06:00:00');
