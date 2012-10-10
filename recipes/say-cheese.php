@@ -10,7 +10,7 @@ $date = date('Y/m/d/H-i');
 if (!file_exists("/home/jacob/Dropbox/Alice/webcam/".date('Y/m/d/'))) mkdir("/home/jacob/Dropbox/Alice/webcam/".date('Y/m/d/'), 0755, true);
 if (!(date('Hi') % 2))
 {
-//	exec("ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 /home/jacob/Dropbox/Alice/webcam/$date.jpg");
-//	copy("/home/jacob/Dropbox/Alice/webcam/$date.jpg", "/home/jacob/Dropbox/Alice/webcam/latest.jpg");
+	exec("ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 /home/jacob/Dropbox/Alice/webcam/$date.jpg");
+	copy("/home/jacob/Dropbox/Alice/webcam/$date.jpg", "/home/jacob/Dropbox/Alice/webcam/latest.jpg");
 }
 ?>

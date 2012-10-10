@@ -48,7 +48,7 @@ if (alice_xbmc_isOn())
 else $errors[] = array("alert", "XBMC is offline.");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
-$smarty->assign("weather", $w['fcastToday']);
+$smarty->assign("weather", $w);
 $smarty->assign("updateTime", $u['time']);
 $smarty->assign("updateCity", $l['city'].', '.$l['state']);
 $smarty->assign("error", $errors);

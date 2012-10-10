@@ -5,8 +5,6 @@ ABOUT:        Notices when computer is offline and sends a notification when we 
 DEPENDENCIES: Pushover module
 INSTALL:      Execute the SQL code below. 
 CONFIG:       Works out of the box though you may want to edit the phrasing to your liking;
-SQL:          INSERT INTO `a_recipes` (`name`, `value`, `lastchanged`) VALUES
-('notifyConnection_time', '-1', '2012-01-01 06:00:00')
 */
 
 $arrayDB = alice_mysql_get("recipes", "notifyConnection");

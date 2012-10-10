@@ -28,14 +28,12 @@ function alice_mysql_put($table, $prefix, $array)
 	$time = date("Y-m-d H:i:s");
 	foreach($array as $name => $value)
 	{
-	mysql_query("UPDATE a_$table SET value='$value', lastchanged='$time' WHERE (name='{$prefix}_{$name}');");
-	
-	/*if(mysql_fetch_array(mysql_query("SELECT EXISTS(SELECT * FROM a_$table WHERE (name = '$name'))")))
-		mysql_query("UPDATE a_$table SET value='$value', lastchanged='$time' WHERE (name='{$prefix}_{$name}');");
-	else
-		mysql_query("INSERT INTO a_$table(name, value, lastchanged) VALUES ('{$prefix}_{$name}','$value','$time');");
-	*/
-	
+		$exists = mysql_fetch_array(mysql_query("SELECT EXISTS(SELECT * FROM a_$table WHERE (name = '{$prefix}_{$name}'))"));
+		if($exists[0])
+			mysql_query("UPDATE a_$table SET value='$value', lastchanged='$time' WHERE (name='{$prefix}_{$name}');");
+		else
+			mysql_query("INSERT INTO a_$table(name, value, lastchanged) VALUES ('{$prefix}_{$name}','$value','$time');");
+
 	}
 	mysql_close();
 	return alice_mysql_get($table, $prefix);
