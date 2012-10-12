@@ -25,14 +25,12 @@ function alice_weather_get($loc)
 function alice_weather_getRadar($loc)
 {
 	
-	#TODO: Find a way to store this image
 	return "http://api.wunderground.com/api/".WUNDERGROUND_API."/animatedradar/q/{$loc['state']}/{$loc['city']}.gif?newmaps=1&timelabel=1&timelabel.y=10&num=8&delay=50";
 
 }
 function alice_weather_getSatellite($loc)
 {
 	
-	#TODO: Find a way to store this image
 	return "http://api.wunderground.com/api/".WUNDERGROUND_API."/animatedsatellite/q/{$loc['state']}/{$loc['city']}.gif?borders=1&basemap=1&timelabel=1&timelabel.y=10&num=8&delay=50";
 
 }

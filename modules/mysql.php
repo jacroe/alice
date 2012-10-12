@@ -38,4 +38,34 @@ function alice_mysql_put($table, $prefix, $array)
 	mysql_close();
 	return alice_mysql_get($table, $prefix);
 }
+
+function alice_mysql_getImage($name)
+{
+	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
+	mysql_select_db(MYSQL_DB) or die('Could not select database');
+	
+	$result = mysql_query("SELECT * FROM a_images WHERE (name = '$name') LIMIT 1");
+	while($row = mysql_fetch_array($result))
+	{
+		return array("mime" => $row['mime'], "image" => $row['image']);
+
+	}
+	mysql_close();
+}
+
+function alice_mysql_putImage($name, $imgLoc, $mime)
+{
+	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
+	mysql_select_db(MYSQL_DB) or die('Could not select database');
+	
+	$time = date("Y-m-d H:i:s");
+	$newImage = addslashes(file_get_contents($imgLoc));
+	
+	$exists = mysql_fetch_array(mysql_query("SELECT EXISTS(SELECT * FROM a_images WHERE (name = '$name'))"));
+		if($exists[0])
+			mysql_query("UPDATE a_images SET mime='$mime', image='$newImage', lastchanged='$time' WHERE (name = '$name')");
+		else
+			mysql_query("INSERT INTO a_images(name, mime, image, lastchanged) VALUES ('$name', '$mime', '$newImage','$time');");
+	mysql_close();
+}
 ?>
