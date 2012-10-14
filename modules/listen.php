@@ -6,6 +6,7 @@ DEPENDENCIES: All modules and their requried libraries.
 */
 function alice_check_command($string)
 {
+	alice_pushover("Hey listen!", "Something is still running check_command().");
 	if (preg_match("/\bxbmc\b/i", $string))
 	{
 		return alice_xbmc_check($string);

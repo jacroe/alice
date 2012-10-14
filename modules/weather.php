@@ -1,7 +1,7 @@
 <?php
 /*
 NAME:         Weather
-ABOUT:        Gets the current weather, forecast and returns sunrise/sunset times
+ABOUT:        Gets the current weather, forecast and and other conditions. Provides URLs to radar and satellite images
 DEPENDENCIES: Location module;
 */
 function alice_weather_get($loc)

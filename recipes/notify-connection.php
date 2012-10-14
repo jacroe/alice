@@ -17,7 +17,7 @@ if (($arrayDB['time'] != -1) && alice_onlineCheck())
 	elseif ($diff->h) $time = "{$diff->h} hours and {$diff->i} minutes";
 	else $time = "{$diff->i} minutes";
 	
-	if ($time != "1 minutes") alice_pushover("Connection Down", "The internet connection was down for $time. It is now back up.");
+	if ($time != "1 minutes" && $time != "0 minutes") alice_pushover("Connection Down", "The internet connection was down for $time. It is now back up.");
 	alice_mysql_put("recipes", "notifyConnection", array("time"=>-1));
 }
 elseif (($arrayDB['time'] == -1) && !alice_onlineCheck())
