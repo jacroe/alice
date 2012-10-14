@@ -12,6 +12,6 @@ if ($sb = file_get_contents("http://localhost:8082/home/"))
 	{
 		file_get_contents("http://localhost:8082/{$matches[0]}");
 		sleep(60); // Give Sickbeard time to download and extract the update and restart
-		alice_pushover("Sickbeard update", "Sickbeard has been updated to the lastest version.");
+		alice_pushover("Sickbeard update", "Sickbeard has been updated to the lastest version.", -1);
         }
 ?>

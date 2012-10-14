@@ -10,6 +10,6 @@ CONFIG:       Change the directories to match your own.
 if (date('Hi') == "0400")
 {
 	exec('rsync -r -t -p -o -g -v --progress --delete -s /home/jacob/www /home/jacob/Dropbox/new-computer');
-	alice_pushover("Webserver backup", "Your webserver has been backed up to Dropbox.");
+	#alice_pushover("Webserver backup", "Your webserver has been backed up to Dropbox.", -1);
 }
 ?>
