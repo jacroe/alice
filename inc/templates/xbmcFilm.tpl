@@ -11,7 +11,7 @@
 
 <div class="span5">
 <h2>Poster</h2>
-<p><img src="{{$poster}}" width=300 /></p>
+<p><img src="./inc/image.php?i=xbmcFilmPoster_{{$movieid}}" width=300 /></p>
 </div>
 
 <div class="span7">

@@ -14,7 +14,7 @@
 
 <div class="span5">
 <h2>Fanart</h2>
-<p><img src="{{$fanart}}" width=400 /></p>
+<p><img src="./inc/image.php?i=xbmcShowFanart_{{$showid}}" width=400 /></p>
 </div>
 
 <div class="span7">

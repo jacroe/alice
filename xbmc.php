@@ -42,6 +42,7 @@ if ($_GET['movie'])
 elseif ($_GET['show'])
 {
 	$arrayShow = alice_xbmc_getSingleShow($_GET['show']);
+	$smarty->assign("showid", $_GET['show']);
 	$smarty->assign("title", $arrayShow->label);
 	$smarty->assign("masthead", $arrayShow->label);
 	$nextEpisode = alice_xbmc_getFirstUnwatchedEpisode($_GET['show']);
