@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2012 at 01:07 AM
+-- Generation Time: Nov 24, 2012 at 03:51 AM
 -- Server version: 5.1.66
 -- PHP Version: 5.3.6-13ubuntu3.9
 
@@ -56,6 +56,28 @@ CREATE TABLE IF NOT EXISTS `a_recipes` (
   `value` text NOT NULL,
   `lastchanged` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `a_x10`
+--
+
+CREATE TABLE IF NOT EXISTS `a_x10` (
+  `name` text NOT NULL,
+  `code` text NOT NULL,
+  `type` text NOT NULL,
+  `curState` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `a_x10`
+--
+
+INSERT INTO `a_x10` (`name`, `code`, `type`, `curState`) VALUES
+('livingroom_TV Lamp', 'j2', 'lamp', 0),
+('livingroom_Speaker', 'j1', 'appliance', 0),
+('bedroom_Bedroom Lamp', 'j3', 'lamp', 10);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
