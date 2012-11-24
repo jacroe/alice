@@ -15,7 +15,7 @@
 {{foreach $arrayShows as $show}}
 <li class=span3>
   <div class=thumbnail>
-  <a href=xbmc.php?show={{$show->tvshowid}} class=thumbnail><img src=inc/image.php?i=xbmcShow_{{$show->tvshowid}} /></a>
+  <a href="xbmc.php?show={{$show->tvshowid}}" class=thumbnail><img src="inc/image.php?i=xbmcShow_{{$show->tvshowid}}" alt="{{$show->label}}" /></a>
   </div>
 </li>
 {{/foreach}}
@@ -30,7 +30,7 @@
 {{foreach $arrayFilms as $film}}
 <li class=span3>
   <div class=thumbnail>
-  <a href=xbmc.php?movie={{$film->movieid}} class=thumbnail><img src=inc/image.php?i=xbmcFilm_{{$film->movieid}} /></a>
+  <a href="xbmc.php?movie={{$film->movieid}}" class=thumbnail><img src="inc/image.php?i=xbmcFilm_{{$film->movieid}}" alt="{{$film->label}}"/></a>
   </div>
 </li>
 {{/foreach}}

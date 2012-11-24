@@ -2,19 +2,19 @@
 require "alice.php";
 
 /* Masthead */
-if ($e['count'])
-	if ($e['count'] == 1) $masthead = "{$e['count']} new message";
-	else $masthead = "{$e['count']} new messages";
-elseif (alice_xbmc_check('playing'))
+if (alice_xbmc_check('playing'))
 {
 	$nowPlaying = alice_xbmc_check('playing');
 	if ($nowPlaying[0])
 	$masthead = "{$nowPlaying[0]} - &ldquo;{$nowPlaying[1]}&rdquo;";
 	else $masthead = $nowPlaying[1];
 }
+elseif ($e['count'])
+	if ($e['count'] == 1) $masthead = "{$e['count']} new message";
+	else $masthead = "{$e['count']} new messages";
 else
 {
-	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 />";
+	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
 }
 
 /* Subhead */
@@ -41,7 +41,7 @@ if (alice_xbmc_isOn())
 	$films = "";
 	foreach ($arrayThreeFilms as $movie)
 	{
-		$films .= "<a href=xbmc.php?movie={$movie->movieid}><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
+		$films .= "<a href=\"xbmc.php?movie={$movie->movieid}\"><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
 	}
 	$smarty->assign("xbmcBody", $films);
 }

@@ -37,12 +37,12 @@
 
 <div class="span4">
 <h2>Radar</h2>
-<img src="{{$radarimg}}" />
+<img src="{{$radarimg}}" alt="Radar image for {{$updateCity}}" />
 </div>
 
 <div class="span4">
 <h2>Satellite</h2>
-<img src="{{$satimg}}" />
+<img src="{{$satimg}}" alt="Satellite image for {{$updateCity}}" />
 </div>
 
 </div>

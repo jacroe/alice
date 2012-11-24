@@ -1,7 +1,7 @@
 <hr>
 <footer>
 {{if $updateTime}}
-<p>Last updated at {{$updateTime}} in {{$updateCity}}. <a href=cron.php?purge={{$page}}>Purge</a> </p>
+<p>Last updated at {{$updateTime}} in {{$updateCity}}. <a href="cron.php?purge={{$page}}">Purge</a> </p>
 {{/if}}
 {{if $dispLicense}}
 {{if $rt}}

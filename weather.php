@@ -3,7 +3,7 @@ require "alice.php";
 
 /* Masthead */
 
-$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 />";
+$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
 
 $subhead = $w['fcastToday'];
 
