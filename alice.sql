@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2012 at 03:51 AM
+-- Generation Time: Nov 24, 2012 at 04:00 AM
 -- Server version: 5.1.66
 -- PHP Version: 5.3.6-13ubuntu3.9
 
@@ -44,6 +44,13 @@ CREATE TABLE IF NOT EXISTS `a_modules` (
   `value` text NOT NULL,
   `lastchanged` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `a_modules`
+--
+
+INSERT INTO `a_modules` (`name`, `value`, `lastchanged`) VALUES
+('update_time', 'never', '2012-11-24 10:00:08');
 
 -- --------------------------------------------------------
 
