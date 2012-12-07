@@ -27,7 +27,7 @@ Alice takes advantage of several programs/websites to be useful.
 *	Rotten Tomatoes
 *	X10
 *	SABnzbd+
-*	Transmission (soon to be Deluge as well)
+*	The Transmission and Deluge BitTorrent clients
 
 The following libraries/utilities have helped Alice become a reality.
 *	Bootstrap from Twitter. <http://getbootstrap.com>
