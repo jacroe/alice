@@ -39,6 +39,20 @@ function alice_mysql_put($table, $prefix, $array)
 	return alice_mysql_get($table, $prefix);
 }
 
+function alice_mysql_remove($table, $prefix, $array)
+{
+	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
+	mysql_select_db(MYSQL_DB) or die('Could not select database');
+	
+	foreach($array as $name)
+	{
+		mysql_query("DELETE FROM a_$table WHERE (name = '{$prefix}_{$name}') LIMIT 1;");
+
+	}
+	mysql_close();
+	return 1;
+}
+
 function alice_mysql_getImage($name)
 {
 	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
@@ -67,5 +81,15 @@ function alice_mysql_putImage($name, $img, $mime="image/jpg")
 	else
 		mysql_query("INSERT INTO a_images(name, mime, image, lastchanged) VALUES ('$name', '$mime', '$newImage','$time');");
 	mysql_close();
+}
+
+function alice_mysql_removeImage($name)
+{
+	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
+	mysql_select_db(MYSQL_DB) or die('Could not select database');
+	
+	mysql_query("DELETE FROM a_images WHERE (name = '$name') LIMIT 1");
+	mysql_close();
+	return 1;
 }
 ?>
