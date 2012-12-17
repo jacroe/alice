@@ -21,5 +21,7 @@ else
 	$e = alice_mysql_get("modules", "email");
 }
 if ($_GET['purge']) header("Location: {$_GET['purge']}.php");
+
+alice_timer_check();
 foreach (glob(PATH.'recipes/*.php') as $recipes) require_once($recipes);
 ?>

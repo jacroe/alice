@@ -3,7 +3,7 @@
 NAME:         Pushover
 ABOUT:        Sends notifications to any Pushover enabled device
 DEPENDENCIES: None directly. Internet access.
-NOTES:        This should never needed to be called by the user. Always with a recipe or module.
+NOTES:        This should never need to be called by the user. Always with a recipe or module.
 */
 function alice_pushover($title, $message, $pri = 0)
 {
