@@ -56,10 +56,6 @@ function alice_check_command($string)
 		$travel = alice_loc_travel($from['lat'].','.$from['long'], $to['zip']);
 		return "It's {$travel['dist']} from {$from['city']} to {$to['city']} or roughly {$travel['time']}. In {$to['city']}, it's {$weather['currTemp']}F and {$weather['currCond']}.";
 	}
-	elseif (preg_match("/\bevent\b/i", $string))
-	{
-		return alice_events($string);
-	}
 	else return alice_error_nocommand();
 }
 

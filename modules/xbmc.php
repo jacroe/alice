@@ -110,14 +110,12 @@ function alice_xbmc_check($string)
 		$id = intval($match[0]);
 		$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("movieid" => $id)), "id" => 1);
 		alice_xbmc_talk($data);
-		alice_events("watch");
 	}
 	elseif (preg_match("/\bepisode\b/i", $string))
 	{
 		preg_match('/\d+/', $string, $match);
 		$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("episodeid" => $id)), "id" => 1);
 		alice_xbmc_talk($data);
-		alice_events("watch");
 	}
 	elseif (preg_match("/\bquit\b/i", $string))
 	{

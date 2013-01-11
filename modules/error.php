@@ -16,10 +16,6 @@ function alice_error_x10()
 {
 	return "I couldn't find a command in that statement.".alice_tryagain();
 }
-function alice_error_noevent()
-{
-	return "I couldn't find an event by that name.".alice_tryagain();
-}
 function alice_error_nocommand()
 {
 	return "I'm sorry, I didn't quite catch that. Did you want me to do something?";
