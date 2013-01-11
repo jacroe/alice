@@ -22,53 +22,50 @@ function alice_x10($device, $do)
 
 function alice_x10_getSingle($code)
 {
-	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
-	mysql_select_db(MYSQL_DB) or die('Could not select database');
+	$db = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DB.';charset=utf8', MYSQL_USER, MYSQL_PASS);
+	$stmt = $db->prepare("SELECT * FROM a_x10 WHERE (code = :code) LIMIT 1");
+	$stmt->execute(array(':code'=>$code));
+	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$device = $rows[0];
+	$name = explode("_", $device['name']);
+	$device['name'] = $name[1];
 	
-	$result = mysql_query("SELECT * FROM a_x10 WHERE (code = '$code') LIMIT 1");
-	while($row = mysql_fetch_array($result))
-	{
-		$name = explode("_", $row['name']);
-		return array("name"=>$name[1], "code"=>$row['code'], "type"=>$row['type'], "curState"=>intval($row['curState']));
-
-	}
-	mysql_close();
+	return $device;
 }
 function alice_x10_getGroup($group)
 {
-	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
-	mysql_select_db(MYSQL_DB) or die('Could not select database');
-	
-	$result = mysql_query("SELECT * FROM a_x10 WHERE (name LIKE '%{$group}_%')");
-	while($row = mysql_fetch_array($result))
+	$db = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DB.';charset=utf8', MYSQL_USER, MYSQL_PASS);
+	$stmt = $db->prepare("SELECT * FROM a_x10 WHERE (name LIKE :name)");
+	$stmt->execute(array(':name'=>"%{$group}_%"));
+	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);	
+	foreach ($rows as $row)
 	{
 		$name = str_replace($group."_", "", $row['name']);
 		$array[] = array("name"=>$name, "code"=>$row['code'], "type"=>$row['type'], "curState"=>intval($row['curState']));
-
 	}
-	mysql_close();
+
 	return $array;
 }
 function alice_x10_update($code, $newState=-1)
 {
 	$device = alice_x10_getSingle($code);
 	
-	mysql_connect(MYSQL_SERVER,MYSQL_USER,MYSQL_PASS) or die('Could not connect to database');
-	mysql_select_db(MYSQL_DB) or die('Could not select database');
+	$db = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DB.';charset=utf8', MYSQL_USER, MYSQL_PASS);
 	
-	if ($newState == -1) mysql_query("UPDATE a_x10 SET curState='-1' WHERE (code = '$code')");
+	if ($newState == -1) $stmt = $db->prepare("UPDATE a_x10 SET curState='-1' WHERE (code = :code)");
 	elseif ($device['type'] == "appliance")
 	{
-		if ($newState == "on") mysql_query("UPDATE a_x10 SET curState='1' WHERE (code = '$code')");
-		else mysql_query("UPDATE a_x10 SET curState='0' WHERE (code = '$code')");
+		if ($newState == "on") $stmt = $db->prepare("UPDATE a_x10 SET curState='1' WHERE (code = :code)");
+		else $stmt = $db->prepare("UPDATE a_x10 SET curState='0' WHERE (code = :code)");
 	}
 	else
 	{
-		if ($newState == "brighten") mysql_query("UPDATE a_x10 SET curState=curState+1 WHERE (code = '$code')");
-		elseif ($newState == "dim") mysql_query("UPDATE a_x10 SET curState=curState-1 WHERE (code = '$code')");
-		elseif ($newState == "on") mysql_query("UPDATE a_x10 SET curState='10' WHERE (code = '$code')");
-		else mysql_query("UPDATE a_x10 SET curState='0' WHERE (code = '$code')");
+		if ($newState == "brighten") $stmt = $db->prepare("UPDATE a_x10 SET curState=curState+1 WHERE (code = :code)");
+		elseif ($newState == "dim") $stmt = $db->prepare("UPDATE a_x10 SET curState=curState-1 WHERE (code = :code)");
+		elseif ($newState == "on") $stmt = $db->prepare("UPDATE a_x10 SET curState='10' WHERE (code = :code)");
+		else $stmt = $db->prepare("UPDATE a_x10 SET curState='0' WHERE (code = :code)");
 	}
-	mysql_close();
+	$stmt->execute(array(':code'=>$code));
+	$stmt = null;
 }
 ?>
