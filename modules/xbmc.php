@@ -106,7 +106,7 @@ function alice_xbmc_check($string)
 	}
 	elseif (preg_match("/\bmovie\b/i", $string))
 	{
-		preg_match('/\d{1,2}/', $string, $match);
+		preg_match('/\d+/', $string, $match);
 		$id = intval($match[0]);
 		$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("movieid" => $id)), "id" => 1);
 		alice_xbmc_talk($data);
@@ -114,9 +114,9 @@ function alice_xbmc_check($string)
 	}
 	elseif (preg_match("/\bepisode\b/i", $string))
 	{
-		preg_match('/\d{1,3}/', $string, $match);
-		$id = intval($match[0]);
+		preg_match('/\d+/', $string, $match);
 		$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("episodeid" => $id)), "id" => 1);
+		echo json_encode($data);
 		alice_xbmc_talk($data);
 		alice_events("watch");
 	}
