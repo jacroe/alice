@@ -2,9 +2,9 @@
 require "alice.php";
 
 /* Masthead */
-if (alice_xbmc_check('playing'))
+if (alice_xbmc_playing())
 {
-	$nowPlaying = alice_xbmc_check('playing');
+	$nowPlaying = alice_xbmc_playing();
 	if ($nowPlaying[0])
 	$masthead = "{$nowPlaying[0]} - &ldquo;{$nowPlaying[1]}&rdquo;";
 	else $masthead = $nowPlaying[1];
@@ -18,16 +18,16 @@ else
 }
 
 /* Subhead */
-if (alice_xbmc_check('playing'))
+if (alice_xbmc_playing())
 {
 	$subhead = <<<SHEAD
 <a class="btn btn-large" onclick='$.post("api.php", { control: "rewind" } );'><i class=icon-backward></i></a>
 <a class="btn btn-large btn-primary" onclick='$.post("api.php", { control: "pause" } );'><i class="icon-play icon-white"></i><i class="icon-pause icon-white"></i></a>
 <a class="btn btn-large" onclick='$.post("api.php", { control: "stop" } );'><i class=icon-stop></i></a>
 <a class="btn btn-large" onclick='$.post("api.php", { control: "forward" } );'><i class=icon-forward></i></a>
-<a class="btn btn-large" onclick='$.post("api.php", { control: "volume up" } );'><i class=icon-volume-up></i></a>
-<a class="btn btn-large" onclick='$.post("api.php", { control: "volume down" } );'><i class=icon-volume-down></i></a>
-<a class="btn btn-large" onclick='$.post("api.php", { control: "volume mute" } );'><i class=icon-volume-off></i></a>
+<a class="btn btn-large" onclick='$.post("api.php", { control: "volume", param: "up" } );'><i class=icon-volume-up></i></a>
+<a class="btn btn-large" onclick='$.post("api.php", { control: "volume", param: "down" } );'><i class=icon-volume-down></i></a>
+<a class="btn btn-large" onclick='$.post("api.php", { control: "volume", param: "mute" } );'><i class=icon-volume-off></i></a>
 SHEAD;
 }
 
