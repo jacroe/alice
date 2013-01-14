@@ -1,6 +1,8 @@
 <?php
 require "alice.php";
 
+if (time()-$u['time'] > 1200) $errors[] = array("error", "Alice's data is at least 20 minutes old.");
+
 /* Masthead */
 if (alice_xbmc_playing())
 {
@@ -31,7 +33,7 @@ if (alice_xbmc_playing())
 SHEAD;
 }
 
-else $subhead = "It is ".date('g:i a');
+else $subhead = "It is ".date("g:i a");
 
 /* XBMC */
 /* Get three most recent films */
@@ -50,7 +52,7 @@ else $errors[] = array("alert", "XBMC is offline.");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w);
-$smarty->assign("updateTime", $u['time']);
+$smarty->assign("updateTime", date("g:i a", $u['time']));
 $smarty->assign("updateCity", $l['city'].', '.$l['state']);
 $smarty->assign("error", $errors);
 $smarty->display("index.tpl");

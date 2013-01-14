@@ -2,7 +2,7 @@
 require('alice.php');
 if ((!(date('i') % 10) || ($_GET['purge'])) && alice_onlineCheck())
 {
-	$t = date('g:i a');
+	$t = time();
 	$l = alice_loc_get(LOCATION_LOOKUP);
 	$w = alice_weather_get($l);
 	$e = alice_email_check('num');

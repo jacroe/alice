@@ -1,6 +1,6 @@
 <?php
 require "alice.php";
-
+if (time()-$u['time'] > 1200) $errors[] = array("error", "Alice's data is at least 20 minutes old.");
 /* Masthead */
 
 $masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
@@ -22,7 +22,7 @@ $smarty->assign("weather", $w);
 $smarty->assign("radarimg", "./inc/image.php?i=weather_radar");
 $smarty->assign("satimg", "./inc/image.php?i=weather_satellite");
 $smarty->assign("nextDay", date('l', strtotime("2 days")));
-$smarty->assign("updateTime", $u['time']);
+$smarty->assign("updateTime", date("g:i a", $u['time']));
 $smarty->assign("updateCity", $l['city'].', '.$l['state']);
 $smarty->assign("alerts", $alertArray);
 $smarty->assign("error", $errors);
