@@ -9,6 +9,28 @@
 <div class="row">
 
 <div class="span4">
+{{if $alerts}}
+<h2>Alerts</h2>
+{{foreach from=$alerts key=i item=alert}}
+<p><a href="#alert{{$i}}" data-toggle="modal">{{$alert.title}}</a> Expires: {{$alert.expires}}.</p>
+
+<div id="alert{{$i}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="alert{{$i}}Label" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h3 id="alert{{$i}}Label">{{$alert.title}}</h3>
+</div>
+<div class="modal-body">
+<p><strong>Issued:</strong> {{$alert.issued}}<br />
+<strong>Expires:</strong> {{$alert.expires}}</p>
+<hr />
+<p>{{$alert.message}}</p>
+<div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button></div>
+</div>
+</div>
+
+{{/foreach}}
+
+{{/if}}
 <h2>Current Conditions</h2>
 <table class="table table-bordered table-condensed">
 <tbody>
