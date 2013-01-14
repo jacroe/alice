@@ -6,15 +6,16 @@ if (time()-$u['time'] > 1200) $errors[] = array("error", "Alice's data is at lea
 $masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
 
 $subhead = $w['fcastToday'];
-
-$alerts = explode("\n", trim($w['alerts']));
-foreach($alerts as $alert)
+if ($w['alerts'])
 {
-	$temp = explode("|", $alert);
-	$alertArray[] = array('title'=>$temp[0], 'issued'=>$temp[1], 'expires'=>$temp[2], 'message'=>$temp[3]);
+	$alerts = explode("\n", trim($w['alerts']));
+	foreach($alerts as $alert)
+	{
+		$temp = explode("|", $alert);
+		$alertArray[] = array('title'=>$temp[0], 'issued'=>$temp[1], 'expires'=>$temp[2], 'message'=>$temp[3]);
+	}
 }
-
-
+else $alertArray = NULL;
 
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
