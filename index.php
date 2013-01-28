@@ -49,11 +49,20 @@ if (alice_xbmc_isOn())
 	$smarty->assign("xbmcBody", $films);
 }
 else $errors[] = array("alert", "XBMC is offline.");
+
+$notifications = alice_mysql_get("modules", "notification", "DESC");
+foreach($notifications as $id => $value)
+{
+	$value = explode("|", $value);
+	$notif[] = array("id"=>$id, "title"=>$value[0], "message"=>$value[1]);
+}
+
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w);
 $smarty->assign("updateTime", date("g:i a", $u['time']));
 $smarty->assign("updateCity", $l['city'].', '.$l['state']);
+$smarty->assign("notifications", array_slice($notif, 0, 3));
 $smarty->assign("error", $errors);
 $smarty->display("index.tpl");
 ?>

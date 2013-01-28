@@ -4,10 +4,10 @@ NAME:         MySQL Database
 ABOUT:        Stores and retrieves all information stored by Alice. 
 DEPENDENCIES: None
 */
-function alice_mysql_get($table, $prefix)
+function alice_mysql_get($table, $prefix, $sort = null)
 {
 	$db = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DB.';charset=utf8', MYSQL_USER, MYSQL_PASS);
-	$stmt = $db->prepare("SELECT * FROM a_$table WHERE (name LIKE :name)");
+	$stmt = $db->prepare("SELECT * FROM a_$table WHERE (name LIKE :name) ORDER BY name $sort");
 	$stmt->execute(array(':name'=>"%{$prefix}_%"));
 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	foreach($rows as $row)

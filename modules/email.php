@@ -38,7 +38,7 @@ Love, Alice', 'text/html');
 	if ($attachment) $message->attach(Swift_Attachment::fromPath($attachment));
 	$result = $mailer->send($message);
 }
-function alice_email_purge($from = NULL, $subject = NULL, $flag = NULL, $move = "INBOX.Reference")
+function alice_email_purge($from = NULL, $subject = NULL, $flag = NULL, $move = "INBOX.Reference", $callback = NULL)
 {
 	$mbox = alice_email_openserver();
 	$MC = imap_check($mbox);
@@ -51,12 +51,15 @@ function alice_email_purge($from = NULL, $subject = NULL, $flag = NULL, $move = 
 		{
 			if ($flag) imap_setflag_full($mbox, $i, $flag);
 			imap_mail_move($mbox, $i, $move);
+			$boolCallback = true;
 		}
 		if($overview->subject == $subject && $subject)
 		{
 			if ($flag) imap_setflag_full($mbox, $i, $flag);
 			imap_mail_move($mbox, $i, $move);
+			$boolCallback = true;
 		}
+		if($boolCallback && $callback) alice_notification_add("Message purged", $callback);
 	}
 	imap_expunge($mbox);
 	imap_close($mbox);

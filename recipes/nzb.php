@@ -11,8 +11,10 @@ foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.nzb')) as $file)
 	$result = file_get_contents(SABNZBD_SERVER."api?mode=addlocalfile&name=".$file."&apikey=".SABNZBD_API);
 	if ($result == "ok\n")
 	{
-		alice_pushover("NZB added", "$file has been queued.");
 		unlink($file);
+		$file = str_replace("/home/jacob/Dropbox/Alice/", "", $file);
+		alice_pushover("NZB added", "$file has been queued.");
+		alice_notification_add("NZB added", "$file has been queued.");
 	}
 	else
 	{

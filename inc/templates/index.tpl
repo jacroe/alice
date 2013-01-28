@@ -22,9 +22,20 @@
 </div>
 
 <div class="span4">
-<h2>Home</h2>
-<p><a class="btn btn-success" onclick='$.post("api.php",{event:"lOn"});'>Lights On</a> <a class="btn btn-danger" onclick='$.post("api.php",{event:"lOff"});'>Lights Off</a></p>
-<p><a class="btn" onclick='$.post("api.php",{event:"watch"});'>Television</a> <a class="btn" onclick='$.post("api.php",{event:"sleep"});'>Sleep</a> <a class="btn" onclick='$.post("api.php",{event:"reading"});'>Reading</a></p>
+<h2>Timer</h2>
+<div class="form-inline">
+  <input type="text" class="input-small" id="timer" placeholder="20 minutes">
+  <button class="btn" onClick='$.post("api.php",{"timer":$("#timer").val(), "message":"Timer set from homepage."});$("#timer").val(null);return false;'>Set timer</button>
+</div>
+
+<h2>Notifications</h2>
+<table class="table table-bordered table-condensed">
+<tbody>
+{{foreach $notifications as $notif}}
+<tr><td><strong>{{$notif.title}}</strong></td><td>{{$notif.message}}</td><td><a class="btn btn-mini" onClick='$.post("api.php", {"notifyRemove":"{{$notif.id}}"});return false;'><i class=icon-trash></i></a></td></tr>
+{{/foreach}}
+</tbody>
+</table>
 </div>
 
 </div>

@@ -10,5 +10,7 @@ foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.mobi')) as $file)
 {
 	alice_email_send("Kindle", "jacroe@free.kindle.com", "Convert", " ", $file);
 	unlink($file);
+	$file = str_replace("/home/jacob/Dropbox/Alice/", "", $file);
+	alice_notification_add("Kindle file sent", "$file has been sent.");
 }
 ?>
