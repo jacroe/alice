@@ -4,18 +4,18 @@ NAME:         X10
 ABOUT:        Turns off and on X10 devices. Must be preset as shown
 DEPENDENCIES: None
 */
-function alice_x10($device, $do)
+function alice_x10($device, $action)
 { 
 	
-	if($do == "on" || $do == "off")
+	if($action == "on" || $action == "off")
 	{
-		exec("nohup flipit flip $device $do > /dev/null 2>&1 & echo $!");
+		exec("nohup flipit flip $device $action > /dev/null 2>&1 & echo $!");
 	}
 	else
 	{
-		exec("nohup flipit $do $device 1 > /dev/null 2>&1 & echo $!");
+		exec("nohup flipit $action $device 1 > /dev/null 2>&1 & echo $!");
 	}
-	alice_x10_update($device, $do);
+	alice_x10_update($device, $action);
 	return true;
 	
 }
