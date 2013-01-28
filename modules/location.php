@@ -36,6 +36,8 @@ function alice_loc_get($string)
 
 function alice_loc_travel($from, $to, $mode = "driving")
 {
+	$from = urlencode($from);
+	$to = urlencode($to);
 	$jsonTravel = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/distancematrix/json?origins=$from&destinations=$to&mode=$mode&language=en-US&sensor=false&units=imperial"));
 	return array("time"=>$jsonTravel->rows[0]->elements[0]->duration->text,
 	"dist"=>$jsonTravel->rows[0]->elements[0]->distance->text);
