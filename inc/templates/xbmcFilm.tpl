@@ -20,7 +20,7 @@
 <tbody>
 <tr><td><strong>Summary</strong></td><td>{{$summary}}</td></tr>
 <tr><td><strong>Review</strong></td><td>{{$rtConsensus}} / {{$rtScore}}%</td></tr>
-<tr><td><strong>Genre</strong></td><td>{{$genre}}</td></tr>
+<tr><td><strong>Genre</strong></td><td>{{foreach $genre as $i}}{{$i}} {{/foreach}}</td></tr>
 <tr><td><strong>Year</strong></td><td>{{$year}}</td></tr>
 <tr><td><strong>Rating</strong></td><td>{{$mpaa}}</td></tr>
 <tr><td><strong>Runtime</strong></td><td>{{$runtime}} minutes</td></tr>

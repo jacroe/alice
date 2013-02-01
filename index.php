@@ -23,6 +23,7 @@ else
 if (alice_xbmc_playing())
 {
 	$subhead = <<<SHEAD
+<div class="progress progress-striped active"><div class="bar" style="width: {$nowPlaying[2]}%;"><strong>{$nowPlaying[2]}%</strong></div></div>
 <a class="btn btn-large" onclick='$.post("api.php", { control: "rewind" } );'><i class=icon-backward></i></a>
 <a class="btn btn-large btn-primary" onclick='$.post("api.php", { control: "pause" } );'><i class="icon-play icon-white"></i><i class="icon-pause icon-white"></i></a>
 <a class="btn btn-large" onclick='$.post("api.php", { control: "stop" } );'><i class=icon-stop></i></a>
@@ -44,7 +45,7 @@ if (alice_xbmc_isOn())
 	$films = "";
 	foreach ($arrayThreeFilms as $movie)
 	{
-		$films .= "<a href=\"xbmc.php?movie={$movie->movieid}\"><strong>{$movie->label}</strong></a> - {$movie->mpaa} - {$movie->runtime} mins<br />\n";
+		$films .= "<a href=\"xbmc.php?movie={$movie->movieid}\"><strong>{$movie->label}</strong></a> - {$movie->mpaa} - " . floor($movie->runtime / 60) . " mins<br />\n";
 	}
 	$smarty->assign("xbmcBody", $films);
 }

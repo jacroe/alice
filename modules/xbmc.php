@@ -98,20 +98,29 @@ function alice_xbmc_playing()
 	{
 		$data = array("jsonrpc" => "2.0", "method" => "Player.GetItem", "params" => array("playerid" => 0, "properties" => array("artist", "title")), "id" => 1);
 		$xbmc = json_decode(alice_xbmc_talk($data));
-		return array($xbmc->result->item->artist, $xbmc->result->item->title);
+		$timeLeft = alice_xbmc_timeLeft(0);
+		return array($xbmc->result->item->artist, $xbmc->result->item->title, $timeLeft);
 	}
 	elseif($player == "video")
 	{
 		$data = array("jsonrpc" => "2.0", "method" => "Player.GetItem", "params" => array("playerid" => 1, "properties" => array("showtitle", "title")), "id" => 1);
 		$xbmc = json_decode(alice_xbmc_talk($data));
-		return array($xbmc->result->item->showtitle, $xbmc->result->item->title);
+		$timeLeft = alice_xbmc_timeLeft(1);
+		return array($xbmc->result->item->showtitle, $xbmc->result->item->title, $timeLeft);
 
 	}
 	else return false;
 }
+function alice_xbmc_timeLeft($playerid)
+{
+	$data = array("jsonrpc" => "2.0", "method" => "Player.GetProperties", "params" => array("playerid" => $playerid, "properties" => array("percentage")), "id" => 1);
+	$timeLeft = json_decode(alice_xbmc_talk($data));
+	return intval($timeLeft->result->percentage);
+}
 function alice_xbmc_notify($msg)
 {
-	file_get_contents(XBMC_SERVER."xbmcCmds/xbmcHttp/?command=ExecBuiltin&parameter=Notification(Alice:,".urlencode($msg).")");
+	$data = array("jsonrpc" => "2.0", "method" => "GUI.ShowNotification", "params" => array("title" => "Alice:", "message" => $msg));
+	alice_xbmc_talk($data);
 	return "Notified XBMC: $msg";
 }
 function alice_xbmc_quit()
