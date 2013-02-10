@@ -18,6 +18,7 @@ function alice_packages(&$data)
 	{
 		$service = "Fedex";
 		$url = "http://www.fedex.com/Tracking?tracknumbers={$matches[0]}";
+	}
 	elseif (preg_match($usps, $data, $matches))
 	{
 		$service = "USPS";
