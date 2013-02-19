@@ -34,6 +34,15 @@ if (!(date('i') % 2))
 				$tracking = alice_packages($msg["body"]);
 				alice_email_move($con, $msg["id"], "INBOX.Reference", 1);
 				alice_notification_add("Amazon package shipped", "{$tracking["service"]}: <a href=\"{$tracking["url"]}\" target=_BLANK>{$tracking["number"]}</a>");
+				break;
+			case "Eagle Alert - The University of Southern Mississippi <noreply@myschoolcast.com>":
+				alice_pushover("Eagle Alert", $msg["subject"], 1);
+				alice_notification_add("Eagle Alert", $msg["subject"]);
+				alice_email_move($con, $msg["id"], "INBOX.IMPORTANT");
+				break;
+			case "Tumblr <no-reply@tumblr.com>":
+				alice_notification_add("Tumblr", $msg["subject"]);
+				alice_email_delete($con, $msg["id"]);
 		}
 		sleep(1);
 	}
