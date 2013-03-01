@@ -31,10 +31,10 @@ Alice takes advantage of several programs/websites to be useful.
 *	The Transmission and Deluge BitTorrent clients
 
 The following libraries/utilities have helped Alice become a reality.
-*	Bootstrap from Twitter. <http://getbootstrap.com>
-*	Smarty Template Engine <http://smarty.net>
-*	SwiftMailer <http://swiftmailer.org>
-*	Transmission PHP class <https://github.com/johan-adriaans/PHP-Transmission-Class>
-*	Weather Icon Pack <http://www.mpetroff.net/archives/2012/09/14/kindle-weather-display/>
+*	Bootstrap from Twitter. <http://getbootstrap.com> Apache License v2.0
+*	Smarty Template Engine <http://smarty.net> LGPL v3
+*	SwiftMailer <http://swiftmailer.org> LGPL v3
+*	Transmission PHP class <https://github.com/johan-adriaans/PHP-Transmission-Class> GPL v3
+*	Weather Icon Pack <http://www.mpetroff.net/archives/2012/09/14/kindle-weather-display/> Public Domain
 
 I'd also like to thank Marvel and the film <em>Iron Man</em> for giving us the idea of Jarvis, and Chad Barraford for giving us the idea of our own personal Jarvis.
