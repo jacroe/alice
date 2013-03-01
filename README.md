@@ -25,6 +25,7 @@ Alice takes advantage of several programs/websites to be useful.
 *	WUnderground
 *	XBMC
 *	Rotten Tomatoes
+*	USA Today
 *	X10
 *	SABnzbd+
 *	The Transmission and Deluge BitTorrent clients

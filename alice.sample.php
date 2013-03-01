@@ -33,7 +33,7 @@ define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wun
 
 /* MODULE: XBMC */
 define("XBMC_SERVER", "http://localhost:8090/");	// Where the server is set up. Used for both HTTP and jsonRPC (default is shown)
-define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb
+define("RTOMATOES_API", "123abc");			// Your RottenTomatoes api key. Used to get RT's freshness and blurb. Get one at http://developer.rottentomatoes.com/
 
 /* MODULE: Transmission */
 define("TRANSMISSION_SERVER", "http://localhost:9091/transmission/rpc");	// Location of Transmission (default is shown)
@@ -43,11 +43,14 @@ define("TRANSMISSION_DOWNLOAD", "/home/bob/Downloads");				// Where the files sh
 
 /* MODULE: Deluge */
 define("DELUGE_SERVER", "http://localhost:8112/json");				// Location of Deluge's Web json server (default shown)
-define("DELUGE_PASS", "#3n.7B");						// Password set to access web client
+define("DELUGE_PASS", "password");						// Password set to access web client
 
 /* MODULE: Pushover */
 define("PUSHOVER_APP", "123abc");	// Your local Alice Pushover application. Make one at https://pushover.net/apps/build
 define("PUSHOVER_USER", "456def");	// Your Pushover user key. https://pushover.net/
+
+/* MODULE: News */
+define("USATODAY_API", "123abc");	// Your USA Today api key. Used to allow getting the news. Get one at http://developer.usatoday.com/
 
 /* RECIPE: NZB */
 define("SABNZBD_SERVER", "http://localhost:8080/sabnzbd/");	// Location of your SABnzbd setup (default is shown)

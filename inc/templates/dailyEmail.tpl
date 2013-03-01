@@ -1,6 +1,15 @@
 Daily email for {{$date}}
 <h1>{{$date}} - {{$city}}, {{$state}}</h1>
+
+<h2>Breaking News</h2>
+{{$news}}
+
 <h2>Weather</h2>
-{{$weather}}
+<strong>High:</strong> {{$weather.hiTemp}} <strong>Low:</strong> {{$weather.loTemp}}<br />
+{{$weather.fcastToday}}
+
 <h2>What you should wear</h2>
-For right now in {{$city}}, you should wear {{$clothes.top}} and {{$clothes.bottom}}. Keep in mind though, the high for today will be {{$clothes.hi}}F. {{if $clothes.extra}}You may also want to have {{$clothes.extra}}.{{/if}}
+{{$clothes.top|ucfirst}} / {{$clothes.bottom|ucfirst}}{{if $clothes.extra}} / {{$clothes.extra}}.{{/if}}
+
+<h2>Today in History</h2>
+In {{$history[0]}}, {{$history[1]}}
