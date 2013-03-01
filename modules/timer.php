@@ -19,7 +19,7 @@ function alice_timer_check()
 	{
 		if($timer < $now) 
 		{
-			alice_pushover("Timer alert", $message);
+			alice_pushover("Timer alert", $message, 1);
 			alice_mysql_remove("modules", "timer", array($timer));
 		}
 	}
