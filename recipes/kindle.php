@@ -6,7 +6,7 @@ DEPENDENCIES: Email module;
 INSTALL:      None;
 CONFIG:       Change directory to one of your own. Change the Kindle email address to your own.
 */
-foreach (array_reverse(glob('/home/jacob/Dropbox/Alice/*.mobi')) as $file)
+foreach (array_reverse(glob(DROPBOX.'*.mobi')) as $file)
 {
 	alice_email_send("Kindle", "jacroe@free.kindle.com", "Convert", " ", $file);
 	unlink($file);

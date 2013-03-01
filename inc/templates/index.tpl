@@ -10,6 +10,7 @@
 
 <div class="span4">
 <h2>Weather</h2>
+{{if $weather.alerts}}<div class="alert alert-error"><strong>Warning!</strong> Weather alerts issued.</div>{{/if}}
 <p>{{if $smarty.now|date_format:"%H" < 18}}{{$weather.fcastToday}}{{else}}{{$weather.fcastTonight}}{{/if}}</p>
 <p><a class="btn" href="weather.php">View details &raquo;</a></p>
 </div>

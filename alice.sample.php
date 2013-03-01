@@ -2,10 +2,11 @@
 error_reporting(0);
 
 /* GENERAL SETTINGS */
-define("NAME", "Bob");			// The name you wish to be referenced by in correspondence (emails, tweets, etc.)
-define("EMAIL", "bob@bob.com");		// Where we should be sending you emails
-define("DISPLAYNOTICES", TRUE); 	// Whether or not API information notices should be displayed. Your keys could be revoked if off
-define("PATH", "/var/www/alice/");	// Root directory of install
+define("NAME", "Bob");				// The name you wish to be referenced by in correspondence (emails, tweets, etc.)
+define("EMAIL", "bob@bob.com");			// Where we should be sending you emails
+define("DISPLAYNOTICES", TRUE); 		// Whether or not API information notices should be displayed. Keys could be revoked if off
+define("PATH", "/var/www/alice/");		// Root directory of install
+define("DROPBOX", "/home/bob/Dropbox/Alice/");	// Location in Dropbox where Alice, or you, can store files that interact with Alice
 
 /* MODULE: MySQL */
 define("MYSQL_SERVER", "localhost");						// MySQL server
