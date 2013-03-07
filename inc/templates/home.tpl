@@ -39,8 +39,12 @@
 
 <div class="span4">
 <h2>Webcam</h2>
-<img src="{{$webcamImg}}" alt="Latest captured image from the webcam"/>
+<img src="{{$webcamImg}}" width=320 alt="Latest image captured from the webcam"/>
 </div>
 
+<div class="span4">
+<h2>Lists</h2>
+<a class="list-grocery btn btn-primary" onClick='$.post("api.php",{"groceryList":"1"});$("a.list-grocery").addClass("disabled");'>Print Grocery List</a>
+</div>
 </div>
 {{include file="footer.tpl" page="home"}}
