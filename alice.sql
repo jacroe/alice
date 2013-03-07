@@ -67,6 +67,22 @@ CREATE TABLE IF NOT EXISTS `a_recipes` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `a_groceries`
+--
+
+CREATE TABLE IF NOT EXISTS `a_groceries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `section` text NOT NULL,
+  `aisle` int(11) DEFAULT NULL,
+  `price` double NOT NULL,
+  `needed` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `a_x10`
 --
 
