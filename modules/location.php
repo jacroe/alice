@@ -25,6 +25,11 @@ function alice_loc_get($string)
 	}
 	$jsonWund = json_decode(file_get_contents("http://api.wunderground.com/api/".WUNDERGROUND_API."/geolookup/q/$loc.json"));
 
+	if($jsonWund->response->error)
+	{
+		alice_error_add("Location module", "Location lookup error ".$jsonWund->response->error->description);
+		return -1;
+	}
 	return array("city"=>$jsonWund->location->city,
 	"state"=>$jsonWund->location->state,
 	"zip"=>$jsonWund->location->zip,
