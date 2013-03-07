@@ -4,11 +4,11 @@ NAME:         Tracking Packages
 ABOUT:        Checks a given string for a shipping number
 DEPENDENCIES: None;
 */
-function alice_packages(&$data)
+function alice_packages($data)
 {
 	$ups = "/\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/i";
 	$fedex = "/\b((96\d\d\d\d\d ?\d\d\d\d|96\d\d) ?\d\d\d\d ?d\d\d\d( ?\d\d\d)?)\b/i";
-	$usps = "/\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/i";
+	$usps = "/\b(9\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|9\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/i";
 	if (preg_match($ups, $data, $matches))
 	{
 		$service = "UPS";

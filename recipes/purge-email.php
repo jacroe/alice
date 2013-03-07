@@ -43,6 +43,11 @@ if (!(date('i') % 2))
 			case "Tumblr <no-reply@tumblr.com>":
 				alice_notification_add("Tumblr", $msg["subject"]);
 				alice_email_delete($con, $msg["id"]);
+				break;
+			case "\"service@paypal.com\" <service@paypal.com>":
+				alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
+				alice_notification_add("Moved PayPal receipt", "Your PayPal receipt was moved.");
+				break;
 		}
 		sleep(1);
 	}
