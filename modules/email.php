@@ -55,7 +55,7 @@ function alice_email_getAllMessages(&$con)
 		"subject"=>$msg->subject,
 		"date"=>$msg->date,
 		"seen"=>$msg->seen,
-		"body"=>imap_fetchbody($con, $msg->msgno, "1", FT_PEEK)
+		"body"=>quoted_printable_decode(imap_fetchbody($con, $msg->msgno, "1", FT_PEEK))
 		);
 	}
 	return $array;
@@ -69,36 +69,5 @@ function alice_email_delete(&$con, $msgno)
 {
 	imap_setflag_full($con, $msgno, "\\Seen");
 	imap_mail_move($con, $msgno, "INBOX.Trash");
-}
-
-function alice_email_purge($from = NULL, $subject = NULL, $flag = NULL, $move = "INBOX.Archives", $callback = NULL) // DEPRECATED
-{
-	alice_pushover("ruh roh", "Something's using alice_email_purge()");
-/*
-	$mbox = alice_email_openserver();
-	$MC = imap_check($mbox);
-	$i=0;
-	$result = imap_fetch_overview($mbox,"1:{$MC->Nmsgs}",0);
-	foreach ($result as $overview)
-	{
-		$i++;
-		if($overview->from == $from && $from)
-		{
-			if ($flag) imap_setflag_full($mbox, $i, $flag);
-			imap_mail_move($mbox, $i, $move);
-			$boolCallback = true;
-		}
-		if($overview->subject == $subject && $subject)
-		{
-			if ($flag) imap_setflag_full($mbox, $i, $flag);
-			imap_mail_move($mbox, $i, $move);
-			$boolCallback = true;
-		}
-		if($boolCallback && $callback) alice_notification_add("Message purged", $callback);
-	}
-	imap_expunge($mbox);
-	imap_close($mbox);
-*/
-
 }
 

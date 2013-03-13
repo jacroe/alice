@@ -6,7 +6,7 @@ DEPENDENCIES: Email module;
 INSTALL:      None;
 CONFIG:       You'll need to set up your own rules. 
 */
-if (!(date('i') % 2))
+if ((date('i') % 2))
 {
 	$con = alice_email_openServer();
 	
@@ -33,7 +33,7 @@ if (!(date('i') % 2))
 			case "\"Amazon.com\" <ship-confirm@amazon.com>":
 				$tracking = alice_packages($msg["body"]);
 				alice_email_move($con, $msg["id"], "INBOX.Reference", 1);
-				alice_notification_add("Amazon package shipped", "{$tracking["service"]}: <a href=\"{$tracking["url"]}\" target=_BLANK>{$tracking["number"]}</a>");
+				alice_notification_add("Amazon package shipped", "{$tracking["service"]}: <a href=\"{$tracking["url"]}\" target=_blank>{$tracking["number"]}</a>");
 				break;
 			case "Eagle Alert - The University of Southern Mississippi <noreply@myschoolcast.com>":
 				alice_pushover("Eagle Alert", $msg["subject"], 1);
@@ -46,7 +46,12 @@ if (!(date('i') % 2))
 				break;
 			case "\"service@paypal.com\" <service@paypal.com>":
 				alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
-				alice_notification_add("Moved PayPal receipt", "Your PayPal receipt was moved.");
+				alice_notification_add("Moved PayPal receipt", $msg["subject"]);
+				break;
+			case "Redbox <receipts@tx.redbox.com>":
+				alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
+				preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $msg["body"], $matches);
+				alice_notification_add("Redbox receipt", "<a href=\"{$matches[0]}\" target=_blank>View receipt</a>");
 				break;
 		}
 		sleep(1);
