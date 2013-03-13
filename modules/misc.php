@@ -28,4 +28,10 @@ function alice_timeDiff($date)
 	$diff = $now->diff($ref);
 	return $diff;
 }
+
+function alice_error_add($loc, $error)
+{
+	$log = file_get_contents(PATH."error.log");
+	file_put_contents(PATH."error.log", date("Y-m-d-H-i-s")."	ERROR at $loc - $error\n", FILE_APPEND);
+}
 ?>
