@@ -6,7 +6,7 @@ DEPENDENCIES: Location data;
 */
 function alice_weather_get($loc)
 {
-	$jsonWeather = json_decode(file_get_contents("http://api.wunderground.com/api/".WUNDERGROUND_API."/conditons/forecast/alerts/q/{$loc['zip']}.json"));
+	$jsonWeather = json_decode(file_get_contents("http://api.wunderground.com/api/".WUNDERGROUND_API."/conditions/forecast/alerts/q/{$loc['zip']}.json"));
 	if($jsonWeather->response->error)
 	{
 		alice_error_add("Weather module", "Weather lookup error ".$jsonWeather->response->error->description);
