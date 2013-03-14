@@ -1,5 +1,9 @@
+# Files to ignore because of end-use
 alice.php
-data.php
-inc/templates_c/
-nbproject/
 error.log
+inc/templates_c/
+
+# Files to ignore because of development
+nbproject/
+alice.sublime-project
+alice.sublime-workspace
