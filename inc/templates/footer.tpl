@@ -21,6 +21,11 @@
 <script src="./lib/bootstrap/js/jquery.js"></script>
 <script src="./lib/bootstrap/js/bootstrap-collapse.js"></script>
 <script src="./lib/bootstrap/js/bootstrap-modal.js"></script>
-
+<script>
+function aliceAPI(jsonData)
+{
+	$.post("api.php", {json:JSON.stringify(jsonData)});
+}
+</script>
 </body>
 </html>

@@ -26,14 +26,14 @@
 <h2>Timer</h2>
 <div class="form-inline">
   <input type="text" class="input-small" id="timer" placeholder="20 minutes">
-  <button class="btn" onClick='$.post("api.php",{"timer":$("#timer").val(), "message":"Timer set from homepage."});$("#timer").val(null);return false;'>Set timer</button>
+  <button class="btn" onClick='aliceAPI({"method":"Timer.Set","params":{"datetime":$("#timer").val(),"message":"Timer set from homepage."}});$("#timer").val(null);return false;'>Set timer</button>
 </div>
 
 <h2>Notifications</h2>
 <table class="table table-bordered table-condensed">
 <tbody>
 {{foreach $notifications as $notif}}
-<tr><td><strong>{{$notif.title}}</strong></td><td>{{$notif.message}}</td><td><a class="btn btn-mini" onClick='$.post("api.php", {"notifyRemove":"{{$notif.id}}"});return false;'><i class=icon-trash></i></a></td></tr>
+<tr><td><strong>{{$notif.title}}</strong></td><td>{{$notif.message}}</td><td><a class="btn btn-mini" onClick='aliceAPI({"method":"Notify.Remove","params":{"timestamp":"{{$notif.id}}"}});return false;'><i class=icon-trash></i></a></td></tr>
 {{/foreach}}
 </tbody>
 </table>

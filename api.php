@@ -1,21 +1,45 @@
 <?php
-if (!$_POST) die("This is Alice's API. She says hi.");
+if (!$_POST['json']) die("This is Alice's API. She says hi.");
 require('alice.php');
 
-# XBMC API Calls
-if ($_POST['movieid']) alice_xbmc_playFilm($_POST['movieid']);
-if ($_POST['episodeid']) alice_xbmc_playEpisode($_POST['episodeid']);
-if ($_POST['control']) alice_xbmc_control($_POST['control'], $_POST['param']);
+$json = json_decode(($_POST['json']));
+switch ($json->method) {
 
-# X10 API Calls
-if ($_POST['x10']) alice_x10($_POST['x10'], $_POST['do']);
+	// XBMC
+	case "XBMC.PlayFilm":
+		alice_xbmc_playFilm($json->params->id);
+		break;
+	case "XBMC.PlayEpisode":
+		alice_xbmc_playEpisode($json->params->id);
+		break;
+	case "XBMC.Control":
+		alice_xbmc_control($json->params->action);
+		break;
 
-# Timer API Calls
-if ($_POST['timer']) alice_timer_set($_POST['timer'], $_POST['message']);
+	// X10
+	case "X10.Do":
+		alice_x10($json->params->device, $json->params->action);
+		break;
 
-# Notifications API Calls
-if ($_POST['notifyAdd']) alice_notification_add($_POST['notifyAdd'], $_POST['message']);
-if ($_POST['notifyRemove']) alice_mysql_remove("modules", "notification", array($_POST['notifyRemove']));
+	// Timer
+	case "Timer.Set":
+		alice_timer_set($json->params->datetime, $json->params->message);
+		break;
 
-# Grocery list API calls
-if ($_POST['groceryList']) alice_groceries_print();
+	// Notifications
+	case "Notify.Add":
+		alice_notification_add($json->params->title, $json->params->message);
+		break;
+	case "Notify.Remove":
+		alice_mysql_remove("modules", "notification", array($json->params->timestamp));
+		break;
+
+	// Groceries
+	case "Grocery.Print":
+		alice_groceries_print();
+		break;
+
+	default:
+		echo "JSONERROR";
+		break;
+}

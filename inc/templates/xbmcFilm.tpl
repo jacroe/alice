@@ -3,7 +3,8 @@
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
 <p>{{$subhead}}</p>
-<p><a class="btn btn-primary btn-large" onclick='$.post("api.php", { movieid: {{$movieid}} } );'><i class="icon-play icon-white"></i> Play film</a></p>
+<p><a class="btn btn-primary btn-large" onclick='aliceAPI({"method":"XBMC.PlayFilm","params":{"id":"{{$movieid}}"}});'><i class="icon-play icon-white"></i> Play film</a></p>
+
 </div>
 
 

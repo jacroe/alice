@@ -33,60 +33,53 @@ function alice_xbmc_control($command, $param = NULL)
 	switch($command)
 	{
 		case "pause":
-		$data = array("jsonrpc" => "2.0", "method" => "Player.PlayPause", "params" => array("playerid" => $player), "id" => 1);
-		$xbmc = json_decode(alice_xbmc_talk($data));
-		if ($xbmc->result->speed) return "XBMC Playing";
-		else return "XBMC Paused";
-		break;
+			$data = array("jsonrpc" => "2.0", "method" => "Player.PlayPause", "params" => array("playerid" => $player), "id" => 1);
+			$xbmc = json_decode(alice_xbmc_talk($data));
+			if ($xbmc->result->speed) return "XBMC Playing";
+			else return "XBMC Paused";
+			break;
 		
 		case "rewind":
-		$data = array("jsonrpc" => "2.0", "method" => "Player.Seek", "params" => array("playerid" => $player, "value" => "smallbackward"), "id" => 1);
-		$xbmc = json_decode(alice_xbmc_talk($data));
-		return "XBMC Skipped Backward";
-		break;
+			$data = array("jsonrpc" => "2.0", "method" => "Player.Seek", "params" => array("playerid" => $player, "value" => "smallbackward"), "id" => 1);
+			$xbmc = json_decode(alice_xbmc_talk($data));
+			return "XBMC Skipped Backward";
+			break;
 		
 		case "forward":
-		$data = array("jsonrpc" => "2.0", "method" => "Player.Seek", "params" => array("playerid" => $player, "value" => "smallforward"), "id" => 1);
-		$xbmc = json_decode(alice_xbmc_talk($data));
-		return "XBMC Skipped Forward";
-		break;
+			$data = array("jsonrpc" => "2.0", "method" => "Player.Seek", "params" => array("playerid" => $player, "value" => "smallforward"), "id" => 1);
+			$xbmc = json_decode(alice_xbmc_talk($data));
+			return "XBMC Skipped Forward";
+			break;
 		
 		case "stop":
-		$data = array("jsonrpc" => "2.0", "method" => "Player.Stop", "params" => array("playerid" => $player), "id" => 1);
-		$xbmc = json_decode(alice_xbmc_talk($data));
-		return "XBMC Stopped";
-		break;
-	
-		case "volume":
-		if ($param == "mute")
-		{
+			$data = array("jsonrpc" => "2.0", "method" => "Player.Stop", "params" => array("playerid" => $player), "id" => 1);
+			$xbmc = json_decode(alice_xbmc_talk($data));
+			return "XBMC Stopped";
+			break;
+		case "mute":
 			$data = array("jsonrpc" => "2.0", "method" => "Application.SetMute", "params" => array("mute" => "toggle"), "id" => 1);
 			$xbmc = json_decode(alice_xbmc_talk($data));
 			if ($xbmc->result) return "XBMC Muted";
 			else return "XBMC Unmuted";
-		}
-		elseif ($param == "up")
-		{
+			break;
+		case "volumeup":
 			$data = array("jsonrpc" => "2.0", "method" => "Application.GetProperties", "params" => array("properties" => array("volume")), "id" => 1);
 			$xbmc = json_decode(alice_xbmc_talk($data));
 			$newvolume = ($xbmc->result->volume)+5;
 			$data = array("jsonrpc" => "2.0", "method" => "Application.SetVolume", "params" => array("volume" => $newvolume), "id" => 1);
 			alice_xbmc_talk($data);
 			return "XBMC volume increased to ".$newvolume;
-		}
-		elseif ($param == "down")
-		{
+			break;
+		case "volumedown":
 			$data = array("jsonrpc" => "2.0", "method" => "Application.GetProperties", "params" => array("properties" => array("volume")), "id" => 1);
 			$xbmc = json_decode(alice_xbmc_talk($data));
 			$newvolume = ($xbmc->result->volume)-5;
 			$data = array("jsonrpc" => "2.0", "method" => "Application.SetVolume", "params" => array("volume" => $newvolume), "id" => 1);
 			alice_xbmc_talk($data);
 			return "XBMC volume decreased to ".$newvolume;
-		}
-		break;
-		
+			break;
 		default:
-		return alice_error_nocommand();
+			return -1;
 		
 	}
 }

@@ -3,7 +3,7 @@
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
 {{if $nextEpisodeID}}
-<p><a class="btn btn-large btn-primary" onclick='$.post("api.php", { episodeid: {{$nextEpisodeID}} } );'><i class="icon-play icon-white"></i> Play next episode</a></p>
+<p><a class="btn btn-large btn-primary" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"id":"{{$nextEpisodeID}}"}});'><i class="icon-play icon-white"></i> Play next episode</a></p>
 {{else}}
 <p>All episodes watched</p>
 {{/if}}
@@ -29,7 +29,7 @@
 <strong>Season {{$season}}</strong><br />
 {{/if}}
 {{/if}}
-<a class="btn btn-mini" onclick='$.post("api.php", { episodeid: {{$episode->episodeid}} } );'><i class=icon-play></i></a>
+<a class="btn btn-mini" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"id":"{{$episode->episodeid}}"}});'><i class=icon-play></i></a>
 {{if $episode->playcount}}<i class=icon-ok></i> {{/if}}
 {{$episode->episode}}. {{$episode->title}}<br />
 {{/foreach}}
