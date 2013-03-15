@@ -3,7 +3,7 @@
 NAME:         Torrent
 ABOUT:        Adds all .torrent files to either Deluge or Transmission based on which is not commmented
 DEPENDENCIES: Deluge module or Transmission module; Pushover module;
-INSTALL:      Edit the Deluge or Transmission settings in alice.php.
+INSTALL:      Edit the Deluge or Transmission settings in alice.php. Comment/Uncomment the below code depending on which torrent software you're using
 CONFIG:       Change the directory to your own.
 */
 

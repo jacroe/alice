@@ -2,7 +2,7 @@
 /*
 NAME:         Backup Apache folder
 ABOUT:        Backups the www folder to Dropbox
-DEPENDENCIES: The rsync package must be installed on your system.
+DEPENDENCIES: rsync;
 INSTALL:      None;
 CONFIG:       Change the directories to match your own. 
 */

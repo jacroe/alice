@@ -2,8 +2,8 @@
 /*
 NAME:         Say cheese!
 ABOUT:        Takes a photo from the webcam and stores it in Dropbox. Note: This recipe as is will NOT work on Windows. It has only been tested to work on Ubuntu 11.10; it may work on Mac.
-DEPENDENCIES: MySQL module;
-INSTALL:      You may need to install ffmpeg and ImageMagick if they aren't already;
+DEPENDENCIES: MySQL module; ffmpeg; ImageMagick;
+INSTALL:      None;
 CONFIG:       Change the location of your webcam and where you would like the image to be stored;
 */
 $imgLoc = date('Y/m/d/H-i');
