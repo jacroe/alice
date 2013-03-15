@@ -55,7 +55,7 @@ function alice_email_getAllMessages(&$con)
 		"subject"=>$msg->subject,
 		"date"=>$msg->date,
 		"seen"=>$msg->seen,
-		"body"=>quoted_printable_decode(imap_fetchbody($con, $msg->msgno, "1", FT_PEEK))
+		"body"=>imap_fetchbody($con, $msg->msgno, "1", FT_PEEK)
 		);
 	}
 	return $array;
