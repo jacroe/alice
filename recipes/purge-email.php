@@ -25,6 +25,8 @@ if ((date('i') % 2))
 				break;
 			case "New message from Simple":
 				alice_email_move($con, $msg["id"], "INBOX.IMPORTANT");
+				//$url = alice_htmlparser_find($msg["body"], "a", false, 1);
+				//echo $url->plaintext;
 				alice_notification_add("Simple bank", "Simple sent a new message.");
 				break;
 		}
@@ -49,9 +51,15 @@ if ((date('i') % 2))
 				alice_notification_add("Moved PayPal receipt", $msg["subject"]);
 				break;
 			case "Redbox <receipts@tx.redbox.com>":
-				alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
-				preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $msg["body"], $matches);
-				alice_notification_add("Redbox receipt", "<a href=\"{$matches[0]}\" target=_blank>View receipt</a>");
+				if($msg["subject"] == "Your Receipt")
+				{
+					alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
+					$url = alice_htmlparser_find($msg["body"], "a", false, 0);
+					$rawTitle = alice_htmlparser_find($msg["body"], "table td[width=496]", false);
+					$title = trim(alice_htmlparser_find($rawTitle[0], "a", false, 0)->plaintext);
+					$price = alice_htmlparser_find($msg["body"], "table td[width=51]", false, -1)->plaintext;
+					alice_notification_add("Redbox", "Rented <em>$title</em> for $price. <a href=\"$url->href\" target=_blank>View receipt</a>");
+				}
 				break;
 		}
 		sleep(1);
