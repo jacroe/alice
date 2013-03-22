@@ -178,3 +178,13 @@ function alice_xbmc_getFirstUnwatchedEpisode($show)
 	}
 	return array("title" => $nextShowTitle, "id" => $nextShowID);
 }
+function alice_xbmc_getLatestEpisode($show)
+{
+	$arrayEpisodes = alice_xbmc_getAllEpisodesOfShow($show);
+	foreach ($arrayEpisodes as $episode)
+	{
+		$lastShowID = $episode->episodeid;
+		$lastShowTitle = $episode->title;
+	}
+	return array("title" => $lastShowTitle, "id" => $lastShowID);
+}

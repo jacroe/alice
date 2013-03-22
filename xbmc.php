@@ -25,7 +25,7 @@ if ($_GET['movie'])
 	$smarty->assign("subhead", $film->tagline);
 	$smarty->assign("movieid", $_GET['movie']);
 	$smarty->assign("summary", $film->plot);
-	$smarty->assign("genre", $film->genre);
+	$smarty->assign("genre", implode(" / ", $film->genre));
 	$smarty->assign("year", $film->year);
 	$smarty->assign("mpaa", $film->mpaa);
 	$smarty->assign("runtime", floor($film->runtime / 60));
