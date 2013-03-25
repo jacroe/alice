@@ -44,6 +44,7 @@ define("TRANSMISSION_DOWNLOAD", "/home/bob/Downloads");				// Where the files sh
 /* MODULE: Deluge */
 define("DELUGE_SERVER", "http://localhost:8112/json");				// Location of Deluge's Web json server (default shown)
 define("DELUGE_PASS", "password");						// Password set to access web client
+define("DELUGE_DOWNLOAD", "/home/bob/Downloads");				// Where the files should be downloaded to
 
 /* MODULE: Pushover */
 define("PUSHOVER_APP", "123abc");	// Your local Alice Pushover application. Make one at https://pushover.net/apps/build

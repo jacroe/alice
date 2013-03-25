@@ -26,7 +26,6 @@ foreach (glob(DROPBOX.'*.torrent') as $file)
 		$file = str_replace(DROPBOX, "", $file);
 	}
 }
-
 foreach (glob(DROPBOX.'*.magnet') as $file)
 {	
 	$torrent = alice_deluge_addLocal(trim(file_get_contents($file)));
