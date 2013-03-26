@@ -8,24 +8,51 @@ switch ($json->method)
 
 	// XBMC
 	case "XBMC.PlayFilm":
-		alice_xbmc_playFilm($json->params->id);
+		if(!alice_xbmc_isOn())
+			echo alice_api_buildResponse("XBMC.PlayFilm", 0, "XBMC is offline.");
+		elseif(!$json->params->id)
+			echo alice_api_buildResponse("XBMC.PlayFilm", 0, "Invalid paramaters");
+		else
+		{
+			if(alice_xbmc_playFilm($json->params->id))
+				echo alice_api_buildResponse("XBMC.PlayFilm");
+			else
+				echo alice_api_buildResponse("XBMC.PlayFilm", 0, "Failed to play film.");
+		}
 		break;
 	case "XBMC.PlayEpisode":
-		if($json->params->id)
-			alice_xbmc_playEpisode($json->params->id);
-		elseif($json->params->type)
-			if($json->params->type == "next")
-			{
-				$arrayNextEpisode = alice_xbmc_getFirstUnwatchedEpisode($json->params->showid);
-				alice_xbmc_playEpisode($arrayNextEpisode["id"]);
-			}
+		if(!alice_xbmc_isOn())
+			echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "XBMC is offline.");
+		elseif(!$json->params->id || !$json->params->type)
+			echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Invalid paramaters");
+		else
+		{
+			if($json->params->id)
+				if(alice_xbmc_playEpisode($json->params->id))
+					echo alice_api_buildResponse("XBMC.PlayEpisode");
+				else
+					echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Failed to play episode.");
+			elseif($json->params->type == "next")
+				{
+					$arrayNextEpisode = alice_xbmc_getFirstUnwatchedEpisode($json->params->showid);
+					if(alice_xbmc_playEpisode($arrayNextEpisode["id"]))
+						echo alice_api_buildResponse("XBMC.PlayEpisode");
+					else
+						echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Failed to play episode.");
+				}
+		}
 		break;
 	case "XBMC.Control":
-		$returnXBMC = alice_xbmc_control($json->params->action);
-		if($returnXBMC != -1)
-			echo alice_api_buildResponse("XBMC.Control", 1, $returnXBMC);
+		if(!alice_xbmc_isOn())
+			echo alice_api_buildResponse("XBMC.PlayFilm", 0, "XBMC is offline.");
 		else
-			echo alice_api_buildResponse("XBMC.Control", 0, "Unrecognized control");
+		{
+			$returnXBMC = alice_xbmc_control($json->params->action);
+			if($returnXBMC != -1)
+				echo alice_api_buildResponse("XBMC.Control", 1, $returnXBMC);
+			else
+				echo alice_api_buildResponse("XBMC.Control", 0, "Unrecognized control");
+		}
 		break;
 
 	// X10
@@ -45,17 +72,29 @@ switch ($json->method)
 			echo alice_api_buildResponse("Timer.Set", 0, "Invalid paramaters");
 		else
 		{
-			$time = alice_timer_set($json->params->datetime, $json->params->message);
-			echo alice_api_buildResponse("Timer.Set", 1, $time);
+			$timerTime = alice_timer_set($json->params->datetime, $json->params->message);
+			echo alice_api_buildResponse("Timer.Set", 1, $timerTime);
 		}
 		break;
 
 	// Notifications
 	case "Notify.Add":
-		alice_notification_add($json->params->title, $json->params->message);
+		if(!$json->params->title || !$json->params->message)
+			echo alice_api_buildResponse("Notify.Add", 0, "Invalid paramaters");
+		else
+		{
+			$notifTime = alice_notification_add($json->params->title, $json->params->message);
+			echo alice_api_buildResponse("Notify.Add", 1, $notifTime);
+		}
 		break;
 	case "Notify.Remove":
-		alice_mysql_remove("modules", "notification", array($json->params->timestamp));
+		if(!$json->params->timestamp)
+			echo alice_api_buildResponse("Notify.Remove", 0, "Invalid paramaters");
+		else
+		{
+			alice_mysql_remove("modules", "notification", array($json->params->timestamp));
+			echo alice_api_buildResponse("Notify.Remove");
+		}
 		break;
 
 	// Groceries
@@ -70,6 +109,7 @@ switch ($json->method)
 		echo alice_api_buildResponse($json->method, 0, "Method not recognized.");
 		break;
 }
+echo "\n";
 function alice_api_buildResponse($method, $status = true, $response = null)
 {
 	if($status)

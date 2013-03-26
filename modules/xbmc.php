@@ -125,12 +125,16 @@ function alice_xbmc_quit()
 function alice_xbmc_playFilm($id)
 {
 	$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("movieid" => intval($id))), "id" => 1);
-	alice_xbmc_talk($data);
+	$jsonReturn = json_decode(ealice_xbmc_talk($data));
+	if($jsonReturn->error) return false;
+	else return true;
 }
 function alice_xbmc_playEpisode($id)
 {
 	$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("episodeid" => intval($id))), "id" => 1);
-	alice_xbmc_talk($data);
+	$jsonReturn = json_decode(ealice_xbmc_talk($data));
+	if($jsonReturn->error) return false;
+	else return true;
 }
 function alice_xbmc_getAllFilms()
 {
