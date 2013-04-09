@@ -23,7 +23,7 @@ switch ($json->method)
 	case "XBMC.PlayEpisode":
 		if(!alice_xbmc_isOn())
 			echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "XBMC is offline.");
-		elseif(!$json->params->id || !$json->params->type)
+		elseif((!$json->params->id) && (!$json->params->type))
 			echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Invalid paramaters");
 		else
 		{
@@ -33,13 +33,21 @@ switch ($json->method)
 				else
 					echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Failed to play episode.");
 			elseif($json->params->type == "next")
-				{
-					$arrayNextEpisode = alice_xbmc_getFirstUnwatchedEpisode($json->params->showid);
-					if(alice_xbmc_playEpisode($arrayNextEpisode["id"]))
-						echo alice_api_buildResponse("XBMC.PlayEpisode");
-					else
-						echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Failed to play episode.");
-				}
+			{
+				$arrayNextEpisode = alice_xbmc_getFirstUnwatchedEpisode($json->params->showid);
+				if(alice_xbmc_playEpisode($arrayNextEpisode["id"]))
+					echo alice_api_buildResponse("XBMC.PlayEpisode");
+				else
+					echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Failed to play episode.");
+			}
+			elseif($json->params->type == "last")
+			{
+				$arrayLastEpisode = alice_xbmc_getLatestEpisode($json->params->showid);
+				if(alice_xbmc_playEpisode($arrayLastEpisode["id"]))
+					echo alice_api_buildResponse("XBMC.PlayEpisode");
+				else
+					echo alice_api_buildResponse("XBMC.PlayEpisode", 0, "Failed to play episode.");
+			}
 		}
 		break;
 	case "XBMC.Control":
