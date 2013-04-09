@@ -4,7 +4,7 @@ NAME:         Groceries Database
 ABOUT:        Stores and retrieves grocery information. Generates a shopping list.
 DEPENDENCIES: MySQL database (not the module);
 */
-function alice_groceries_get($arraySection = array("Health", "Cleaning supplies", "Dairy", "Deli", "Grocery"))
+function alice_groceries_get($arraySection = array("Clothing", "Health", "Cleaning supplies", "Dairy", "Deli", "Grocery"))
 {
 	$db = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DB.';charset=utf8', MYSQL_USER, MYSQL_PASS);
 	$stmt = $db->prepare("SELECT name,aisle,price,needed,section FROM a_groceries WHERE (section LIKE :section) ORDER BY section,aisle DESC");
@@ -24,9 +24,10 @@ function alice_groceries_mark($item, $needed = true)
 	$stmt->execute(array(':name'=>"%$item%"));
 	return $stmt->rowCount();
 }
-function alice_groceries_print($arraySection = array("Health", "Cleaning supplies", "Dairy", "Deli", "Grocery"))
+function alice_groceries_print($arraySection = array("Clothing", "Health", "Cleaning supplies", "Dairy", "Deli", "Grocery"))
 {
 	// This function only exists until the Events module is built. This shouldn't be done by this module
+	// Perhaps it should? If events are going to be a set of Alice function calls, then this is definitely where this goes. 
 	global $smarty;
 	$data = alice_groceries_get($arraySection);
 	$smarty->assign("data", $data);
