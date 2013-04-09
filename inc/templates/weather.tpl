@@ -57,7 +57,7 @@
 </table>
 </div>
 
-<div class="span4">
+<!--<div class="span4">
 <h2>Radar</h2>
 <img src="{{$radarimg}}" alt="Radar image for {{$updateCity}}" />
 </div>
@@ -65,6 +65,23 @@
 <div class="span4">
 <h2>Satellite</h2>
 <img src="{{$satimg}}" alt="Satellite image for {{$updateCity}}" />
+</div>-->
+<div class="span4">
+	<h2>Weather Maps</h2>
+	<div class="tabbable">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#tabRadar" data-toggle="tab">Radar</a></li>
+			<li><a href="#tabSat" data-toggle="tab">Satellite</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="tabRadar">
+				<img src="{{$radarimg}}" alt="Radar image for {{$updateCity}}" />
+			</div>
+			<div class="tab-pane" id="tabSat">
+				<img src="{{$satimg}}" alt="Satellite image for {{$updateCity}}" />
+			</div>
+		</div>
+	</div>
 </div>
 
 </div>

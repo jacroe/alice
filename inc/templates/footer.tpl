@@ -21,6 +21,7 @@
 <script src="./lib/bootstrap/js/jquery.js"></script>
 <script src="./lib/bootstrap/js/bootstrap-collapse.js"></script>
 <script src="./lib/bootstrap/js/bootstrap-modal.js"></script>
+<script src="./lib/bootstrap/js/bootstrap-tab.js"></script>
 <script>
 function aliceAPI(jsonData)
 {
