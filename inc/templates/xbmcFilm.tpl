@@ -1,5 +1,4 @@
 {{include file="header.tpl" page="xbmc"}}
-<div class="container">
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
 <p>{{$subhead}}</p>

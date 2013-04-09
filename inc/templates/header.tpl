@@ -32,29 +32,32 @@ padding-bottom: 40px;
 <body>
 
 <div class="navbar navbar-fixed-top navbar-inverse">
-<div class="navbar-inner">
-<div class="container">
-<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a class="brand" href="index.php">Alice</a>
-<div class="nav-collapse collapse">
-<ul class="nav">
-<li class="{{if $page=='index'}}active{{/if}}"><a href="index.php">Main</a></li>
-<li class="{{if $page=='weather'}}active{{/if}}"><a href="weather.php">Weather</a></li>
-<li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
-<li class="{{if $page=='home'}}active{{/if}}"><a href="home.php">Home</a></li>
-</ul>
-</div><!--/.nav-collapse -->
+	<div class="navbar-inner">
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="brand" href="index.php">Alice</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li class="{{if $page=='index'}}active{{/if}}"><a href="index.php">Main</a></li>
+					<li class="{{if $page=='weather'}}active{{/if}}"><a href="weather.php">Weather</a></li>
+					<li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
+					<li class="{{if $page=='home'}}active{{/if}}"><a href="home.php">Home</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
 </div>
-</div>
-</div>
+
 {{if $error}}
 <div class="container">
 {{foreach $error as $issue}}
-<div class="alert alert-{{$issue[0]}}"><strong>Warning!</strong> {{$issue[1]}}</div>
+	<div class="alert alert-{{$issue[0]}}"><strong>Warning!</strong> {{$issue[1]}}</div>
 {{/foreach}}
 </div>
 {{/if}}
+
+<div class="container">

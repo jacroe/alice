@@ -1,6 +1,4 @@
 {{include file="header.tpl" page="weather"}}
-<div class="container">
-
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
 <p>{{$subhead}}</p>
