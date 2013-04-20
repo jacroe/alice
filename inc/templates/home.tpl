@@ -41,6 +41,25 @@
 </div>
 
 <div class="span4">
+<h2>Timers</h2>
+{{if $allTimers}}
+<table class="table table-bordered table-condensed">
+<tbody>
+{{foreach $allTimers as $timer}}
+<tr><td><strong>{{$timer.message}}</strong></td><td>{{$timer.timeLeft}}</td><td><a class="btn btn-mini" onClick='aliceAPI({"method":"Timer.Remove","params":{"timer":"{{$timer.timer}}"}});return false;'><i class=icon-trash></i></a></td></tr>
+{{/foreach}}
+</tbody>
+</table>
+{{else}}
+<p>No timers have been set.</p>
+{{/if}}
+
+<form class="form-inline">
+<input type="text" class="input-small" id="message" placeholder="Drink is cold.">
+<input type="text" class="input-small" id="timer" placeholder="20 minutes">
+<button class="btn" onClick='aliceAPI({"method":"Timer.Set","params":{"datetime":$("#timer").val(),"message":$("#message").val()}});$("#timer").val(null);$("#message").val(null);return false;'>Set timer</button>
+</form>
+
 <h2>Lists</h2>
 <a class="list-grocery btn btn-primary" onClick='aliceAPI({"method":"Grocery.Print","params":{}});$("a.list-grocery").addClass("disabled");'>Print Grocery List</a>
 </div>

@@ -21,13 +21,6 @@
 </div>
 
 <div class="span4">
-	<h2>Timer</h2>
-	<div class="form-inline">
-		<input type="text" class="input-small" id="message" placeholder="Drink is cold.">
-		<input type="text" class="input-small" id="timer" placeholder="20 minutes">
-		<button class="btn" onClick='aliceAPI({"method":"Timer.Set","params":{"datetime":$("#timer").val(),"message":$("#message").val()}});$("#timer").val(null);$("#message").val(null);return false;'>Set timer</button>
-	</div>
-
 	<h2>Notifications</h2>
 		<table class="table table-bordered table-condensed">
 			<tbody>

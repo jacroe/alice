@@ -84,6 +84,14 @@ switch ($json->method)
 			echo alice_api_buildResponse("Timer.Set", 1, $timerTime);
 		}
 		break;
+	case "Timer.Remove":
+		if(!$json->params->timer)
+			echo alice_api_buildResponse("Timer.Remove", 0, "Invalid paramaters");
+		else
+		{
+			alice_timer_remove($json->params->timer);
+			echo alice_api_buildResponse("Timer.Remove");
+		}
 
 	// Notifications
 	case "Notify.Add":
