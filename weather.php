@@ -17,6 +17,7 @@ if ($w['alerts'])
 }
 else $alertArray = NULL;
 
+$smarty->assign("title", "Weather in {$l['city']}, {$l['state']}");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w);
