@@ -108,7 +108,7 @@ switch ($json->method)
 			echo alice_api_buildResponse("Notify.Remove", 0, "Invalid paramaters");
 		else
 		{
-			alice_mysql_remove("modules", "notification", array($json->params->timestamp));
+			alice_notification_remove($json->params->timestamp);
 			echo alice_api_buildResponse("Notify.Remove");
 		}
 		break;

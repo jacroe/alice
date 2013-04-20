@@ -22,6 +22,7 @@
 
 <div class="span4">
 	<h2>Notifications</h2>
+	{{if $notifications}}
 		<table class="table table-bordered table-condensed">
 			<tbody>
 			{{foreach $notifications as $notif}}
@@ -29,6 +30,9 @@
 			{{/foreach}}
 			</tbody>
 		</table>
+	{{else}}
+		<p>No notifications.</p>
+	{{/if}}
 </div>
 
 </div>
