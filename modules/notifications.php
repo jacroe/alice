@@ -12,6 +12,6 @@ function alice_notification_add($title, $message)
 }
 function alice_notification_remove($timestamp)
 {
-	alice_mysql_remove("modules", "notification", $timestamp);
+	alice_mysql_remove("modules", "notification", array($timestamp));
 }
 ?>
