@@ -53,6 +53,10 @@ function alice_x10_update($code, $newState=-1)
 	$db = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DB.';charset=utf8', MYSQL_USER, MYSQL_PASS);
 	
 	if ($newState == -1) $stmt = $db->prepare("UPDATE a_x10 SET curState='-1' WHERE (code = :code)");
+	elseif ($device['type'] == "chime")
+	{
+		$stmt = $db->prepare("UPDATE a_x10 SET curState='0' WHERE (code = :code)");
+	}
 	elseif ($device['type'] == "appliance")
 	{
 		if ($newState == "on") $stmt = $db->prepare("UPDATE a_x10 SET curState='1' WHERE (code = :code)");
