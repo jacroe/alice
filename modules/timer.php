@@ -25,6 +25,7 @@ function alice_timer_check()
 		if($timer < $now) 
 		{
 			alice_pushover("Timer alert", $message, 1);
+			alice_xbmc_notify($message);
 			alice_timer_remove($timer);
 		}
 	}
