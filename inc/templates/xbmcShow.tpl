@@ -2,7 +2,7 @@
 <div class="hero-unit">
 <h1>{{$masthead}}</h1>
 {{if $nextEpisodeID}}
-<p><a class="btn btn-large btn-primary" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"type":"next","showid":"{{$showid}}"}});'><i class="icon-play icon-white"></i> Play next episode</a> <a class="btn btn-large" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"type":"last","showid":"{{$showid}}"}});'><i class="icon-play"></i> Play latest</a></p>
+<p><a class="btn btn-primary" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"type":"next","showid":"{{$showid}}"}});'><i class="icon-play icon-white"></i> Play next episode</a> <a class="btn" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"type":"last","showid":"{{$showid}}"}});'><i class="icon-play"></i> Play latest</a></p>
 {{else}}
 <p>All episodes watched</p>
 {{/if}}
