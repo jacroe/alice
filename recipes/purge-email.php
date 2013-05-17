@@ -61,6 +61,13 @@ if ((date('i') % 2))
 					alice_notification_add("Redbox", "Rented <em>$title</em> for $price. <a href=\"$url->href\" target=_blank>View receipt</a>");
 				}
 				break;
+			case "noreply@google.com":
+				if(strpos($msg["subject"], "Google Analytics intelligence alert") !== false)
+				{
+					alice_email_delete($con, $msg["id"]);
+					alice_notification_add("Google Analytics", "20+ people visited jacroe.com");
+				}
+				break;
 		}
 		sleep(1);
 	}
