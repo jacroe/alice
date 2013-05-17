@@ -125,6 +125,17 @@ function alice_api($json)
 				return alice_api_buildResponse("Grocery.Print", 0, "PDF was not placed in Dropbox. Check error.log for more info.");
 			break;
 
+		// Macros
+		case "Macro.Run":
+			if(!$json->params->macro)
+				return alice_api_buildResponse("Macro.Run", 0, "Invalid paramaters");
+			else
+			{
+				alice_macro_run($json->params->macro);
+				return alice_api_buildResponse("Macro.Run");
+			}
+			break;
+
 		default:
 			return alice_api_buildResponse($json->method, 0, "Method not recognized.");
 			break;
