@@ -7,6 +7,7 @@ define("EMAIL", "bob@bob.com");			// Where we should be sending you emails
 define("DISPLAYNOTICES", TRUE); 		// Whether or not API information notices should be displayed. Keys could be revoked if off
 define("PATH", "/var/www/alice/");		// Root directory of install
 define("DROPBOX", "/home/bob/Dropbox/Alice/");	// Location in Dropbox where Alice, or you, can store files that interact with Alice
+define("LINKLIGHTSXBMC", TRUE);			// Executes the 'lightson' and 'lightsoff' events in conjunction with XBMC playing or not playing.
 
 /* MODULE: MySQL */
 define("MYSQL_SERVER", "localhost");						// MySQL server

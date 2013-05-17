@@ -35,8 +35,16 @@ function alice_xbmc_control($command, $param = NULL)
 		case "pause":
 			$data = array("jsonrpc" => "2.0", "method" => "Player.PlayPause", "params" => array("playerid" => $player), "id" => 1);
 			$xbmc = json_decode(alice_xbmc_talk($data));
-			if ($xbmc->result->speed) return "XBMC Playing";
-			else return "XBMC Paused";
+			if ($xbmc->result->speed)
+			{
+				if (LINKLIGHTSXBMC) alice_macro_run("lightsoff");
+				return "XBMC Playing";
+			}
+			else 
+			{
+				if (LINKLIGHTSXBMC) alice_macro_run("lightson");
+				return "XBMC Paused";
+			}
 			break;
 		
 		case "rewind":
@@ -54,6 +62,7 @@ function alice_xbmc_control($command, $param = NULL)
 		case "stop":
 			$data = array("jsonrpc" => "2.0", "method" => "Player.Stop", "params" => array("playerid" => $player), "id" => 1);
 			$xbmc = json_decode(alice_xbmc_talk($data));
+			if (LINKLIGHTSXBMC) alice_macro_run("lightson");
 			return "XBMC Stopped";
 			break;
 		case "mute":
@@ -126,6 +135,7 @@ function alice_xbmc_playFilm($id)
 {
 	$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("movieid" => intval($id))), "id" => 1);
 	$jsonReturn = json_decode(alice_xbmc_talk($data));
+	if (LINKLIGHTSXBMC) alice_macro_run("lightsoff");
 	if($jsonReturn->error) return false;
 	else return true;
 }
@@ -133,6 +143,7 @@ function alice_xbmc_playEpisode($id)
 {
 	$data = array("jsonrpc" => "2.0", "method" => "Player.Open", "params" => array("item" => array("episodeid" => intval($id))), "id" => 1);
 	$jsonReturn = json_decode(alice_xbmc_talk($data));
+	if (LINKLIGHTSXBMC) alice_macro_run("lightsoff");
 	if($jsonReturn->error) return false;
 	else return true;
 }
