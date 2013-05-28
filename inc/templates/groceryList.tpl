@@ -4,8 +4,8 @@
 <tr><th>Name</th><th>Section</th><th>Aisle</th><th>Price</th></tr>
 {{foreach $data as $section}}
 {{foreach $section as $item}}
-{{if $item.needed}}<tr><td>{{$item.name}}</td><td>{{$item.section}}</td><td>{{$item.aisle}}</td><td>${{$item.price}}</td></tr>
-{{assign var=price value=$price+$item.price}}
+{{if $item.needed}}<tr><td>{{$item.name}}{{if $item.needed > 1}} (Qty: {{$item.needed}}){{/if}}</td><td>{{$item.section}}</td><td>{{$item.aisle}}</td><td>${{($item.price*$item.needed)|string_format:"%.2f"}}</td></tr>
+{{assign var=price value=$price+$item.price*$item.needed}}
 {{/if}}
 {{/foreach}}
 {{/foreach}}
