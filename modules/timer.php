@@ -24,6 +24,7 @@ function alice_timer_check()
 	{
 		if($timer < $now) 
 		{
+			if (preg_match("/#chime/i", $message)) alice_macro_run("chime");
 			alice_pushover("Timer alert", $message, 1);
 			alice_xbmc_notify($message);
 			alice_timer_remove($timer);
@@ -43,7 +44,7 @@ function alice_timer_getAll()
 function alice_timer_timeLeft($timer)
 {
 	$diff = alice_timeDiff(date('c', $timer));
-	if ($diff->y) $timeLeft = "{$diff->y} years, {$diff->m} months, {$diff->j} days";
+	if ($diff->y) $timeLeft = "{$diff->y} years, {$diff->m} months, {$diff->d} days";
 	elseif ($diff->m) $timeLeft = "{$diff->m} months {$diff->d} days";
 	elseif ($diff->d) $timeLeft = "{$diff->d} days {$diff->h} hours";
 	elseif ($diff->h) $timeLeft = "{$diff->h} hours {$diff->i} minutes";
