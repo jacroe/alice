@@ -9,9 +9,5 @@ function alice_macro_run($name)
 	$allMacros = alice_mysql_get("modules", "macro");
 	$data = explode("\n", $allMacros[$name]);
 	foreach ($data as $command)
-	{
 		alice_api($command);
-		sleep(2);
-	}
 }
-

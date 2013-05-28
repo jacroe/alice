@@ -4,18 +4,19 @@ NAME:         X10
 ABOUT:        Turns off and on X10 devices. Must be preset as shown
 DEPENDENCIES: None
 */
-function alice_x10($device, $action)
+function alice_x10($device, $action, $amount = 1)
 { 
-	
+	#alice_notification_add("x10", "$device - $action - $amount");
 	if($action == "on" || $action == "off")
 	{
-		exec("nohup flipit flip $device $action > /dev/null 2>&1 & echo $!");
+		exec("nohup /usr/local/bin/flipit flip $device $action > /dev/null 2>&1 & echo $!");
 	}
 	else
 	{
-		exec("nohup flipit $action $device 1 > /dev/null 2>&1 & echo $!");
+		exec("nohup /usr/local/bin/flipit $action $device $amount > /dev/null 2>&1 & echo $!");
 	}
-	alice_x10_update($device, $action);
+	alice_x10_update($device, $action, $amount);
+	sleep(1);
 	return true;
 	
 }
@@ -46,7 +47,7 @@ function alice_x10_getGroup($group)
 
 	return $array;
 }
-function alice_x10_update($code, $newState=-1)
+function alice_x10_update($code, $newState = -1, $amount = 1)
 {
 	$device = alice_x10_getSingle($code);
 	
@@ -64,8 +65,8 @@ function alice_x10_update($code, $newState=-1)
 	}
 	else
 	{
-		if ($newState == "brighten") $stmt = $db->prepare("UPDATE a_x10 SET curState=curState+1 WHERE (code = :code)");
-		elseif ($newState == "dim") $stmt = $db->prepare("UPDATE a_x10 SET curState=curState-1 WHERE (code = :code)");
+		if ($newState == "brighten") $stmt = $db->prepare("UPDATE a_x10 SET curState=curState+$amount WHERE (code = :code)");
+		elseif ($newState == "dim") $stmt = $db->prepare("UPDATE a_x10 SET curState=curState-$amount WHERE (code = :code)");
 		elseif ($newState == "on") $stmt = $db->prepare("UPDATE a_x10 SET curState='10' WHERE (code = :code)");
 		else $stmt = $db->prepare("UPDATE a_x10 SET curState='0' WHERE (code = :code)");
 	}

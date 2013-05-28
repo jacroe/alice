@@ -66,11 +66,24 @@ function alice_api($json)
 					return alice_api_buildResponse("XBMC.Control", 0, "Unrecognized control");
 			}
 			break;
+		case "XBMC.Quit":
+			if(!alice_xbmc_isOn())
+				return alice_api_buildResponse("XBMC.Quit", 0, "XBMC is offline.");
+			else
+			{
+				alice_xbmc_quit();
+				return alice_api_buildResponse("XBMC.Quit");
+			}
 
 		// X10
 		case "X10.Do":
 			if(!$json->params->device || !$json->params->action)
 				return alice_api_buildResponse("X10.Do", 0, "Invalid paramaters");
+			elseif ($json->params->amount)
+			{
+				alice_x10($json->params->device, $json->params->action, $json->params->amount);
+				return alice_api_buildResponse("X10.Do");
+			}
 			else
 			{
 				alice_x10($json->params->device, $json->params->action);
