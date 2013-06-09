@@ -9,7 +9,8 @@ CONFIG:       You'll need to set up your own rules.
 if ((date('i') % 2))
 {
 	$con = alice_email_openServer();
-	
+	if(!$con) goto endPurgeEmail;
+
 	$messages = alice_email_getAllMessages($con);
 	foreach($messages as $msg)
 	{
@@ -74,3 +75,4 @@ if ((date('i') % 2))
 	
 	alice_email_closeServer($con);
 }
+endPurgeEmail:;

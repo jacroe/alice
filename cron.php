@@ -11,7 +11,7 @@ if ((!(date('i') % 10) || ($_GET['purge'])) && alice_onlineCheck())
 	if($w != -1) alice_mysql_put("modules", "weather", $w);
 	if (!(date('i') % 30) || ($_GET['purge'])) alice_mysql_putImage("weather_radar", alice_weather_getRadar($l), "image/gif");
 	if (!(date('i') % 30) || ($_GET['purge'])) alice_mysql_putImage("weather_satellite", alice_weather_getSatellite($l), "image/gif");
-	alice_mysql_put("modules", "email", array("count"=>$e));
+	if($e != -1) alice_mysql_put("modules", "email", array("count"=>$e));
 	alice_mysql_put("modules", "update", array("time"=>$t));
 }
 else

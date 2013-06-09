@@ -4,14 +4,38 @@ NAME:         Weather
 ABOUT:        Gets the current weather, forecast and and other conditions. Provides URLs to radar and satellite images
 DEPENDENCIES: Location data;
 */
+
+$serviceList[] = alice_weather_status();
+
+function alice_weather_status()
+{
+	$wData = alice_mysql_get("modules", "weather");
+
+	if($wData["status"])
+	{
+		$sMessage = "Looking out the window.";
+		$sStatus = "0";
+	}
+	else
+	{
+		$sMessage = "Blinds are closed.";
+		$sStatus = "2";
+	}
+
+	return array("title"=>"Weather", "message"=>$sMessage, "status"=>$sStatus);
+}
+
+
 function alice_weather_get($loc)
 {
 	$jsonWeather = json_decode(file_get_contents("http://api.wunderground.com/api/".WUNDERGROUND_API."/conditions/forecast/alerts/q/{$loc['zip']}.json"));
 	if($jsonWeather->response->error)
 	{
 		alice_error_add("Weather module", "Weather lookup error ".$jsonWeather->response->error->description);
+		alice_mysql_put("modules", "weather", array("status"=>"0"));
 		return -1;
 	}
+	else alice_mysql_put("modules", "weather", array("status"=>"1"));
 	$icon = alice_weather_getIcon($jsonWeather->current_observation->icon);
 	if ($jsonWeather->response->features->alerts)
 		foreach($jsonWeather->alerts as $alert)

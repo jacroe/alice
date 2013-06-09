@@ -4,6 +4,24 @@ NAME:         XBMC
 ABOUT:        Plays films, tv shows, and controls the playback of XBMC
 DEPENDENCIES: None;
 */
+
+$serviceList[] = alice_xbmc_status();
+
+function alice_xbmc_status()
+{
+	if(alice_xbmc_isOn())
+	{
+		$sMessage = "Feeling jolly good.";
+		$sStatus = 0;
+	}
+	else
+	{
+		$sMessage = "Not feeling too smokey.";
+		$sStatus = 2;
+	}
+	return array("title"=>"XBMC", "message"=>$sMessage, "status"=>$sStatus);
+}
+
 function alice_xbmc_talk($data)
 {
 	$data = json_encode($data);

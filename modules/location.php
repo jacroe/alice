@@ -4,6 +4,27 @@ NAME:         Location
 ABOUT:        Returns data about certain locations. Can look up where a person is based on Google Latitude
 DEPENDENCIES: None;
 */
+
+$serviceList[] = alice_loc_status();
+
+function alice_loc_status()
+{
+	$lData = alice_mysql_get("modules", "location");
+
+	if($lData["status"])
+	{
+		$sMessage = "I see you.";
+		$sStatus = "0";
+	}
+	else
+	{
+		$sMessage = "Where'd you go?";
+		$sStatus = "2";
+	}
+
+	return array("title"=>"Location", "message"=>$sMessage, "status"=>$sStatus);
+}
+
 function alice_loc_check($string)
 {
 	if(preg_match('/\(? (\d\d\d\d\d)/x', $string, $matches)) return true;
@@ -28,8 +49,10 @@ function alice_loc_get($string)
 	if($jsonWund->response->error)
 	{
 		alice_error_add("Location module", "Location lookup error ".$jsonWund->response->error->description);
+		alice_mysql_put("modules", "location", array("status"=>"0"));
 		return -1;
 	}
+	else alice_mysql_put("modules", "location", array("status"=>"1"));
 	return array("city"=>$jsonWund->location->city,
 	"state"=>$jsonWund->location->state,
 	"zip"=>$jsonWund->location->zip,

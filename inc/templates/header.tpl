@@ -46,6 +46,7 @@ padding-bottom: 40px;
 					<li class="{{if $page=='weather'}}active{{/if}}"><a href="weather.php">Weather</a></li>
 					<li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
 					<li class="{{if $page=='home'}}active{{/if}}"><a href="home.php">Home</a></li>
+					<li class="{{if $page=='meta'}}active{{/if}}"><a href="meta.php">Meta</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

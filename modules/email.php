@@ -4,9 +4,38 @@ NAME:         Email
 ABOUT:        Checks for, sends, and organizes email
 DEPENDENCIES: Swift library;
 */
+
+$serviceList[] = alice_email_status();
+
+function alice_email_status()
+{
+	$lData = alice_mysql_get("modules", "email");
+
+	if($lData["status"])
+	{
+		$sMessage = "Mail man's running.";
+		$sStatus = "0";
+	}
+	else
+	{
+		$sMessage = "Postal holiday.";
+		$sStatus = "2";
+	}
+
+	return array("title"=>"Email", "message"=>$sMessage, "status"=>$sStatus);
+}
+
+
 function alice_email_openServer()
 {
-	return imap_open(IMAP_SERVER, IMAP_USER, IMAP_PASS);
+	if($con = imap_open(IMAP_SERVER, IMAP_USER, IMAP_PASS))
+		alice_mysql_put("modules", "email", array("status"=>"1"));
+	else
+	{
+		alice_mysql_put("modules", "email", array("status"=>"0"));
+		alice_error_add("Email module", "Couldn't open IMAP connection");
+	}
+	return $con;
 }
 function alice_email_closeServer(&$con)
 {
@@ -16,6 +45,8 @@ function alice_email_closeServer(&$con)
 function alice_email_check($meta = "sentence")
 {
 	$mbox = alice_email_openserver();
+	if(!$mbox)
+		return -1;
 	$check = imap_mailboxmsginfo($mbox); 
 	imap_close($mbox);
 	$count = $check->Unread;

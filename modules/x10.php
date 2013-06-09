@@ -4,6 +4,25 @@ NAME:         X10
 ABOUT:        Turns off and on X10 devices. Must be preset as shown
 DEPENDENCIES: None
 */
+
+$serviceList[] = alice_x10_status();
+
+function alice_x10_status()
+{
+	if(is_writable("/dev/ttyUSB0"))
+	{
+		$sMessage = "Awaiting orders.";
+		$sStatus = "0";
+	}
+	else
+	{
+		$sMessage = "Not listening.";
+		$sStatus = "2";
+	}
+
+	return array("title"=>"X10", "message"=>$sMessage, "status"=>$sStatus);
+}
+
 function alice_x10($device, $action, $amount = 1)
 { 
 	#alice_notification_add("x10", "$device - $action - $amount");
