@@ -21,6 +21,8 @@
 </div>
 
 <div class="span4">
+	<h2>Modes</h2>
+	<p><a class="btn btn-success" onClick='aliceAPI({"method":"Macro.Run","params":{"macro":"home"}})'>Home</a> <a class="btn btn-danger" onClick='aliceAPI({"method":"Macro.Run","params":{"macro":"away"}})'>Away</a></p>
 	<h2>Notifications</h2>
 	{{if $notifications}}
 		<table class="table table-bordered table-condensed">
