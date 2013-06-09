@@ -59,6 +59,7 @@ define("SABNZBD_SERVER", "http://localhost:8080/sabnzbd/");	// Location of your 
 define("SABNZBD_API", ""); 					// Found in Config > General > SABnzbd Web Server > API Key
 
 /* THAT'S IT! Don't edit anything below this line */
+foreach (glob(PATH."modules/_*.php") as $includes) require_once($includes); // Load parents first
 foreach (glob(PATH."modules/*.php") as $includes) require_once($includes);
 require_once(PATH."lib/smarty/Smarty.class.php");
 $smarty = new Smarty;

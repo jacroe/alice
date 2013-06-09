@@ -4,6 +4,24 @@ NAME:         Miscellaneous
 ABOUT:        Functions for Alice that are too small to be modules but necessary
 DEPENDENCIES: None;
 */
+
+$serviceList[] = alice_status();
+
+function alice_status()
+{
+	if(alice_onlineCheck())
+	{
+		$sMessage = "Bits are flowing.";
+		$sStatus = 0;
+	}
+	else
+	{
+		$sMessage = "Tubes are clogged";
+		$sStatus = 2;
+	}
+	return array("title"=>"Internet connection", "message"=>$sMessage, "status"=>$sStatus);
+}
+
 function alice_cleanup($string)
 {
 	$string = " ".strtolower($string)." ";
