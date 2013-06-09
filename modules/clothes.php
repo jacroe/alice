@@ -4,11 +4,12 @@ NAME:         Clothes
 ABOUT:        Returns data about what type of clothes to wear for the day
 DEPENDENCIES: None directly. The weather array must be passed to it. 
 */
-function alice_clothes($weather) {
+function alice_clothes($weather)
+{
 	
 	$temp = $weather['currTemp'];
 	$hi = $weather['hiTemp'];
-	$forecast = $weather['fcastTod'];
+	$forecast = $weather['fcastToday'];
 
 	// top
 	if ($temp >= 60) $top = "just a tshirt";
