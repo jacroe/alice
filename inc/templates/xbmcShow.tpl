@@ -20,17 +20,13 @@
 <h2>Episodes</h2>
 <p>
 {{foreach $arrayEpisodes as $episode}}
-{{if $season != $episode->season}}
+{{if $season != $episode->season && $episode->season != 0}}
 {{assign var='season' value=$episode->season}}
-{{if $season == 0}}
-<strong>Specials</strong><br />
-{{else}}
 <strong>Season {{$season}}</strong><br />
-{{/if}}
 {{/if}}
 <a class="btn btn-mini" onclick='aliceAPI({"method":"XBMC.PlayEpisode","params":{"id":"{{$episode->episodeid}}"}});'><i class=icon-play></i></a>
 {{if $episode->playcount}}<i class=icon-ok></i> {{/if}}
-{{$episode->episode}}. {{$episode->title}}<br />
+{{if $episode->season == 0}}S{{/if}}{{$episode->episode}}. {{$episode->title}}<br />
 {{/foreach}}
 </p>
 </div>

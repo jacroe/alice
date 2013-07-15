@@ -193,7 +193,7 @@ function alice_xbmc_getSingleShow($show)
 
 function alice_xbmc_getAllEpisodesOfShow($show)
 {
-	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetEpisodes", "params" => array("sort" => array("order" => "ascending", "method" => "label", "ignorearticle" => true),"tvshowid" => intval($show), "properties" => array("title", "episode", "season", "playcount")), "id" => 1);
+	$data = array("jsonrpc" => "2.0", "method" => "VideoLibrary.GetEpisodes", "params" => array("sort" => array("order" => "ascending", "method" => "episode", "ignorearticle" => true),"tvshowid" => intval($show), "properties" => array("title", "episode", "season", "playcount")), "id" => 1);
 	$xbmc = json_decode(alice_xbmc_talk($data));
 	return $xbmc->result->episodes;
 }
