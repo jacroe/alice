@@ -17,23 +17,24 @@ elseif (date('Hi') == "1830")
 {
 	alice_x10("j2", "brighten", 2);
 }
-elseif (date('Hi') == "1949")
+elseif (date('Hi') == "1845")
 {
 	alice_x10("j2", "brighten", 2);
 }
-elseif (date('Hi') == "1955")
+elseif (date('Hi') == "1900")
 {
 	alice_x10("j2", "brighten", 4);
 }
 
 // Time to get ready for bed
-if (date('Hi') == "0000")
+if (date('Hi') == "2345")
 {
 	alice_macro_run("chime");
 	alice_macro_run("lightsoff");
+	sleep(2);
 	alice_macro_run("lightson");
 }
-if (date('Hi') == "0030")
+if (date('Hi') == "0000")
 {
 	alice_macro_run("chime");
 	alice_macro_run("lightsoff");

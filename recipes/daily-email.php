@@ -7,10 +7,10 @@ INSTALL:      None;
 CONFIG:       Edit the dailyEmail.tpl file in inc/templates folder to your liking.
 */
 $dailyEmail = false;
-if (date('Hi') == '0700' && ((date('N') == '2') || (date('N') == '4')) ) $dailyEmail = true; // TTh @ 7
+/*if (date('Hi') == '0700' && ((date('N') == '2') || (date('N') == '4')) ) $dailyEmail = true; // TTh @ 7
 elseif (date('Hi') == '1100' && ((date('N') == '1') || (date('N') == '3') || (date('N') == '5')) ) $dailyEmail = true; // MWF @ 11
-elseif (date('Hi') == '1200' && ((date('N') == '6') || (date('N') == '7')) ) $dailyEmail = true; //SS @ noon
-
+elseif (date('Hi') == '1200' && ((date('N') == '6') || (date('N') == '7')) ) $dailyEmail = true; //SS @ noon*/
+if (date('Hi') == '0700') $dailyEmail = true;
 if ($dailyEmail)
 {
 	$arrayNews = alice_news(4);
