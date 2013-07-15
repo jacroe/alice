@@ -25,7 +25,9 @@ function alice_timer_check()
 		if($timer < $now) 
 		{
 			if (preg_match("/#chime/i", $message)) alice_macro_run("chime");
-			alice_pushover("Timer alert", $message, 1);
+			if (preg_match("/#lightson/i", $message)) alice_macro_run("lightson");
+			if (preg_match("/#lightsoff/i", $message)) alice_macro_run("lightsoff");
+			if (!preg_match("/#nonotify/i", $message)) alice_pushover("Timer alert", $message, 1);
 			alice_xbmc_notify($message);
 			alice_timer_remove($timer);
 		}
