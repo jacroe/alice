@@ -6,7 +6,7 @@ DEPENDENCIES: Email module;
 INSTALL:      None;
 CONFIG:       You'll need to set up your own rules. 
 */
-if ((date('i') % 2))
+if ((date('i') % 2) && alice_onlineCheck())
 {
 	$con = alice_email_openServer();
 	if(!$con) goto endPurgeEmail;
@@ -33,6 +33,10 @@ if ((date('i') % 2))
 		}
 		switch($msg["from"])
 		{
+			case "\"auto-confirm@amazon.com\" <auto-confirm@amazon.com>":
+				alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
+				alice_notification_add("Moved Amazon receipt", str_replace("Amazon.com order of ", "", $msg["subject"]));
+				break;
 			case "\"Amazon.com\" <ship-confirm@amazon.com>":
 				$tracking = alice_packages($msg["body"]);
 				alice_email_move($con, $msg["id"], "INBOX.Reference", 1);
@@ -55,11 +59,12 @@ if ((date('i') % 2))
 				if($msg["subject"] == "Your Receipt")
 				{
 					alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
-					$url = alice_htmlparser_find($msg["body"], "a", false, 0);
+					/*$url = alice_htmlparser_find($msg["body"], "a", false, 0);
 					$rawTitle = alice_htmlparser_find($msg["body"], "table td[width=496]", false);
 					$title = trim(alice_htmlparser_find($rawTitle[0], "a", false, 0)->plaintext);
 					$price = alice_htmlparser_find($msg["body"], "table td[width=51]", false, -1)->plaintext;
-					alice_notification_add("Redbox", "Rented <em>$title</em> for $price. <a href=\"$url->href\" target=_blank>View receipt</a>");
+					alice_notification_add("Redbox", "Rented <em>$title</em> for $price. <a href=\"$url->href\" target=_blank>View receipt</a>");*/
+					alice_notification_add("Redbox", "Disc returned.");
 				}
 				break;
 			case "noreply@google.com":
