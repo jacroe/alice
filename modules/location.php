@@ -48,7 +48,7 @@ function alice_loc_get($string)
 
 	if($jsonWund->response->error)
 	{
-		alice_error_add("Location module", "Location lookup error ".$jsonWund->response->error->description);
+		alice_error_add("Location module", "WUnderground geolookup error ".$jsonWund->response->error->description);
 		alice_mysql_put("modules", "location", array("status"=>"0"));
 		return -1;
 	}

@@ -11,6 +11,7 @@ $subhead = "It is ".date("g:i a");
 
 $errorLog = file_get_contents(PATH."error.log");
 
+$smarty->assign("title", "Meta");
 $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("serviceList", $serviceList);
