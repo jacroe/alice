@@ -17,7 +17,7 @@ $smarty->assign("bedroom_x10", $bedroom_x10);
 $smarty->assign("living_x10", $living_x10);
 $smarty->assign("allTimers", alice_timer_getAll());
 $smarty->assign("updateTime", date("g:i a", $u['time']));
-$smarty->assign("updateCity", $l['city'].', '.$l['state']);
+$smarty->assign("updateCity", $u['city']);
 $smarty->assign("error", $errors);
 $smarty->display("home.tpl");
 ?>

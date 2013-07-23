@@ -17,7 +17,7 @@ $smarty->assign("subhead", $subhead);
 $smarty->assign("serviceList", $serviceList);
 $smarty->assign("errorLog", $errorLog);
 $smarty->assign("updateTime", date("g:i a", $u['time']));
-$smarty->assign("updateCity", $l['city'].', '.$l['state']);
+$smarty->assign("updateCity", $u['city']);
 $smarty->assign("error", $errors);
 $smarty->display("meta.tpl");
 ?>

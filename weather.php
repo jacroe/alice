@@ -25,7 +25,7 @@ $smarty->assign("radarimg", "./inc/image.php?i=weather_radar");
 $smarty->assign("satimg", "./inc/image.php?i=weather_satellite");
 $smarty->assign("nextDay", date('l', strtotime("2 days")));
 $smarty->assign("updateTime", date("g:i a", $u['time']));
-$smarty->assign("updateCity", $l['city'].', '.$l['state']);
+$smarty->assign("updateCity", $u['city']);
 $smarty->assign("alerts", $alertArray);
 $smarty->assign("error", $errors);
 $smarty->display("weather.tpl");
