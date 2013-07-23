@@ -62,7 +62,7 @@ $smarty->assign("masthead", $masthead);
 $smarty->assign("subhead", $subhead);
 $smarty->assign("weather", $w);
 $smarty->assign("updateTime", date("g:i a", $u['time']));
-$smarty->assign("updateCity", $l['city'].', '.$l['state']);
+$smarty->assign("updateCity", $u["city"]);
 $smarty->assign("notifications", array_slice($notif, 0, 3));
 $smarty->assign("error", $errors);
 $smarty->display("index.tpl");

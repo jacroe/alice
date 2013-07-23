@@ -34,7 +34,7 @@ function alice_loc_check($string)
 
 function alice_loc_get($string)
 {
-	if (preg_match('/\(? (\d\d\d\d\d)/x', $string, $matches))
+	/*if (preg_match('/\(? (\d\d\d\d\d)/x', $string, $matches))
 	{
 		$loc = $matches[0];
 	}
@@ -43,7 +43,8 @@ function alice_loc_get($string)
 		$jsonLatitude = json_decode(file_get_contents("http://www.google.com/latitude/apps/badge/api?user=".LATITUDE_API."&type=json"));
 		$loc = "{$jsonLatitude->features[0]->geometry->coordinates[1]},{$jsonLatitude->features[0]->geometry->coordinates[0]}";
 		// The API places the longitude before the latitude (at least for the Western hemisphere; can't test Eastern)
-	}
+	}*/
+	$loc = $string;
 	$jsonWund = json_decode(file_get_contents("http://api.wunderground.com/api/".WUNDERGROUND_API."/geolookup/q/$loc.json"));
 
 	if($jsonWund->response->error)

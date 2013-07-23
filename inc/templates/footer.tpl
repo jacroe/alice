@@ -1,7 +1,7 @@
 <hr>
 <footer>
 {{if $updateTime}}
-<p>Last updated at {{$updateTime}} in {{$updateCity}}. <a href="cron.php?purge={{$page}}">Purge</a> </p>
+<p>Last updated at {{$updateTime}} in {{$updateCity}}. <a href="#" onclick="aliceSetLocation();return false;">Purge</a> </p>
 {{/if}}
 {{if $dispLicense}}
 {{if $rt}}
@@ -26,6 +26,26 @@
 function aliceAPI(jsonData)
 {
 	$.post("api.php", {json:JSON.stringify(jsonData)});
+}
+function aliceSetLocation()
+{
+	navigator.geolocation.getCurrentPosition(
+		function(position)
+		{
+			var latitude = position.coords.latitude;
+			var longitude = position.coords.longitude;
+			$.post(
+				"api.php",
+				{json:JSON.stringify({"method":"Location.Set","params":{"lat":latitude,"lon":longitude}})},
+				function(returnData){ window.location.href = "cron.php?purge={{$page}}"; }
+			);
+		},
+		function(err)
+		{
+			alert('ERRORS');
+		},
+		{enableHighAccuracy: true}
+	);
 }
 </script>
 </body>

@@ -9,7 +9,21 @@ function alice_api($json)
 	$json = json_decode($json);
 	switch ($json->method)
 	{
-
+		// Location
+		case "Location.Set":
+			if(!($json->params->zip || ($json->params->lat && $json->params->lon)))
+				return alice_api_buildResponse("Location.Set", 0, "Invalid paramaters");
+			elseif($json->params->zip)
+			{
+				alice_mysql_put("modules", "location", alice_loc_get($json->params->zip));
+				return alice_api_buildResponse("Location.Set");
+			}
+			else
+			{
+				alice_mysql_put("modules", "location", alice_loc_get($json->params->lat.",".$json->params->lon));
+				return alice_api_buildResponse("Location.Set");
+			}
+			break;
 		// XBMC
 		case "XBMC.PlayFilm":
 			if(!alice_xbmc_isOn())
