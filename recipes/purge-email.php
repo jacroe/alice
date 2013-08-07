@@ -56,7 +56,7 @@ if ((date('i') % 2) && alice_onlineCheck())
 				alice_notification_add("Moved PayPal receipt", $msg["subject"]);
 				break;
 			case "Redbox <receipts@tx.redbox.com>":
-				if($msg["subject"] == "Your Receipt")
+				if($msg["subject"] == "Don't forget your receipt.")
 				{
 					alice_email_move($con, $msg["id"], "INBOX.Receipts", 1);
 					/*$url = alice_htmlparser_find($msg["body"], "a", false, 0);
