@@ -16,7 +16,7 @@ elseif ($e['count'])
 	else $masthead = "{$e['count']} new messages";
 else
 {
-	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 class='img-responsive' alt='{$w['currCond']}' />";
+	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
 }
 
 /* Subhead */
