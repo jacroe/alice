@@ -86,7 +86,7 @@
 <table class="table table-bordered table-condensed">
 <tbody>
 {{foreach $allTimers as $timer}}
-<tr><td><strong>{{$timer.message}}</strong></td><td>{{$timer.timeLeft}}</td><td><a class="btn btn-mini" onClick='aliceAPI({"method":"Timer.Remove","params":{"timer":"{{$timer.timer}}"}});return false;'><i class=icon-trash></i></a></td></tr>
+<tr><td><strong>{{$timer.message}}</strong></td><td>{{$timer.timeLeft}}</td><td><a class="btn btn-default btn-xs" onClick='aliceAPI({"method":"Timer.Remove","params":{"timer":"{{$timer.timer}}"}});return false;'><i class="glyphicon glyphicon-trash"></span></a></td></tr>
 {{/foreach}}
 </tbody>
 </table>
