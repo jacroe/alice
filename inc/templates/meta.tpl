@@ -11,7 +11,7 @@
 	<table class="table table-bordered table-condensed">
 		<tbody>
 		{{foreach $serviceList as $service}}
-		<tr><td><strong>{{$service.title}}</strong></td><td><span class={{if $service.status == 1}}text-warning{{elseif $service.status == 2}}text-error{{else}}text-success{{/if}}>{{$service.message}}</span></td></tr>
+		<tr><td><strong>{{$service.title}}</strong></td><td><span class={{if $service.status == 1}}text-warning{{elseif $service.status == 2}}text-danger{{else}}text-success{{/if}}>{{$service.message}}</span></td></tr>
 		{{/foreach}}
 		</tbody>
 	</table>
