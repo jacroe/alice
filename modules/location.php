@@ -5,25 +5,6 @@ ABOUT:        Returns data about certain locations. Can look up where a person i
 DEPENDENCIES: None;
 */
 
-$serviceList[] = alice_loc_status();
-
-function alice_loc_status()
-{
-	$lData = alice_mysql_get("modules", "location");
-
-	if($lData["status"])
-	{
-		$sMessage = "I see you.";
-		$sStatus = "0";
-	}
-	else
-	{
-		$sMessage = "Where'd you go?";
-		$sStatus = "2";
-	}
-
-	return array("title"=>"Location", "message"=>$sMessage, "status"=>$sStatus);
-}
 
 function alice_loc_check($string)
 {
