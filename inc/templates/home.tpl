@@ -77,7 +77,7 @@
 
 <div class="col-md-4">
 <h2>Webcam</h2>
-<img src="{{$webcamImg}}" width="320" alt="Latest image captured from the webcam"/>
+<img src="{{$webcamImg}}" width="320" alt="Latest image captured from the webcam" class="img-responsive" />
 </div>
 
 <div class="col-md-4">
