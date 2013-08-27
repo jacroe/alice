@@ -1,20 +1,20 @@
 {{include file="header.tpl" page="xbmc"}}
-<div class="hero-unit">
+<div class="jumbotron">
 <h1>{{$masthead}}</h1>
 <p>{{$subhead}}</p>
-<p><a class="btn btn-primary" onclick='aliceAPI({"method":"XBMC.PlayFilm","params":{"id":"{{$movieid}}"}});'><i class="icon-play icon-white"></i> Play film</a></p>
+<p><a class="btn btn-primary" onclick='aliceAPI({"method":"XBMC.PlayFilm","params":{"id":"{{$movieid}}"}});'><span class="glyphicon glyphicon-play"></span> Play film</a></p>
 
 </div>
 
 
 <div class="row">
 
-<div class="span5">
+<div class="col-md-5">
 <h2>Poster</h2>
-<p><img src="./inc/image.php?i=xbmcFilmPoster_{{$movieid}}" width=300 alt="Poster" /></p>
+<p><img src="./inc/image.php?i=xbmcFilmPoster_{{$movieid}}" width="300" class="img-responsive" alt="Poster" /></p>
 </div>
 
-<div class="span7">
+<div class="col-md-7">
 <h2>Information</h2>
 <table class="table table-bordered table-condensed">
 <tbody>

@@ -1,12 +1,12 @@
 {{include file="header.tpl" page="meta"}}
-<div class="hero-unit">
+<div class="jumbotron">
 	<h1>{{$masthead}}</h1>
 	<p>{{$subhead}}</p>
 </div>
 
 <div class="row">
 
-<div class="span4">
+<div class="col-md-4">
 	<h2>Services</h2>
 	<table class="table table-bordered table-condensed">
 		<tbody>
@@ -17,7 +17,7 @@
 	</table>
 </div>
 
-<div class="span8">
+<div class="col-md-8">
 	<h2>Error log</h2>
 	<pre class=.pre-scrollable>{{$errorLog}}</pre>
 </div>

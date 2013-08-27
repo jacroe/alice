@@ -15,7 +15,6 @@ padding-top: 60px;
 padding-bottom: 40px;
 }
 </style>
-<link href="./lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -32,24 +31,24 @@ padding-bottom: 40px;
 <body>
 
 <div class="navbar navbar-fixed-top navbar-inverse">
-	<div class="navbar-inner">
-		<div class="container">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="index.php">Alice</a>
-			<div class="nav-collapse collapse">
-				<ul class="nav">
-					<li class="{{if $page=='index'}}active{{/if}}"><a href="index.php">Main</a></li>
-					<li class="{{if $page=='weather'}}active{{/if}}"><a href="weather.php">Weather</a></li>
-					<li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
-					<li class="{{if $page=='home'}}active{{/if}}"><a href="home.php">Home</a></li>
-					<li class="{{if $page=='meta'}}active{{/if}}"><a href="meta.php">Meta</a></li>
-				</ul>
-			</div><!--/.nav-collapse -->
+			<a class="navbar-brand" href="index.php">Alice</a>
 		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="{{if $page=='index'}}active{{/if}}"><a href="index.php">Main</a></li>
+				<li class="{{if $page=='weather'}}active{{/if}}"><a href="weather.php">Weather</a></li>
+				<li class="{{if $page=='xbmc'}}active{{/if}}"><a href="xbmc.php">XBMC</a></li>
+				<li class="{{if $page=='home'}}active{{/if}}"><a href="home.php">Home</a></li>
+				<li class="{{if $page=='meta'}}active{{/if}}"><a href="meta.php">Meta</a></li>
+			</ul>
+		</div><!--/.navbar-collapse -->
 	</div>
 </div>
 

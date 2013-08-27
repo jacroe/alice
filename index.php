@@ -1,7 +1,7 @@
 <?php
 require "alice.php";
 
-if (time()-$u['time'] > 1200) $errors[] = array("error", "Alice's data is at least 20 minutes old.");
+if (time()-$u['time'] > 1200) $errors[] = array("danger", "Alice's data is at least 20 minutes old.");
 
 /* Masthead */
 if (alice_xbmc_playing())
@@ -16,21 +16,21 @@ elseif ($e['count'])
 	else $masthead = "{$e['count']} new messages";
 else
 {
-	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
+	$masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 class='img-responsive' alt='{$w['currCond']}' />";
 }
 
 /* Subhead */
 if (alice_xbmc_playing())
 {
 	$subhead = <<<SHEAD
-<div class="progress progress-striped active"><div class="bar" style="width: {$nowPlaying[2]}%;"><strong>{$nowPlaying[2]}%</strong></div></div>
-<a class="btn" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"rewind"}});'><i class=icon-backward></i></a>
-<a class="btn btn-primary" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"pause"}});'><i class="icon-play icon-white"></i><i class="icon-pause icon-white"></i></a>
-<a class="btn" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"stop"}});'><i class=icon-stop></i></a>
-<a class="btn" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"forward"}});'><i class=icon-forward></i></a>
-<a class="btn" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"volumeup"}});'><i class=icon-volume-up></i></a>
-<a class="btn" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"volumedown"}});'><i class=icon-volume-down></i></a>
-<a class="btn" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"mute"}});'><i class=icon-volume-off></i></a>
+<div class="progress progress-striped active"><div class="progress-bar" style="width: {$nowPlaying[2]}%;"><strong>{$nowPlaying[2]}%</strong></div></div>
+<a class="btn btn-default" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"rewind"}});'><span class="glyphicon glyphicon-backward"></span></a>
+<a class="btn btn-primary" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"pause"}});'><span class="glyphicon glyphicon-play"></span><span class="glyphicon glyphicon-pause"></span></a>
+<a class="btn btn-default" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"stop"}});'><span class="glyphicon glyphicon-stop"></span></a>
+<a class="btn btn-default" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"forward"}});'><span class="glyphicon glyphicon-forward"></span></a>
+<a class="btn btn-default" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"volumeup"}});'><span class="glyphicon glyphicon-volume-up"></span></a>
+<a class="btn btn-default" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"volumedown"}});'><span class="glyphicon glyphicon-volume-down"></span></a>
+<a class="btn btn-default" onclick='aliceAPI({"method":"XBMC.Control","params":{"action":"mute"}});'><span class="glyphicon glyphicon-volume-off"></span></a>
 SHEAD;
 }
 
@@ -49,7 +49,7 @@ if (alice_xbmc_isOn())
 	}
 	$smarty->assign("xbmcBody", $films);
 }
-else $errors[] = array("alert", "XBMC is offline.");
+else $errors[] = array("warning", "XBMC is offline.");
 
 $notifications = alice_mysql_get("modules", "notification", "DESC");
 foreach($notifications as $id => $value)

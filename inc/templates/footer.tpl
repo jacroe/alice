@@ -19,9 +19,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="./lib/bootstrap/js/jquery.js"></script>
-<script src="./lib/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="./lib/bootstrap/js/bootstrap-modal.js"></script>
-<script src="./lib/bootstrap/js/bootstrap-tab.js"></script>
+<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 <script>
 function aliceAPI(jsonData)
 {

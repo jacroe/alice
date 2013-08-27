@@ -1,30 +1,36 @@
 {{include file="header.tpl" page="weather"}}
-<div class="hero-unit">
+<div class="jumbotron">
 <h1>{{$masthead}}</h1>
 <p>{{$subhead}}</p>
 </div>
 
 <div class="row">
 
-<div class="span4">
+<div class="col-md-4">
 {{if $alerts}}
 <h2>Alerts</h2>
 {{foreach from=$alerts key=i item=alert}}
 <p><a href="#alert{{$i}}" data-toggle="modal">{{$alert.title}}</a> Expires: {{$alert.expires}}.</p>
 
-<div id="alert{{$i}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="alert{{$i}}Label" aria-hidden="true">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-<h3 id="alert{{$i}}Label">{{$alert.title}}</h3>
-</div>
-<div class="modal-body">
-<p><strong>Issued:</strong> {{$alert.issued}}<br />
-<strong>Expires:</strong> {{$alert.expires}}</p>
-<hr />
-<p>{{$alert.message}}</p>
-<div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button></div>
-</div>
-</div>
+<div id="alert{{$i}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alert{{$i}}Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="modal-title">{{$alert.title}}</h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					<strong>Issued:</strong> {{$alert.issued}}<br />
+					<strong>Expires:</strong> {{$alert.expires}}
+				</p>
+				<hr />
+				<p>{{$alert.message}}</p>
+			</div>
+			<div class="modal-footer"><button class="btn btn-default" data-dismiss="modal">Close</button></div>
+		</div><!-- ./modal-content -->
+	</div><!-- ./modal-dialog -->
+</div><!-- ./modal -->
 
 {{/foreach}}
 
@@ -55,16 +61,16 @@
 </table>
 </div>
 
-<!--<div class="span4">
+<!--<div class="col-md-4">
 <h2>Radar</h2>
 <img src="{{$radarimg}}" alt="Radar image for {{$updateCity}}" />
 </div>
 
-<div class="span4">
+<div class="col-md-4">
 <h2>Satellite</h2>
 <img src="{{$satimg}}" alt="Satellite image for {{$updateCity}}" />
 </div>-->
-<div class="span4">
+<div class="col-md-4">
 	<h2>Weather Maps</h2>
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
