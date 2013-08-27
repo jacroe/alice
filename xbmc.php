@@ -8,7 +8,7 @@ if ($_GET['movie'])
 	$imdb = str_replace("tt", "", $film->imdbnumber);
 	$arrayRT = json_decode(file_get_contents("http://api.rottentomatoes.com/api/public/v1.0/movie_alias.json?apikey=".RTOMATOES_API."&type=imdb&id=$imdb"));
 	switch ($arrayRT->ratings->critics_rating)
-	{	
+	{
 		case "Fresh":
 		$rtImage = "fresh";
 		break;
