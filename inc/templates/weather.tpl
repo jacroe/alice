@@ -39,6 +39,7 @@
 <table class="table table-bordered table-condensed">
 <tbody>
 <tr><td><strong>High / Low</strong></td><td>{{$weather.hiTemp}}F / {{$weather.loTemp}}F</td></tr>
+<tr><td><strong>Dewpoint</strong></td><td>{{$weather.currDewpoint}}F</td></tr>
 <tr><td><strong>Wind</strong></td><td>{{$weather.currWind}}</td></tr>
 <tr><td><strong>Humidity</strong></td><td>{{$weather.currHumidity}}</td></tr>
 </tbody>

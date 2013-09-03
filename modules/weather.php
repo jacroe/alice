@@ -43,20 +43,21 @@ function alice_weather_get($loc)
 			$message = str_replace("\n", "<br />", trim($alert->message));
 			$alertData .= "{$alert->description}|{$alert->date}|{$alert->expires}|$message\n";
 		}
-	return array("currTemp"=>"{$jsonWeather->current_observation->temp_f}",
-	"currCond"=>"{$jsonWeather->current_observation->weather}",
-	"currWind" => "{$jsonWeather->current_observation->wind_string}",
-	"currHumidity" => "{$jsonWeather->current_observation->relative_humidity}",
-	"hiTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->high->fahrenheit}", 
-	"loTemp"=>"{$jsonWeather->forecast->simpleforecast->forecastday[0]->low->fahrenheit}",
-	"fcastToday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[0]->fcttext}",
-	"fcastTonight"=>"{$jsonWeather->forecast->txt_forecast->forecastday[1]->fcttext}",
-	"fcastTomorrow"=>"{$jsonWeather->forecast->txt_forecast->forecastday[2]->fcttext}",
-	"fcastTomorrowNight"=>"{$jsonWeather->forecast->txt_forecast->forecastday[3]->fcttext}",
-	"fcastNextday"=>"{$jsonWeather->forecast->txt_forecast->forecastday[4]->fcttext}",
-	"fcastNextdayNight"=>"{$jsonWeather->forecast->txt_forecast->forecastday[5]->fcttext}",
-	"alerts"=>$alertData,
-	"icon"=>$icon);
+	return array("currTemp" => $jsonWeather->current_observation->temp_f,
+	"currCond" => $jsonWeather->current_observation->weather,
+	"currWind" => $jsonWeather->current_observation->wind_string,
+	"currHumidity" => $jsonWeather->current_observation->relative_humidity,
+	"currDewpoint" => $jsonWeather->current_observation->dewpoint_f,
+	"hiTemp" => $jsonWeather->forecast->simpleforecast->forecastday[0]->high->fahrenheit,
+	"loTemp" => $jsonWeather->forecast->simpleforecast->forecastday[0]->low->fahrenheit,
+	"fcastToday" => $jsonWeather->forecast->txt_forecast->forecastday[0]->fcttext,
+	"fcastTonight" => $jsonWeather->forecast->txt_forecast->forecastday[1]->fcttext,
+	"fcastTomorrow" => $jsonWeather->forecast->txt_forecast->forecastday[2]->fcttext,
+	"fcastTomorrowNight" => $jsonWeather->forecast->txt_forecast->forecastday[3]->fcttext,
+	"fcastNextday" => $jsonWeather->forecast->txt_forecast->forecastday[4]->fcttext,
+	"fcastNextdayNight" => $jsonWeather->forecast->txt_forecast->forecastday[5]->fcttext,
+	"alerts" => $alertData,
+	"icon" => $icon);
 }
 function alice_weather_getRadar($loc)
 {
