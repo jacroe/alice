@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `a_modules` (
 --
 
 INSERT INTO `a_modules` (`name`, `value`, `lastchanged`) VALUES
-('update_time', 'never', '2012-11-24 10:00:08');
+('update_time', '0', '2012-11-24 10:00:08');
 
 -- --------------------------------------------------------
 
