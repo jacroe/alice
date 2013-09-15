@@ -1,6 +1,6 @@
 <?php
 require "alice.php";
-if (time()-$u['time'] > 1200) $errors[] = array("error", "Alice's data is at least 20 minutes old.");
+if (time()-$u['time'] > 1200) $errors[] = array("danger", "Alice's data is at least 20 minutes old.");
 /* Masthead */
 
 $masthead = "{$w['currTemp']}&deg;F - {$w['currCond']} <img src=./inc/images/weather/{$w['icon']}.png width=100 alt='{$w['currCond']}' />";
