@@ -27,7 +27,6 @@ define("SMTP_FROM", "alice@bob.com");						// Where should it look like it's com
 
 /* MODULE: Location */
 define("LOCATION_LOOKUP", "here");		// Set your physical location using a zipcode. Can also be set to "here" which will cause your location to be determined by Google Latitude
-define("LATITUDE_API", "1234567890123467890");	// Can grab your user ID @ https://www.google.com/latitude/b/0/apps (Must enable Google Public Location Badge)
 
 /* MODULE: Weather */
 define("WUNDERGROUND_API", "123abc");	// Free API key available @ http://api.wunderground.com/api/

@@ -7,7 +7,7 @@ $masthead = "Home Life";
 $subhead = "Or, rather, dorm life.";
 
 $bedroom_x10 = alice_x10_getGroup("bedroom");
-$living_x10 = alice_x10_getGroup("living");
+$living_x10 = alice_x10_getGroup("livingroom");
 
 $smarty->assign("title", "Home Life");
 $smarty->assign("masthead", $masthead);
