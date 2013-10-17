@@ -86,7 +86,7 @@ function alice_email_getAllMessages(&$con)
 		"subject"=>$msg->subject,
 		"date"=>$msg->date,
 		"seen"=>$msg->seen,
-		"body"=>imap_fetchbody($con, $msg->msgno, "1", FT_PEEK)
+		"body"=>alice_email_getHTMLBody($con, $msg->msgno)
 		);
 	}
 	return $array;
@@ -102,3 +102,78 @@ function alice_email_delete(&$con, $msgno)
 	imap_mail_move($con, $msgno, "INBOX.Trash");
 }
 
+function alice_email_getHTMLBody($mbox, $msgid)
+{
+	$partArray = alice_email_createPartArray(imap_fetchstructure($mbox, $msgid));
+	
+	foreach ($partArray as $part)
+	{
+		if ($part['part_object']->subtype == "HTML")
+			break;
+	}
+	$message = imap_fetchbody($mbox, $msgid, $part['part_number'], FT_PEEK);
+	if($part['part_object']->encoding == 3)
+		$message = imap_base64($message);
+	else if($part['part_object']->encoding == 1)
+		$message = imap_8bit($message);
+	else
+		$message = imap_qprint($message);
+
+	return $message;
+}
+function alice_email_getPlainBody($mbox, $msgid)
+{
+	$partArray = alice_email_createPartArray(imap_fetchstructure($mbox, $msgid));
+	
+	foreach ($partArray as $part)
+	{
+		if ($part['part_object']->subtype == "PLAIN")
+			break;
+	}
+	$message = imap_fetchbody($mbox, $msgid, $part['part_number'], FT_PEEK);
+	if($part['part_object']->encoding == 3)
+		$message = imap_base64($message);
+	else if($part['part_object']->encoding == 1)
+		$message = imap_8bit($message);
+	else
+		$message = imap_qprint($message);
+
+	return $message;
+}
+function alice_email_createPartArray($structure, $prefix="") {
+	if (sizeof($structure->parts) > 0) {    // There some sub parts
+		foreach ($structure->parts as $count => $part) {
+			alice_email_addPartToArray($part, $prefix.($count+1), $part_array);
+		}
+	}else{    // Email does not have a seperate mime attachment for text
+		$part_array[] = array('part_number' => $prefix.'1', 'part_object' => $obj);
+	}
+   return $part_array;
+}
+// Sub function for alice_email_createPartArray(). Only called by alice_email_createPartArray() and itself. 
+function alice_email_addPartToArray($obj, $partno, & $part_array) {
+	$part_array[] = array('part_number' => $partno, 'part_object' => $obj);
+	if ($obj->type == 2) { // Check to see if the part is an attached email message, as in the RFC-822 type
+		//print_r($obj);
+		if (sizeof($obj->parts) > 0) {    // Check to see if the email has parts
+			foreach ($obj->parts as $count => $part) {
+				// Iterate here again to compensate for the broken way that imap_fetchbody() handles attachments
+				if (sizeof($part->parts) > 0) {
+					foreach ($part->parts as $count2 => $part2) {
+						alice_email_addPartToArray($part2, $partno.".".($count2+1), $part_array);
+					}
+				}else{    // Attached email does not have a seperate mime attachment for text
+					$part_array[] = array('part_number' => $partno.'.'.($count+1), 'part_object' => $obj);
+				}
+			}
+		}else{    // Not sure if this is possible
+			$part_array[] = array('part_number' => $prefix.'.1', 'part_object' => $obj);
+		}
+	}else{    // If there are more sub-parts, expand them out.
+		if (sizeof($obj->parts) > 0) {
+			foreach ($obj->parts as $count => $p) {
+				alice_email_addPartToArray($p, $partno.".".($count+1), $part_array);
+			}
+		}
+	}
+}
